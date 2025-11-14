@@ -81,86 +81,245 @@
         </aside>
         
         <main class="main-content">
-            <p>Der Arduino Alvik ist ein Schulungsroboter der sehr genau fahren kann. Hierfür ist folgender Befehl empfehlenswert.</p>
-<div class="tip-box">💡 <strong>Tipp:</strong><br>alvik.set_wheels_speed(x,x)
-Der Wert x wird in Umdrehungen pro Minute angegeben
-</div>
-<div class="info-box">❓ <strong>Frage:</strong><br>Man könnte sich nun Fragen wie weit der Alvik in einer Minute fährt?
-</div>
-<h4>Wie weit fährt der Alvik in mm?</h4>
-<p>Der Radius des Rades beträgt 17 mm. Berechne zuerst den Umfang.</p>
-<p>Alviks Rad 34 mm breit ist. Um den Umfang <strong>(U)</strong> des Rades zu berechnen, verwenden wir Durchmesser und Pi <strong>(π)</strong> wie in der folgenden Formel gezeigt:</p>
-<p>U=π⋅d</p>
-<p>Wenn wir die tatsächlichen Zahlen eingeben, finden wir <strong>C = 3,14 × 34</strong> oder <strong>U = 106,8 mm</strong> in der Länge.</p>
-<p>Wenn also der Abstand um das Rad 106,8 mm lang ist, <strong>können wir zu dem Schluss kommen, dass eine vollständige Raddrehung von 360º den Roboter ungefähr um 106,8 mm bewegt.</strong></p>
-<pre><code class="language-python">from arduino_alvik import ArduinoALvik
+            <h2>Exaktes Fahren – Präzise Steuerung mit Radgeschwindigkeit</h2>
+            
+            <p>Der Arduino Alvik ist ein Schulungsroboter, der sehr präzise gesteuert werden kann. Während <code>move()</code> für einfache Fahraufgaben ausreicht, ermöglicht die direkte Steuerung der Radgeschwindigkeit eine feinere Kontrolle über Bewegungen und Zeitabläufe.</p>
+
+            <h3>Direkte Radgeschwindigkeitssteuerung</h3>
+            
+            <div class="tip-box">
+                💡 <strong>Wichtiger Befehl:</strong><br>
+                <code>alvik.set_wheels_speed(links, rechts)</code><br>
+                Die Werte werden in <strong>Umdrehungen pro Minute (RPM)</strong> angegeben.
+            </div>
+
+            <p>Mit diesem Befehl steuerst du die Geschwindigkeit jedes Rades einzeln. Das ermöglicht:</p>
+            <ul>
+                <li>Präzise Zeitsteuerung (z.B. "fahre genau 10 Sekunden")</li>
+                <li>Unterschiedliche Geschwindigkeiten für linkes und rechtes Rad</li>
+                <li>Sanfte Kurvenfahrten</li>
+                <li>Kontinuierliche Bewegung während andere Aufgaben ausgeführt werden</li>
+            </ul>
+
+            <h3>Wie weit fährt der Alvik pro Radumdrehung?</h3>
+            
+            <div class="info-box">
+                ❓ <strong>Frage:</strong><br>
+                Wie weit fährt der Alvik in einer Minute bei einer bestimmten Radgeschwindigkeit?
+            </div>
+
+            <p>Um diese Frage zu beantworten, müssen wir zuerst den <strong>Radumfang</strong> berechnen.</p>
+
+            <h4>Berechnung des Radumfangs</h4>
+            
+            <p><strong>Gegebene Werte:</strong></p>
+            <ul>
+                <li>Raddurchmesser: <strong>34 mm</strong></li>
+                <li>Radius: <strong>17 mm</strong></li>
+            </ul>
+
+            <p><strong>Formel für den Umfang (U):</strong></p>
+            <p>U = π × d</p>
+            <p>U = 3,14 × 34 mm</p>
+            <p><strong>U = 106,8 mm</strong></p>
+
+            <p><strong>Wichtige Erkenntnis:</strong> Eine vollständige Radumdrehung (360°) bewegt den Roboter etwa <strong>106,8 mm (≈ 10,7 cm)</strong> vorwärts.</p>
+
+            <h4>Fahrtstrecke berechnen</h4>
+            <p>Wenn die Räder mit <strong>10 Umdrehungen pro Minute (RPM)</strong> drehen:</p>
+            <ul>
+                <li>Pro Umdrehung: 106,8 mm</li>
+                <li>10 Umdrehungen: 10 × 106,8 mm = 1.068 mm ≈ <strong>1,07 Meter pro Minute</strong></li>
+                <li>Pro Sekunde: 1.068 mm ÷ 60 = <strong>17,8 mm/s</strong></li>
+            </ul>
+
+            <h3>Beispiel 1: Kontinuierliches Fahren</h3>
+            <p>Der Alvik fährt mit konstanter Geschwindigkeit ohne Zeitbegrenzung:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
 from time import sleep_ms
+
 alvik = ArduinoAlvik()
 alvik.begin()
 
-while True:
-    alvik.set_wheels_speed(10,10) # der Alvik fährt mit 10 Umdrehungen pro Minute
+# Beide Räder mit 10 Umdrehungen pro Minute
+alvik.set_wheels_speed(10, 10)
 
-
-
+# Der Alvik fährt jetzt dauerhaft mit dieser Geschwindigkeit
+# Um zu stoppen, muss man explizit alvik.stop() aufrufen
 </code></pre>
-<h4>Exaktes fahren</h4>
-<p>Der Alvik soll nach 60 Sekunden stehen bleiben. Hierfür benötigen wir die Klasse <strong>ticks_ms</strong>.</p>
 
-<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep_ms
-from time import ticks_ms
+            <h3>Beispiel 2: Exaktes Fahren mit Zeitsteuerung</h3>
+            <p>Der Alvik soll genau 60 Sekunden fahren und dann automatisch stoppen. Dafür verwenden wir <code>ticks_ms()</code> zur Zeitmessung.</p>
 
-startzeit = ticks_ms()
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms, ticks_ms
+
 alvik = ArduinoAlvik()
 alvik.begin()
 
+# Startzeit merken
+startzeit = ticks_ms()
+
 while True:
+    # Räder mit 10 RPM drehen
     alvik.set_wheels_speed(10, 10)
+    
+    # Aktuelle Zeit prüfen
     aktuelle_zeit = ticks_ms()
+    
+    # Nach 60 Sekunden (60.000 Millisekunden) stoppen
     if aktuelle_zeit - startzeit &gt;= 60000:
         alvik.stop()
         break
 
+# Berechne die gefahrene Strecke:
+# 10 RPM × 106,8 mm × 1 Minute = 1.068 mm ≈ 1,07 Meter
 </code></pre>
-<p>Frage wie weit ist der Alvik gefahren ?</p>
-			
-			
-<h3>Was macht ticks_ms()?</h3><br>
 
-Stell dir vor, dein Roboter hat eine <b>Stoppuhr</b>, die automatisch startet, sobald du ihn einschaltest. `ticks_ms()` zeigt dir, wie viele Millisekunden (Tausendstel Sekunden) seit dem Einschalten vergangen sind.<br>
+            <h4>Analyse: Wie weit ist der Alvik gefahren?</h4>
+            <p>Bei 10 Umdrehungen pro Minute für 60 Sekunden:</p>
+            <ul>
+                <li>10 Umdrehungen × 106,8 mm = 1.068 mm</li>
+                <li><strong>Gefahrene Strecke: ≈ 1,07 Meter</strong></li>
+            </ul>
 
-<b>Warum braucht man das?</b><br><br>
+            <h3>Was ist ticks_ms() und warum brauchen wir es?</h3>
+            
+            <p>Stell dir vor, dein Roboter hat eine <strong>Stoppuhr</strong>, die automatisch startet, sobald du ihn einschaltest. <code>ticks_ms()</code> zeigt dir, wie viele Millisekunden (Tausendstel Sekunden) seit dem Einschalten vergangen sind.</p>
 
-Normalerweise würdest du mit `time.sleep(1)` den Roboter für 1 Sekunde anhalten. Aber dann kann er in dieser Zeit nichts anderes machen - er "schläft" komplett.<br>
+            <h4>Warum nicht einfach time.sleep() verwenden?</h4>
+            <p>Der Unterschied ist entscheidend:</p>
+            
+            <ul>
+                <li><strong>Mit <code>sleep(1)</code>:</strong> Der Roboter pausiert komplett für 1 Sekunde – er kann in dieser Zeit nichts anderes machen</li>
+                <li><strong>Mit <code>ticks_ms()</code>:</strong> Der Roboter kann die Zeit im Auge behalten UND gleichzeitig andere Dinge tun (Sensoren auslesen, weiterfahren, LEDs steuern)</li>
+            </ul>
 
-<div class="info-box">❓  <strong>Mit `ticks_ms()` kannst du die Zeit im Auge behalten, während der Roboter gleichzeitig andere Dinge macht - wie Sensoren auslesen oder weiterfahren.</strong>
-	<div><br>
+            <div class="info-box">
+                ❓ <strong>Merke:</strong><br>
+                <code>ticks_ms()</code> ermöglicht Multitasking – der Roboter kann mehrere Aufgaben gleichzeitig ausführen, während die Zeit läuft.
+            </div>
 
-<h4>Einfaches Beispiel</h4>
+            <h3>Beispiel 3: Zeitmessung mit ticks_diff()</h3>
+            <p>Eine elegantere Methode zur Zeitdifferenz-Berechnung:</p>
 
-<pre><code class="language-python">
-from time import ticks_ms, ticks_diff
+            <pre><code class="language-python">from time import ticks_ms, ticks_diff
+from arduino_alvik import ArduinoAlvik
 
-# Schreibe dir die aktuelle Zeit auf
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Startzeit merken
 start_zeit = ticks_ms()
 
 while True:
     # Prüfe, ob 2 Sekunden vergangen sind
-    if ticks_diff(ticks_ms(), start_zeit) > 2000:  # 2000 Millisekunden = 2 Sekunden
+    if ticks_diff(ticks_ms(), start_zeit) &gt; 2000:  # 2000 ms = 2 Sekunden
         print("2 Sekunden sind um!")
-        start_zeit = ticks_ms()  # Starte die Zeitmessung neu
+        start_zeit = ticks_ms()  # Zeitmessung neu starten
     
-    # Hier kann dein Roboter trotzdem andere Sachen machen!
-    # z.B. Sensoren auslesen, LED blinken lassen, etc.
+    # Hier kann der Roboter trotzdem andere Dinge machen:
+    # - Sensoren auslesen
+    # - LEDs blinken lassen
+    # - Hindernissen ausweichen
+    # - etc.
+    
+    alvik.set_wheels_speed(10, 10)
 </code></pre>
 
-Merke: `ticks_diff()` ist wie ein Taschenrechner, der für dich ausrechnet, wie viel Zeit vergangen ist.
-			
-			
-			
+            <h4>Vorteile von ticks_ms() und ticks_diff()</h4>
+            <ul>
+                <li><strong>Nicht-blockierend:</strong> Code läuft weiter, während Zeit gemessen wird</li>
+                <li><strong>Präzise:</strong> Millisekunden-Genauigkeit</li>
+                <li><strong>Flexibel:</strong> Mehrere Zeitintervalle parallel messbar</li>
+                <li><strong>Robust:</strong> <code>ticks_diff()</code> funktioniert auch bei Überlauf (nach ~49 Tagen)</li>
+            </ul>
+
+            <h3>Praktische Anwendungen</h3>
+            
+            <h4>Beispiel: Exakte Fahrtstrecke</h4>
+            <p>Du möchtest, dass der Alvik genau 2 Meter fährt:</p>
+            
+            <ul>
+                <li>Ziel: 2.000 mm</li>
+                <li>Pro Umdrehung: 106,8 mm</li>
+                <li>Benötigte Umdrehungen: 2.000 ÷ 106,8 ≈ 18,7 Umdrehungen</li>
+                <li>Bei 10 RPM: 18,7 ÷ 10 = 1,87 Minuten ≈ <strong>112 Sekunden</strong></li>
+            </ul>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import ticks_ms, ticks_diff
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Fahre 112 Sekunden mit 10 RPM für ca. 2 Meter
+start = ticks_ms()
+
+while ticks_diff(ticks_ms(), start) &lt; 112000:  # 112 Sekunden
+    alvik.set_wheels_speed(10, 10)
+
+alvik.stop()
+print("2 Meter gefahren!")
+</code></pre>
+
+            <h3>Vergleich: move() vs. set_wheels_speed()</h3>
+            
+            <table>
+                <tr>
+                    <th>Eigenschaft</th>
+                    <th>move()</th>
+                    <th>set_wheels_speed()</th>
+                </tr>
+                <tr>
+                    <td><strong>Verwendung</strong></td>
+                    <td>Einfache Fahrbefehle</td>
+                    <td>Präzise Steuerung</td>
+                </tr>
+                <tr>
+                    <td><strong>Eingabe</strong></td>
+                    <td>Entfernung in cm</td>
+                    <td>Geschwindigkeit in RPM</td>
+                </tr>
+                <tr>
+                    <td><strong>Blockierend</strong></td>
+                    <td>Ja (wartet bis fertig)</td>
+                    <td>Nein (läuft kontinuierlich)</td>
+                </tr>
+                <tr>
+                    <td><strong>Zeitkontrolle</strong></td>
+                    <td>Automatisch</td>
+                    <td>Manuell mit ticks_ms()</td>
+                </tr>
+                <tr>
+                    <td><strong>Multitasking</strong></td>
+                    <td>Schwierig</td>
+                    <td>Einfach möglich</td>
+                </tr>
+            </table>
+
+            <h3>Tipps für präzises Fahren</h3>
+            
+            <ul>
+                <li><strong>Batteriespannung:</strong> Volle Batterien für konstante Geschwindigkeit</li>
+                <li><strong>Untergrund:</strong> Glatter, ebener Boden für beste Ergebnisse</li>
+                <li><strong>Kalibrierung:</strong> Messe die tatsächliche Strecke und passe RPM-Werte an</li>
+                <li><strong>Schlupf:</strong> Berücksichtige, dass Räder auf verschiedenen Oberflächen unterschiedlich viel Grip haben</li>
+                <li><strong>Reaktionszeit:</strong> Der Roboter braucht eine kurze Zeit, um auf Geschwindigkeitsänderungen zu reagieren</li>
+            </ul>
+
+            <h3>Zusammenfassung</h3>
+            
+            <p>Für exaktes Fahren kombinierst du:</p>
+            <ol>
+                <li><strong>Radumfang-Berechnung:</strong> Wissen, wie weit eine Radumdrehung fährt (106,8 mm)</li>
+                <li><strong>Geschwindigkeitssteuerung:</strong> <code>set_wheels_speed()</code> für kontinuierliche Bewegung</li>
+                <li><strong>Zeitmessung:</strong> <code>ticks_ms()</code> und <code>ticks_diff()</code> für präzise Zeitsteuerung</li>
+                <li><strong>Mathematik:</strong> RPM × Radumfang × Zeit = Gefahrene Strecke</li>
+            </ol>
         </main>
-			</div>
+    </div>
     
     <a href="#" class="back-to-top">↑</a>
     
