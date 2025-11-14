@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Alvik - MicroPython Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Farbkorrektur für Medienzentrum */
+        :root {
+            --primary-color: #67747a !important;
+            --primary-dark: #004a95 !important;
+            --secondary-color: #51b047 !important;
+            --accent-color: #ef7e26 !important;
+        }
+        
+        /* Header mit beiden Logos */
+        header {
+            background: white !important;
+            border-bottom: 4px solid #67747a;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+        
+        .mz-logo {
+            width: 180px;
+            height: auto;
+        }
+        
+        .header-text {
+            flex: 1;
+        }
+        
+        .header-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #004a95;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .alvik-logo-small {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            padding: 4px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-text p {
+            margin: 0.25rem 0 0 0;
+            color: #67747a;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .header-text small {
+            display: block;
+            font-size: 0.875rem;
+            color: #51b047;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        
+        /* Gradient-Fixes */
+        body {
+            background: linear-gradient(135deg, #67747a 0%, #51b047 100%) !important;
+        }
+        
+        .sidebar h2,
+        .main-content h1 {
+            color: #004a95 !important;
+        }
+        
+        .sidebar ul li a.active {
+            background: linear-gradient(135deg, #004a95, #51b047) !important;
+        }
+        
+        .sidebar ul li a:hover {
+            color: #004a95 !important;
+        }
+        
+        .main-content h2 {
+            color: #004a95 !important;
+        }
+        
+        .main-content h2::before {
+            background: linear-gradient(180deg, #004a95, #51b047) !important;
+        }
+        
+        .main-content a {
+            color: #004a95 !important;
+        }
+        
+        .main-content a:hover {
+            color: #51b047 !important;
+        }
+        
+        .back-to-top {
+            background: linear-gradient(135deg, #004a95, #51b047) !important;
+        }
+        
+        /* Info Boxes mit MZ-Farben */
+        .info-box {
+            border-left-color: #004a95 !important;
+        }
+        
+        .tip-box {
+            border-left-color: #51b047 !important;
+        }
+        
+        .warning-box {
+            border-left-color: #ef7e26 !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/MZ_GIVB_Logo.svg" alt="Medienzentrum Gießen-Vogelsberg" class="mz-logo">
+            <div class="header-text">
+                <h1>
+                    Arduino Alvik
+                    <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="alvik-logo-small">
+                </h1>
+                <p>MicroPython Lernplattform</p>
+                <small>Medienzentrum Gießen-Vogelsberg</small>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Suche...">
+            </div>
+            <div class="nav-section">
+                <h3>Erste Schritte</h3>
+                <ul>
+                    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+                    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+                    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
+                    <li><a href="command-center.html">🚀 Command Center</a></li>
+                    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+                    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+                    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+                    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+                    <li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+                    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+                    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Erweiterungen</h3>
+                <ul>
+                    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+                    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Projekte & Beispiele</h3>
+                <ul>
+                    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+                    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+                    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+                    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+                    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Ressourcen</h3>
+                <ul>
+                    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Übungen</h3>
+                <ul>
+                    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+                    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik</a></li>
+                    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <h1>🤖 Willkommen zur Arduino Alvik Lernplattform!</h1>
+            
+            <p>Herzlich willkommen zum <strong>MicroPython</strong>-Kurs mit dem <strong>Arduino Alvik</strong>. Der Arduino Alvik lässt sich auch mit C++ und Scratch programmieren, aber hier konzentrieren wir uns auf MicroPython.</p>
+            
+            <div class="info-box">
+                <p><strong>Was ist der Arduino Alvik?</strong></p>
+                <p>Der Arduino Alvik überzeugt durch seine hochpräzisen Motoren mit Hall-Effekt-Encodern, die exakte Bewegungen ermöglichen. Dank seiner vielseitigen Sensorik und Erweiterbarkeit eignet sich der Alvik besonders gut für den Einsatz im pädagogischen Bereich, von der Mittel- bis zur Hochschulbildung.</p>
+            </div>
+            
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik Roboter">
+            
+            <h2>Was lernst du hier?</h2>
+            
+            <div class="tip-box">
+                <p>Auf dieser Plattform findest du:</p>
+                <ul>
+                    <li>Schritt-für-Schritt Anleitungen zur Programmierung des Alvik</li>
+                    <li>Praktische Beispiele und Übungen</li>
+                    <li>Erweiterungsmöglichkeiten mit Sensoren</li>
+                    <li>Physik-Experimente mit dem Roboter</li>
+                    <li>Komplette Unterrichtsstunden mit Aufgaben</li>
+                </ul>
+            </div>
+            
+            <h2>Schnellstart</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div class="tip-box">
+                    <h3>1. Erste Schritte</h3>
+                    <p>Lerne die Grundlagen: Setup, Software und erste Programme</p>
+                </div>
+                <div class="tip-box">
+                    <h3>2. Bewegung</h3>
+                    <p>Programmiere den Alvik zum Fahren und Drehen</p>
+                </div>
+                <div class="tip-box">
+                    <h3>3. Sensoren</h3>
+                    <p>Nutze die eingebauten Sensoren für intelligente Projekte</p>
+                </div>
+            </div>
+            
+            <h2>Features</h2>
+            
+            <ul>
+                <li>🤖 Hochpräzise Motoren mit Hall-Effekt-Encodern</li>
+                <li>📡 Vielseitige Sensorik (IMU, Farbe, Abstand, Linie)</li>
+                <li>🔌 Erweiterbar über I2C</li>
+                <li>💡 RGB-LEDs und Touch-Buttons</li>
+                <li>🐍 Programmierbar mit MicroPython</li>
+                <li>📱 Integration mit phyphox für Messungen</li>
+            </ul>
+            
+            <div class="warning-box">
+                <p><strong>Wichtig:</strong> Stelle sicher, dass dein Alvik auf dem neuesten Stand ist. Nutze dafür regelmäßig den <a href="https://alvikupdate.arduino.cc/" target="_blank">Alvik Updater</a>.</p>
+            </div>
+            
+            <h2>Empfohlene Software</h2>
+            
+            <p>Für die Programmierung empfehlen wir <strong>Thonny</strong>:</p>
+            
+            <ul>
+                <li>Download: <a href="https://thonny.org" target="_blank">thonny.org</a></li>
+                <li>Einfache, benutzerfreundliche IDE</li>
+                <li>Direkter Zugriff auf den Alvik über USB</li>
+                <li>Integrierte Debugging-Tools</li>
+            </ul>
+            
+            <p>Viel Erfolg beim Programmieren! 🚀</p>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025 | Medienzentrum Gießen-Vogelsberg</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

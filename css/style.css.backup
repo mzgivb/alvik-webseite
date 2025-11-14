@@ -3,14 +3,14 @@
 
 :root {
     /* Modernere Farbpalette */
-    --primary-color: #0EA5E9;
-    --primary-dark: #0284C7;
-    --secondary-color: #8B5CF6;
-    --accent-color: #F59E0B;
-    --accent-dark: #D97706;
-    --success-color: #10B981;
-    --warning-color: #F59E0B;
-    --danger-color: #EF4444;
+    --primary-color: #004a95;
+    --primary-dark: #003366;
+    --secondary-color: #51b047;
+    --accent-color: #ef7e26;
+    --accent-dark: #dd2e34;
+    --success-color: #51b047;
+    --warning-color: #ef7e26;
+    --danger-color: #e30613;
     
     /* Neutrals */
     --bg-color: #F9FAFB;
@@ -47,7 +47,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #004a95 0%, #51b047 100%);
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
