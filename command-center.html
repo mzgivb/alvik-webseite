@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center - Arduino Alvik API Referenz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .command-center {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .command-center h1 {
+            color: white !important;
+            border: none !important;
+            margin-bottom: 1rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .filter-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+        
+        .commands-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .command-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .command-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .command-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .command-name {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .command-category {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .command-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .command-example {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 1rem;
+            position: relative;
+            margin-top: 1rem;
+        }
+        
+        .command-example code {
+            display: block;
+            color: #212529;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: var(--secondary-color);
+        }
+        
+        .copy-btn.copied {
+            background: #4CAF50;
+        }
+        
+        .parameters {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .parameters-title {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .parameter {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .parameter-name {
+            font-family: 'Courier New', monospace;
+            color: #D63384;
+            font-weight: 600;
+        }
+        
+        .parameter-desc {
+            color: #666;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Suche...">
+            </div>
+            <div class="nav-section">
+                <h3>Erste Schritte</h3>
+                <ul>
+                    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+                    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+                    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
+                    <li><a href="command-center.html" class="active">Command Center</a></li>
+                    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+                    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+                    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+                    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+                    <li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+                    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+                    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Erweiterungen</h3>
+                <ul>
+                    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+                    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Projekte & Beispiele</h3>
+                <ul>
+                    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+                    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+                    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+                    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+                    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Ressourcen</h3>
+                <ul>
+                    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Übungen</h3>
+                <ul>
+                    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+                    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik</a></li>
+                    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="command-center">
+                <h1>🤖 Alvik Command Center</h1>
+                <p>Durchsuche alle MicroPython API-Befehle für den Arduino Alvik. Finde schnell die richtigen Funktionen für dein Projekt!</p>
+                
+                <div class="search-bar">
+                    <input type="text" id="command-search" placeholder="🔍 Suche nach Befehlen, z.B. 'drive', 'led', 'sensor'...">
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">Alle</button>
+                    <button class="filter-btn" data-category="bewegung">🚗 Bewegung</button>
+                    <button class="filter-btn" data-category="sensoren">📡 Sensoren</button>
+                    <button class="filter-btn" data-category="leds">💡 LEDs</button>
+                    <button class="filter-btn" data-category="servo">🎮 Servo</button>
+                    <button class="filter-btn" data-category="system">⚙️ System</button>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <span>📚 Befehle gesamt:</span>
+                        <strong id="total-commands">0</strong>
+                    </div>
+                    <div class="stat">
+                        <span>🔍 Gefunden:</span>
+                        <strong id="found-commands">0</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="commands-grid" id="commands-container">
+                <!-- Commands werden hier dynamisch eingefügt -->
+            </div>
+            
+            <div class="no-results" id="no-results" style="display: none;">
+                <h3>🔍 Keine Befehle gefunden</h3>
+                <p>Versuche es mit anderen Suchbegriffen oder wähle eine andere Kategorie.</p>
+            </div>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script src="js/commands.js"></script>
+</body>
+</html>
