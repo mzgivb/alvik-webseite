@@ -191,64 +191,68 @@ elif alvik.get_touch_left() or alvik.get_touch_right():
     
     // LEDs
     {
-        name: 'alvik.set_leds(color)',
+        name: 'alvik.left_led.set_color(r, g, b)',
         category: 'leds',
-        description: 'Setzt die Farbe beider LEDs gleichzeitig.',
+        description: 'Setzt die Farbe der linken LED. Werte von 0 (aus) bis 1 (voll an).',
         parameters: [
-            { name: 'color', desc: 'Farbe als Name (z.B. "red") oder RGB-Tupel' }
+            { name: 'r', desc: 'Rotwert (0.0 - 1.0)' },
+            { name: 'g', desc: 'Grünwert (0.0 - 1.0)' },
+            { name: 'b', desc: 'Blauwert (0.0 - 1.0)' }
         ],
-        example: `# Vordefinierte Farben verwenden
-alvik.set_leds("red")
-alvik.set_leds("green")
-alvik.set_leds("blue")
+        example: `# Farben setzen (0 = aus, 1 = voll an)
+alvik.left_led.set_color(1, 0, 0)  # Rot
+alvik.right_led.set_color(0, 1, 0)  # Grün
 
-# RGB-Werte verwenden (0-255)
-alvik.set_leds((255, 128, 0))  # Orange
-alvik.set_leds((255, 0, 255))  # Magenta
+# Orange (Rot + etwas Grün)
+alvik.left_led.set_color(1, 0.5, 0)
 
 # LEDs ausschalten
-alvik.set_leds("off")`
+alvik.left_led.set_color(0, 0, 0)
+alvik.right_led.set_color(0, 0, 0)`
     },
     {
-        name: 'alvik.left_led.set_color(color)',
+        name: 'alvik.right_led.set_color(r, g, b)',
         category: 'leds',
-        description: 'Steuert nur die linke LED.',
+        description: 'Setzt die Farbe der rechten LED. Werte von 0 (aus) bis 1 (voll an).',
         parameters: [
-            { name: 'color', desc: 'Farbe als Name oder RGB-Tupel' }
+            { name: 'r', desc: 'Rotwert (0.0 - 1.0)' },
+            { name: 'g', desc: 'Grünwert (0.0 - 1.0)' },
+            { name: 'b', desc: 'Blauwert (0.0 - 1.0)' }
         ],
-        example: `# Linke LED rot
-alvik.left_led.set_color("red")
+        example: `# Blinkmuster erstellen
+import time
 
-# Rechte LED grün
-alvik.right_led.set_color("green")
-
-# Blinkmuster erstellen
 while True:
-    alvik.left_led.set_color("red")
+    # Rot blinken
+    alvik.left_led.set_color(1, 0, 0)
     time.sleep(0.5)
-    alvik.left_led.set_color("off")
-    time.sleep(0.5)`
+    alvik.left_led.set_color(0, 0, 0)  # Aus
+    time.sleep(0.5)
+    
+# Beide LEDs unterschiedlich
+alvik.left_led.set_color(1, 0, 0)   # Links rot
+alvik.right_led.set_color(0, 0, 1)  # Rechts blau`
     },
     {
-        name: 'alvik.set_illuminator(brightness)',
+        name: 'alvik.set_illuminator(value)',
         category: 'leds',
-        description: 'Steuert die Helligkeit der weißen Beleuchtungs-LED.',
+        description: 'Schaltet die weiße Beleuchtungs-LED ein oder aus.',
         parameters: [
-            { name: 'brightness', desc: 'Helligkeit von 0 (aus) bis 100 (maximum)' }
+            { name: 'value', desc: 'True = EIN, False = AUS' }
         ],
-        example: `# Volle Helligkeit
-alvik.set_illuminator(100)
+        example: `# LED einschalten
+alvik.set_illuminator(True)
 
-# Halbe Helligkeit
-alvik.set_illuminator(50)
+# LED ausschalten
+alvik.set_illuminator(False)
 
-# Ausschalten
-alvik.set_illuminator(0)
-
-# Dimmen
-for i in range(0, 101, 10):
-    alvik.set_illuminator(i)
-    time.sleep(0.1)`
+# Blinken lassen
+import time
+for i in range(5):
+    alvik.set_illuminator(True)
+    time.sleep(0.5)
+    alvik.set_illuminator(False)
+    time.sleep(0.5)`
     },
     
     // Servo
