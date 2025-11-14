@@ -81,41 +81,351 @@
         </aside>
         
         <main class="main-content">
-            <p><strong>Lässt eine blaue LED auf dem ESP32 blinken:</strong></p>
-<pre><code class="language-python">from machine import Pin
+            <h2>LED blinken lassen – Visuelle Signale programmieren</h2>
+            
+            <p>LEDs (Light Emitting Diodes) sind nicht nur schön anzusehen, sondern auch äußerst praktisch für die Programmierung. Sie ermöglichen visuelle Rückmeldungen, Statusanzeigen und können zur Fehlersuche eingesetzt werden. Der Arduino Alvik verfügt über mehrere LEDs, die du individuell ansteuern kannst.</p>
+
+            <h3>Die LEDs auf dem Alvik</h3>
+            
+            <p>Der Alvik hat verschiedene LEDs, die du programmieren kannst:</p>
+            
+            <ul>
+                <li><strong>ESP32 Onboard-LED:</strong> Kleine blaue LED auf dem ESP32-Chip (Pin 45)</li>
+                <li><strong>Linke RGB-LED:</strong> <code>alvik.left_led</code> – Farbige LED auf der linken Seite</li>
+                <li><strong>Rechte RGB-LED:</strong> <code>alvik.right_led</code> – Farbige LED auf der rechten Seite</li>
+            </ul>
+
+            <div class="tip-box">
+                💡 <strong>RGB-LEDs:</strong><br>
+                RGB steht für <strong>R</strong>ot, <strong>G</strong>rün, <strong>B</strong>lau. Durch Mischung dieser drei Grundfarben können nahezu alle Farben erzeugt werden!
+            </div>
+
+            <h3>Beispiel 1: ESP32 Onboard-LED blinken lassen</h3>
+            
+            <p>Die einfachste LED auf dem Alvik ist die kleine blaue LED auf dem ESP32-Chip. Sie ist ideal für erste Experimente und zum Debuggen.</p>
+
+            <h4>Code-Beispiel</h4>
+            <pre><code class="language-python">from machine import Pin
 from time import sleep
 
-led = Pin(45,Pin.OUT)
-
+# LED auf Pin 45 initialisieren
+led = Pin(45, Pin.OUT)
 
 while True:
-    led.value(1)
-    sleep(1)
-    led.value(0)
-    sleep(1)
-
-
+    led.value(1)  # LED einschalten
+    sleep(1)      # 1 Sekunde warten
+    led.value(0)  # LED ausschalten
+    sleep(1)      # 1 Sekunde warten
 </code></pre>
-<p><strong>Lässt rechte und linke LED auf dem Alvik blinken:</strong></p>
-<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+
+            <h4>Wie funktioniert der Code?</h4>
+            <ol>
+                <li><strong>Import:</strong> <code>machine.Pin</code> für Hardware-Steuerung, <code>time.sleep</code> für Pausen</li>
+                <li><strong>Pin-Konfiguration:</strong> <code>Pin(45, Pin.OUT)</code> setzt Pin 45 als Ausgang</li>
+                <li><strong>LED an:</strong> <code>led.value(1)</code> schaltet die LED ein (HIGH)</li>
+                <li><strong>LED aus:</strong> <code>led.value(0)</code> schaltet die LED aus (LOW)</li>
+                <li><strong>Endlosschleife:</strong> <code>while True</code> lässt die LED kontinuierlich blinken</li>
+            </ol>
+
+            <h3>Beispiel 2: RGB-LEDs mit Farben</h3>
+            
+            <p>Die RGB-LEDs auf dem Alvik können in verschiedenen Farben leuchten. Du steuerst sie über die Alvik-API mit der Methode <code>set_color()</code>.</p>
+
+            <h4>RGB-Farbsystem verstehen</h4>
+            <p>Jede Farbe wird durch drei Werte definiert:</p>
+            <ul>
+                <li><strong>Rot (R):</strong> Wert von 0 (aus) bis 1 (voll an)</li>
+                <li><strong>Grün (G):</strong> Wert von 0 (aus) bis 1 (voll an)</li>
+                <li><strong>Blau (B):</strong> Wert von 0 (aus) bis 1 (voll an)</li>
+            </ul>
+
+            <h4>Wichtige Farben</h4>
+            <table>
+                <tr>
+                    <th>Farbe</th>
+                    <th>RGB-Werte</th>
+                    <th>Code</th>
+                </tr>
+                <tr>
+                    <td style="background: red; color: white;">Rot</td>
+                    <td>(1, 0, 0)</td>
+                    <td><code>set_color(1, 0, 0)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: green; color: white;">Grün</td>
+                    <td>(0, 1, 0)</td>
+                    <td><code>set_color(0, 1, 0)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: blue; color: white;">Blau</td>
+                    <td>(0, 0, 1)</td>
+                    <td><code>set_color(0, 0, 1)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: yellow;">Gelb</td>
+                    <td>(1, 1, 0)</td>
+                    <td><code>set_color(1, 1, 0)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: cyan;">Cyan</td>
+                    <td>(0, 1, 1)</td>
+                    <td><code>set_color(0, 1, 1)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: magenta; color: white;">Magenta</td>
+                    <td>(1, 0, 1)</td>
+                    <td><code>set_color(1, 0, 1)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: white;">Weiß</td>
+                    <td>(1, 1, 1)</td>
+                    <td><code>set_color(1, 1, 1)</code></td>
+                </tr>
+                <tr>
+                    <td style="background: black; color: white;">Aus</td>
+                    <td>(0, 0, 0)</td>
+                    <td><code>set_color(0, 0, 0)</code></td>
+                </tr>
+            </table>
+
+            <h4>Code-Beispiel: Farbwechsel</h4>
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
 from time import sleep_ms
 
 alvik = ArduinoAlvik()
 alvik.begin()
+
+# Blinke 5 mal durch verschiedene Farben
 for _ in range(5):
-      alvik.left_led.set_color(0,0,1)
-      sleep_ms(1000)
-      alvik.left_led.set_color(0,1,0)
-      sleep_ms(1000)
-      alvik.left_led.set_color(1,0,0)
-      sleep_ms(1000)
-      alvik.right_led.set_color(0,0,1)
-      sleep_ms(1000)
-      alvik.right_led.set_color(0,1,0)
-      sleep_ms(1000)
-      alvik.right_led.set_color(1,0,0)
-      sleep_ms(1000)
+    # Linke LED: Blau
+    alvik.left_led.set_color(0, 0, 1)
+    sleep_ms(1000)
+    
+    # Linke LED: Grün
+    alvik.left_led.set_color(0, 1, 0)
+    sleep_ms(1000)
+    
+    # Linke LED: Rot
+    alvik.left_led.set_color(1, 0, 0)
+    sleep_ms(1000)
+    
+    # Rechte LED: Blau
+    alvik.right_led.set_color(0, 0, 1)
+    sleep_ms(1000)
+    
+    # Rechte LED: Grün
+    alvik.right_led.set_color(0, 1, 0)
+    sleep_ms(1000)
+    
+    # Rechte LED: Rot
+    alvik.right_led.set_color(1, 0, 0)
+    sleep_ms(1000)
+
+# Alle LEDs ausschalten
+alvik.left_led.set_color(0, 0, 0)
+alvik.right_led.set_color(0, 0, 0)
 </code></pre>
+
+            <h3>Beispiel 3: Synchrones Blinken beider LEDs</h3>
+            <p>Lass beide LEDs gleichzeitig in der gleichen Farbe blinken:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+while True:
+    # Beide LEDs rot
+    alvik.left_led.set_color(1, 0, 0)
+    alvik.right_led.set_color(1, 0, 0)
+    sleep(0.5)
+    
+    # Beide LEDs aus
+    alvik.left_led.set_color(0, 0, 0)
+    alvik.right_led.set_color(0, 0, 0)
+    sleep(0.5)
+</code></pre>
+
+            <h3>Beispiel 4: Wechselblinker (Polizeisignal)</h3>
+            <p>Erstelle ein Blaulicht-Effekt mit abwechselnd blinkenden LEDs:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Blaulicht für 10 Sekunden
+for _ in range(20):
+    # Linke LED blau, rechte aus
+    alvik.left_led.set_color(0, 0, 1)
+    alvik.right_led.set_color(0, 0, 0)
+    sleep_ms(250)
+    
+    # Rechte LED blau, linke aus
+    alvik.left_led.set_color(0, 0, 0)
+    alvik.right_led.set_color(0, 0, 1)
+    sleep_ms(250)
+
+# Ausschalten
+alvik.left_led.set_color(0, 0, 0)
+alvik.right_led.set_color(0, 0, 0)
+</code></pre>
+
+            <h3>Beispiel 5: Regenbogen-Effekt</h3>
+            <p>Durchlaufe sanft verschiedene Farben:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Farbsequenz: Rot → Gelb → Grün → Cyan → Blau → Magenta → Rot
+farben = [
+    (1, 0, 0),    # Rot
+    (1, 1, 0),    # Gelb
+    (0, 1, 0),    # Grün
+    (0, 1, 1),    # Cyan
+    (0, 0, 1),    # Blau
+    (1, 0, 1),    # Magenta
+]
+
+while True:
+    for farbe in farben:
+        alvik.left_led.set_color(farbe[0], farbe[1], farbe[2])
+        alvik.right_led.set_color(farbe[0], farbe[1], farbe[2])
+        sleep(0.5)
+</code></pre>
+
+            <h3>Beispiel 6: LED als Status-Anzeige</h3>
+            <p>Nutze LEDs zur Anzeige von Zuständen während der Fahrt:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+distance_threshold = 15
+
+while True:
+    # Abstand messen
+    distance_l, distance_cl, distance_c, distance_r, distance_cr = alvik.get_distance()
+    
+    if distance_c < distance_threshold:
+        # Hindernis: Rote LEDs
+        alvik.left_led.set_color(1, 0, 0)
+        alvik.right_led.set_color(1, 0, 0)
+        alvik.rotate(45)
+    else:
+        # Freie Fahrt: Grüne LEDs
+        alvik.left_led.set_color(0, 1, 0)
+        alvik.right_led.set_color(0, 1, 0)
+        alvik.drive(10, 0, linear_unit='cm/s')
+    
+    sleep_ms(100)
+</code></pre>
+
+            <h3>Praktische Anwendungen für LEDs</h3>
+
+            <h4>Debugging und Fehlersuche</h4>
+            <p>LEDs sind hervorragend zum Debuggen, wenn keine USB-Verbindung besteht:</p>
+            <ul>
+                <li><strong>Grün:</strong> Programm läuft normal</li>
+                <li><strong>Rot:</strong> Fehler oder Problem erkannt</li>
+                <li><strong>Blau:</strong> Warte auf Eingabe oder Sensor</li>
+                <li><strong>Blinken:</strong> Zeigt an, dass Code ausgeführt wird</li>
+            </ul>
+
+            <h4>Benutzer-Feedback</h4>
+            <ul>
+                <li>Zeige Betriebszustände an (Bereit, Aktiv, Pausiert)</li>
+                <li>Signalisiere erfolgreiche oder fehlgeschlagene Aktionen</li>
+                <li>Warne vor niedrigem Batteriestand</li>
+                <li>Zeige Sensorzustände visuell an</li>
+            </ul>
+
+            <h4>Show-Effekte</h4>
+            <ul>
+                <li>Erstelle Lichtshows zur Präsentation</li>
+                <li>Synchronisiere LEDs mit Bewegungen</li>
+                <li>Reagiere auf Musik oder Sound</li>
+                <li>Erstelle Muster und Animationen</li>
+            </ul>
+
+            <h3>Helligkeitssteuerung</h3>
+            <p>Du kannst auch Zwischenwerte verwenden, um die Helligkeit zu reduzieren:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Verschiedene Helligkeitsstufen
+alvik.left_led.set_color(1.0, 0, 0)    # Voll hell rot
+sleep(1)
+alvik.left_led.set_color(0.5, 0, 0)    # Halbe Helligkeit rot
+sleep(1)
+alvik.left_led.set_color(0.1, 0, 0)    # Sehr dunkel rot
+sleep(1)
+alvik.left_led.set_color(0, 0, 0)      # Aus
+</code></pre>
+
+            <h3>Tipps & Best Practices</h3>
+
+            <ul>
+                <li><strong>Energie sparen:</strong> Schalte LEDs aus, wenn sie nicht benötigt werden</li>
+                <li><strong>Nicht zu schnell blinken:</strong> Unter 100ms kann schwer zu sehen sein</li>
+                <li><strong>Farben sinnvoll wählen:</strong> Rot = Warnung/Stop, Grün = OK, Blau = Info</li>
+                <li><strong>Beide LEDs nutzen:</strong> Unterschiedliche Seiten für verschiedene Informationen</li>
+                <li><strong>Kommentare im Code:</strong> Dokumentiere, was welche Farbe bedeutet</li>
+            </ul>
+
+            <h3>Häufige Fehler und Lösungen</h3>
+
+            <table>
+                <tr>
+                    <th>Problem</th>
+                    <th>Ursache</th>
+                    <th>Lösung</th>
+                </tr>
+                <tr>
+                    <td>LED leuchtet nicht</td>
+                    <td>Falscher Pin oder nicht initialisiert</td>
+                    <td>Prüfe Pin-Nummer (45 für ESP32 LED)</td>
+                </tr>
+                <tr>
+                    <td>Falsche Farbe</td>
+                    <td>RGB-Werte vertauscht</td>
+                    <td>Reihenfolge: (Rot, Grün, Blau)</td>
+                </tr>
+                <tr>
+                    <td>LED zu hell/dunkel</td>
+                    <td>Helligkeitswert falsch</td>
+                    <td>Werte zwischen 0.0 und 1.0 verwenden</td>
+                </tr>
+                <tr>
+                    <td>Blinken zu schnell/langsam</td>
+                    <td>sleep() Zeit anpassen</td>
+                    <td>Experimentiere mit verschiedenen Werten</td>
+                </tr>
+            </table>
+
+            <h3>Zusammenfassung</h3>
+
+            <p>LED-Programmierung auf dem Alvik:</p>
+            <ul>
+                <li><strong>ESP32 LED:</strong> <code>Pin(45, Pin.OUT)</code> für einfache Ein/Aus-Signale</li>
+                <li><strong>RGB-LEDs:</strong> <code>alvik.left_led.set_color(r, g, b)</code> für farbige Anzeigen</li>
+                <li><strong>Werte:</strong> 0 = aus, 1 = voll an, Zwischenwerte für Helligkeit</li>
+                <li><strong>Farben:</strong> Mische Rot, Grün und Blau für alle Farben</li>
+                <li><strong>Anwendung:</strong> Status, Debugging, Show-Effekte</li>
+            </ul>
+
+            <p>Mit LEDs machst du deinen Alvik nicht nur schöner, sondern auch informativer und einfacher zu debuggen! 💡</p>
         </main>
     </div>
     
