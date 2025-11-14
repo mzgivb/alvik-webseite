@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exakt fahren - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <p>Der Arduino Alvik ist ein Schulungsroboter der sehr genau fahren kann. Hierfür ist folgender Befehl empfehlenswert.</p>
+<div class="tip-box">💡 <strong>Tipp:</strong><br>alvik.set_wheels_speed(x,x)
+Der Wert x wird in Umdrehungen pro Minute angegeben
+</div>
+<div class="info-box">❓ <strong>Frage:</strong><br>Man könnte sich nun Fragen wie weit der Alvik in einer Minute fährt?
+</div>
+<h4>Wie weit fährt der Alvik in mm?</h4>
+<p>Der Radius des Rades beträgt 17 mm. Berechne zuerst den Umfang.</p>
+<p>Alviks Rad 34 mm breit ist. Um den Umfang <strong>(U)</strong> des Rades zu berechnen, verwenden wir Durchmesser und Pi <strong>(π)</strong> wie in der folgenden Formel gezeigt:</p>
+<p>U=π⋅d</p>
+<p>Wenn wir die tatsächlichen Zahlen eingeben, finden wir <strong>C = 3,14 × 34</strong> oder <strong>U = 106,8 mm</strong> in der Länge.</p>
+<p>Wenn also der Abstand um das Rad 106,8 mm lang ist, <strong>können wir zu dem Schluss kommen, dass eine vollständige Raddrehung von 360º den Roboter ungefähr um 106,8 mm bewegt.</strong></p>
+<pre><code class="language-python">from arduino_alvik import ArduinoALvik
+from time import sleep_ms
+alvik = ArduinoAlvik()
+alvik.begin()
+
+while True:
+    alvik.set_wheels_speed(10,10) # der Alvik fährt mit 10 Umdrehungen pro Minute
+
+
+
+</code></pre>
+<h4>Exaktes fahren</h4>
+<p>Der Alvik soll nach 60 Sekunden stehen bleiben. Hierfür benötigen wir die Klasse <strong>ticks_ms</strong>.</p>
+
+<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+from time import ticks_ms
+
+startzeit = ticks_ms()
+alvik = ArduinoAlvik()
+alvik.begin()
+
+while True:
+    alvik.set_wheels_speed(10, 10)
+    aktuelle_zeit = ticks_ms()
+    if aktuelle_zeit - startzeit &gt;= 60000:
+        alvik.stop()
+        break
+
+</code></pre>
+<p>Frage wie weit ist der Alvik gefahren ?</p>
+			
+			
+<h3>Was macht ticks_ms()?</h3><br>
+
+Stell dir vor, dein Roboter hat eine <b>Stoppuhr</b>, die automatisch startet, sobald du ihn einschaltest. `ticks_ms()` zeigt dir, wie viele Millisekunden (Tausendstel Sekunden) seit dem Einschalten vergangen sind.<br>
+
+<b>Warum braucht man das?</b><br><br>
+
+Normalerweise würdest du mit `time.sleep(1)` den Roboter für 1 Sekunde anhalten. Aber dann kann er in dieser Zeit nichts anderes machen - er "schläft" komplett.<br>
+
+<div class="info-box">❓  <strong>Mit `ticks_ms()` kannst du die Zeit im Auge behalten, während der Roboter gleichzeitig andere Dinge macht - wie Sensoren auslesen oder weiterfahren.</strong>
+	<div><br>
+
+<h4>Einfaches Beispiel</h4>
+
+<pre><code class="language-python">
+from time import ticks_ms, ticks_diff
+
+# Schreibe dir die aktuelle Zeit auf
+start_zeit = ticks_ms()
+
+while True:
+    # Prüfe, ob 2 Sekunden vergangen sind
+    if ticks_diff(ticks_ms(), start_zeit) > 2000:  # 2000 Millisekunden = 2 Sekunden
+        print("2 Sekunden sind um!")
+        start_zeit = ticks_ms()  # Starte die Zeitmessung neu
+    
+    # Hier kann dein Roboter trotzdem andere Sachen machen!
+    # z.B. Sensoren auslesen, LED blinken lassen, etc.
+</code></pre>
+
+Merke: `ticks_diff()` ist wie ein Taschenrechner, der für dich ausrechnet, wie viel Zeit vergangen ist.
+			
+			
+			
+        </main>
+			</div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

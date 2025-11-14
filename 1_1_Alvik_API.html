@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API-Liste - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <<li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <h2>API-Liste</h2>
+<p>Der Alvik hat eine ganze Menge an Funktionen bzw. Methoden, die man über auf den Alvik zugreifen kann, um dessen vollen Funktionsumfang auszuschöpfen.<br />
+Bevorsie auf eine dieser Funktionen zuzugreifen können, müssen Sie zunächst eine <strong>Instanz</strong> der Klasse <strong>ArduinoAlvik()</strong> initialisieren. Diese Referenz ist sowohl für <strong>MicroPython</strong> als auch für <strong>C++-Umgebungen</strong> nützlich, da die <strong>Funktionen</strong> alle so erstellt wurden, dass sie in den Entwicklungsumgebungen die gleiche Form haben, sodass Ihre Erfahrung mit beiden Optionen einfach sein sollte.</p>
+<div class="info-box">ℹ️ <strong>Info:</strong><br></div>
+<p><code>ArduinoAlvik()</code> Ist die <strong>Klasse</strong><br />
+<code>begin()</code> ist die <strong>Funktion</strong><br />
+<em>alvik</em> ist die <strong>Instanz</strong><br />
+<code>alvik.begin()</code> ist die <strong>Methode</strong></p>
+<pre><code class="language-arduino">alvik = ArduinoAlvik()
+</code></pre>
+<p>AnschlieÃŸend können Sie die folgenden <strong>Funktionen</strong> als <strong>Methoden</strong> der von Ihnen erstellten <strong>Instanz</strong> verwenden, zum Beispiel:</p>
+<pre><code class="language-arduino">alvik.begin()
+</code></pre>
+<h3>is_on</h3>
+<pre><code>alvik.is_on()
+</code></pre>
+<p><em>Gibt true zurück, wenn der Roboter eingeschaltet ist</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li>boolean: Gibt true zurück, wenn der Roboter eingeschaltet ist, andernfalls false.</li>
+</ul>
+<h3>begin</h3>
+<pre><code>alvik.begin()
+</code></pre>
+<p><em>Startet alle Alvik-Operationen</em></p>
+<h3>is_target_reached</h3>
+<pre><code>alvik.is_target_reached()
+</code></pre>
+<p><em>Gibt True zurück, wenn der Roboter eine M- oder R-Bestätigung gesendet hat. Es antwortet auch mit einer Ack-Empfangsnachricht</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li>boolean: Gibt True zurück, wenn der Roboter das Ziel erreicht hat, andernfalls False.</li>
+</ul>
+<h3>stop</h3>
+<pre><code>alvik.stop()
+</code></pre>
+<p><em>Stoppt alle Alvik-Operationen</em></p>
+<h3>get_orientation</h3>
+<pre><code>alvik.get_orientation()
+</code></pre>
+<p><em>Gibt die Ausrichtung der IMU zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>r</strong>: Rollwert</li>
+<li><strong>p</strong>: Nickwert</li>
+<li><strong>y</strong>: Gierwert</li>
+</ul>
+<h3>get_acceleration</h3>
+<pre><code>alvik.get_accelerations()
+</code></pre>
+<p><em>Gibt die 3-Achsen-Beschleunigungswerte der IMU zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>ax</strong>: Beschleunigung auf x</li>
+<li><strong>ay</strong>: Beschleunigung auf y</li>
+<li><strong>az</strong>: Beschleunigung auf z</li>
+</ul>
+<h3>get_gyros</h3>
+<pre><code>alvik.get_gyros()
+</code></pre>
+<p><em>Gibt die 3-Achsen-Winkelbeschleunigung der IMU zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>gx</strong>: Winkelbeschleunigung auf x</li>
+<li><strong>gy</strong>: Winkelbeschleunigung auf y</li>
+<li><strong>gz</strong>: Winkelbeschleunigung auf z</li>
+</ul>
+<h3>get_imu</h3>
+<pre><code>alvik.get_imu()
+</code></pre>
+<p><em>Gibt alle IMU-Messwerte zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>ax</strong>: Beschleunigung auf x</li>
+<li><strong>ay</strong>: Beschleunigung auf y</li>
+<li><strong>az</strong>: Beschleunigung auf z</li>
+<li><strong>gx</strong>: Winkelbeschleunigung auf x</li>
+<li><strong>gy</strong>: Winkelbeschleunigung auf y</li>
+<li><strong>gz</strong>: Winkelbeschleunigung auf z</li>
+</ul>
+<p>Hier ein Beispiel:</p>
+<p>!<a href="3_0_Alvik_Sensoren_auslesen.html">3.0 Alvik Sensoren auslesen</a></p>
+<h3>get_line_sensors</h3>
+<pre><code>alvik.get_line_sensors()
+</code></pre>
+<p><em>Gibt die Messwerte der Linienfolgesensoren zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>left</strong>: Messwert des linken Sensors</li>
+<li><strong>center</strong>: Messwert des mittleren Sensors</li>
+<li><strong>right</strong>: Messwert des rechten Sensors</li>
+</ul>
+<h3>brake</h3>
+<pre><code>alvik.brake()
+</code></pre>
+<p><em>Bremst den Roboter</em></p>
+<h3>get_ack</h3>
+<pre><code>get_ack.get_ack()
+</code></pre>
+<p><em>Gibt die letzte Bestätigung zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>last_ack</strong>: Wert der letzten Bestätigung.</li>
+</ul>
+<h3>get_battery_charge</h3>
+<pre><code>alvik.get_battery_charge()
+</code></pre>
+<p><em>Gibt den Ladezustand der Batterie zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>battery_soc</strong>: Ladezustand in Prozent.</li>
+</ul>
+<h3>get_touch_any</h3>
+<pre><code>alvik.get_touch_any()
+</code></pre>
+<p><em>Gibt true zurück, wenn eine beliebige Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_any</strong>: true, wenn eine beliebige Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_ok</h3>
+<pre><code>alvik.get_touch_ok()
+</code></pre>
+<p><em>Gibt true zurück, wenn die OK-Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_ok</strong>: true, wenn die OK-Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_cancel</h3>
+<pre><code>alvik.get_touch_cancel()
+</code></pre>
+<p><em>Gibt true zurück, wenn die Abbruch-Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_cancel</strong>: true, wenn die Abbruch-Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_center</h3>
+<pre><code>alvik.get_touch_center()
+</code></pre>
+<p><em>Gibt true zurück, wenn die mittlere Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_center</strong>: true, wenn die mittlere Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_up</h3>
+<pre><code>alvik.get_touch_up()
+</code></pre>
+<p><em>Gibt true zurück, wenn die Aufwärts-Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_up</strong>: true, wenn die Aufwärts-Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_left</h3>
+<pre><code>alvik.get_touch_left()
+</code></pre>
+<p><em>Gibt true zurück, wenn die Links-Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_left</strong>: true, wenn die Links-Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_down</h3>
+<pre><code>alvik.get_touch_down
+</code></pre>
+<p><em>Gibt true zurück, wenn die Abwärts-Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_down</strong>: true, wenn die Abwärts-Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_touch_right</h3>
+<pre><code>alvik.get_touch_right()
+</code></pre>
+<p><em>Gibt true zurück, wenn die Rechts-Taste gedrückt wird</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>touch_right</strong>: true, wenn die Rechts-Taste gedrückt wird, andernfalls false.</li>
+</ul>
+<h3>get_color_raw</h3>
+<pre><code>alvik.get_color_raw()
+</code></pre>
+<p>get_color_raw()</p>
+<p><em>Gibt die Rohmesswerte des Farbsensors zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>color</strong>: Rohmesswerte des Farbsensors</li>
+</ul>
+<h3>get_color_label</h3>
+<pre><code>alvik.get_color_label()
+</code></pre>
+<p><em>Gibt die vom Sensor erkannte Farbbezeichnung zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>color</strong>: die vom Sensor erkannte Farbbezeichnung</li>
+</ul>
+<h3>get_version</h3>
+<pre><code>alvik.get_version()
+</code></pre>
+<p><em>Gibt die Firmware-Version des Alvik zurück</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>version</strong>: Gibt die Firmware-Version des Alvik zurück</li>
+</ul>
+<h3>print_status</h3>
+<pre><code>alvik.print_status()
+</code></pre>
+<p><em>Gibt den Alvik-Status aus</em></p>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>status</strong>: Gibt den Alvik-Status aus</li>
+</ul>
+<h3>set_behaviour</h3>
+<pre><code>alvik.set_behaviour()
+</code></pre>
+<p><em>Setzt das Verhalten von Alvik</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>behaviour</strong>: Verhaltenscode</li>
+</ul>
+<h3>rotate</h3>
+<pre><code>alvik.rotate()
+</code></pre>
+<p>rotate(angle: float, unit: str = 'deg', blocking: bool = True)</p>
+<p><em>Dreht den Roboter um den angegebenen Winkel</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>angle</strong>: der Winkelwert</li>
+<li><strong>unit</strong>: <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-angle-unit">Winkel-Einheit</a></li>
+<li><strong>blocking</strong>: <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#blocking-or-non-blocking"><em>True</em> oder <em>False</em></a></li>
+</ul>
+<h3>move</h3>
+<pre><code>alvik.move()
+</code></pre>
+<p>move(distance: float, unit: str = 'cm', blocking: bool = True)</p>
+<p><em>Bewegt den Roboter um die angegebene Strecke</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>distance</strong>: der Streckenwert</li>
+<li><strong>unit</strong>: die Streckeneinheit. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-distance-unit">?</a></li>
+<li><strong>blocking</strong>: <em>True</em> oder <em>False</em>, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#blocking-or-non-blocking">?</a></li>
+</ul>
+<h3>get_wheels_speed</h3>
+<pre><code>alvik.get_wheels_speed()
+</code></pre>
+<p>get_wheels_speed(unit: str = 'rpm')</p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>unit</strong>: Einheit der Drehzahl der Räder. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-rotational-speed-unit">?</a></li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>left_wheel_speed</strong>: der Geschwindigkeitswert</li>
+<li><strong>right_wheel_speed</strong>: der Geschwindigkeitswert</li>
+</ul>
+<p><em>Gibt die Geschwindigkeit der Räder zurück</em></p>
+<h3>set_wheels_speed</h3>
+<pre><code>alvik.set_wheels_speed()
+</code></pre>
+<p>set_wheels_speed(left_speed: float, right_speed: float, unit: str = 'rpm')</p>
+<p><em>Setzt die Geschwindigkeit des linken/rechten Motors</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>left_speed</strong>: der Geschwindigkeitswert</li>
+<li><strong>right_speed</strong>: der Geschwindigkeitswert</li>
+<li><strong>unit</strong>: Einheit der Drehzahl der Räder. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-rotational-speed-unit">?</a></li>
+</ul>
+<h3>set_wheels_position</h3>
+<pre><code>alvik.set_wheels_position()
+</code></pre>
+<p>set_wheels_position(left_angle: float, right_angle: float, unit: str = 'deg')</p>
+<p><em>Setzt den Winkel des linken/rechten Motors</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>left_angle</strong>: der Winkelwert</li>
+<li><strong>right_angle</strong>: der Winkelwert</li>
+<li><strong>unit</strong>: die Winkel-Einheit, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-angle-unit">?</a></li>
+</ul>
+<h3>get_wheels_position</h3>
+<pre><code>lavik.get_wheels_position()
+</code></pre>
+<p>get_wheels_position(unit: str = 'deg')</p>
+<p><em>Gibt den Winkel der Räder zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>angular_unit</strong>: Einheit der Drehzahl der Räder. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-rotational-speed-unit">?</a></li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>angular_velocity</strong>: Geschwindigkeit der Räder.</li>
+</ul>
+<h3>drive</h3>
+<pre><code>alvik.drive()
+</code></pre>
+<p>drive(linear_velocity: float, angular_velocity: float, linear_unit: str = 'cm/s',angular_unit: str = 'deg/s')</p>
+<p><em>Fährt den Roboter mit linearer und Winkelgeschwindigkeit</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>linear_velocity</strong>: Geschwindigkeit des Roboters.</li>
+<li><strong>angular_velocity</strong>: Geschwindigkeit der Räder.</li>
+<li><strong>linear_unit</strong>: Einheit der linearen Geschwindigkeit. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-linear-speed-unit">?</a></li>
+<li><strong>angular_unit</strong>: Einheit der Drehzahl der Räder. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-rotational-speed-unit">?</a></li>
+</ul>
+<h3>get_drive_speed</h3>
+<pre><code>alvik.get_drive_speed()
+</code></pre>
+<p>get_drive_speed(linear_unit: str = 'cm/s', angular_unit: str = 'deg/s')</p>
+<p><em>Gibt die lineare und Winkelgeschwindigkeit des Roboters zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>linear_unit</strong>: Einheit der linearen Geschwindigkeit. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-linear-speed-unit">?</a></li>
+<li><strong>angular_unit</strong>: Einheit der Drehzahl der Räder. <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-rotational-speed-unit">?</a></li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>linear_velocity</strong>: Geschwindigkeit des Roboters.</li>
+<li><strong>angular_velocity</strong>: Geschwindigkeit der Räder.</li>
+</ul>
+<h3>reset_pose</h3>
+<pre><code>alvik.reset_pose()
+</code></pre>
+<p>reset_pose(x: float, y: float, theta: float, distance_unit: str = 'cm', angle_unit: str = 'deg')</p>
+<p><em>Setzt die Roboterpose zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>x</strong></li>
+<li><strong>y</strong></li>
+<li><strong>theta</strong></li>
+<li><strong>distance_unit</strong>: Einheit der x- und y-Werte, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-distance-unit">?</a></li>
+<li><strong>angle_unit</strong>: Einheit des Theta-Werts, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-angle-unit">?</a></li>
+</ul>
+<h3>get_pose</h3>
+<pre><code>alvik.get_pose()
+</code></pre>
+<p>get_pose(distance_unit: str = 'cm', angle_unit: str = 'deg')</p>
+<p><em>Gibt die aktuelle Pose des Roboters zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>distance_unit</strong>: Einheit der x- und y-Werte, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-distance-unit">?</a></li>
+<li><strong>angle_unit</strong>: Einheit des Theta-Werts, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-angle-unit">?</a></li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>x</strong></li>
+<li><strong>y</strong></li>
+<li><strong>theta</strong></li>
+</ul>
+<h3>set_servo_positions</h3>
+<pre><code>alvik.set_servo_positions()
+</code></pre>
+<p>set_servo_positions(a_position: int, b_position: int)</p>
+<p><em>Setzt den Winkel der Servomotoren A/B</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>a_position</strong>: Position des Servomotors A (0-180)</li>
+<li><strong>b_position</strong>: Position des Servomotors B (0-180)</li>
+</ul>
+<h3>left_led.set_color</h3>
+<pre><code>alvik.left_led.set_color(0, 0, 0)
+</code></pre>
+<p>wählt einen Farbcode für die linke LED</p>
+<div class="tip-box">💡 <strong>Tipp:</strong><br>ersetze left durch right für die rechte LED
+</div>
+
+<p><strong>Eingaben</strong></p>
+<ul>
+<li>(1,0,0) rot</li>
+<li>(0,1,0) grün</li>
+<li>(0,0,1) blau</li>
+</ul>
+<h3>set_illuminator</h3>
+<pre><code>alvik.set_illuminator()
+</code></pre>
+<p>set_illuminator(value: bool)</p>
+<p><em>Schaltet die Beleuchtungs-LED ein/aus</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>value</strong>: True = EIN, False = AUS</li>
+</ul>
+<h3>color_calibration</h3>
+<pre><code>alvik.color_calibration()
+</code></pre>
+<p>color_calibration(background: str = 'white')</p>
+<p><em>Kalibriert den Farbsensor</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>background</strong>: Zeichenkette "white" oder "black"</li>
+</ul>
+<h3>rgb2hsv</h3>
+<pre><code>alvik.rgb2hsv()
+</code></pre>
+<p>rgb2hsv(r: float, g: float, b: float)</p>
+<p><em>Konvertiert normalisiertes RGB in HSV</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>r</strong>: Rotwert</li>
+<li><strong>g</strong>: Grünwert</li>
+<li><strong>b</strong>: Blauwert</li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>h</strong>: Farbwert</li>
+<li><strong>s</strong>: Sättigungswert</li>
+<li><strong>v</strong>: Helligkeitswert</li>
+</ul>
+<h3>get_color</h3>
+<pre><code>alvik.get_color()
+</code></pre>
+<p>get_color(color_format: str = 'rgb')</p>
+<p><em>Gibt die normalisierten Farbmesswerte des Farbsensors zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>color_format</strong>: nur rgb oder hsv</li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>r</strong> oder <strong>h</strong></li>
+<li><strong>g</strong> oder <strong>s</strong></li>
+<li><strong>b</strong> oder <strong>v</strong></li>
+</ul>
+<h3>hsv2label</h3>
+<pre><code>alvik.hsv2label()
+</code></pre>
+<p>hsv2label(h, s, v)</p>
+<p><em>Gibt die Farbbezeichnung zurück, die der angegebenen normalisierten HSV-Farbeingabe entspricht</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>h</strong>: Farbwert</li>
+<li><strong>s</strong>: Sättigungswert</li>
+<li><strong>v</strong>: Helligkeitswert</li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>color label</strong>: wie "BLACK" oder "GREEN", falls möglich, andernfalls "UNDEFINED" zurückgeben</li>
+</ul>
+<h3>get_distance</h3>
+<pre><code>alvik.get_distance()
+</code></pre>
+<p>get_distance(unit: str = 'cm')</p>
+<p><em>Gibt die Entfernungsmesswerte des TOF-Sensors zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>unit</strong>: Einheit der Entfernungsausgabe</li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>left_tof</strong>: Objektentfernung 45° links</li>
+<li><strong>center_left_tof</strong>: Objektentfernung 22° links</li>
+<li><strong>center_tof</strong>: Objektentfernung in der Mitte</li>
+<li><strong>center_right_tof</strong>: Objektentfernung 22° rechts</li>
+<li><strong>right_tof</strong>: Objektentfernung 45° rechts</li>
+</ul>
+<h3>get_distance_top</h3>
+<pre><code>alvik.get_distance_top()
+</code></pre>
+<p>get_distance_top(unit: str = 'cm')</p>
+<p><em>Gibt die Entfernungsmesswerte des oberen Hindernisses zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>unit</strong>: Einheit der Entfernungsausgabe</li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>top_tof</strong>: Objektentfernung 45° oben</li>
+</ul>
+<h3>get_distance_bottom</h3>
+<pre><code>alvik.get_distance_bottom()
+</code></pre>
+<p>get_distance_bottom(unit: str = 'cm')</p>
+<p><em>Gibt die Entfernungsmesswerte des unteren Hindernisses zurück</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>unit</strong>: Einheit der Entfernungsausgabe</li>
+</ul>
+<p><strong>Ausgaben</strong></p>
+<ul>
+<li><strong>bottom_tof</strong>: Objektentfernung 45° unten</li>
+</ul>
+<h3>on_touch_ok_pressed</h3>
+<pre><code>alvik.on_touch_ok_pressed()
+</code></pre>
+<p>on_touch_ok_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste OK gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+<h3>on_touch_cancel_pressed</h3>
+<pre><code>alvik.on_touch_cancel_pressed()
+</code></pre>
+<p>on_touch_cancel_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste ABBRECHEN gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+<h3>on_touch_center_pressed</h3>
+<pre><code>alvik.on_touch_center_pressed()
+</code></pre>
+<p>on_touch_center_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste MITTE gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+<h3>on_touch_up_pressed</h3>
+<pre><code>alvik.on_touch_up_pressed()
+</code></pre>
+<p>on_touch_up_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste AUFWÃ„RTS gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+<h3>on_touch_left_pressed</h3>
+<pre><code>alvik.on_touch_left_pressed()
+</code></pre>
+<p>on_touch_left_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste LINKS gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+<h3>on_touch_down_pressed</h3>
+<pre><code>alvik.on_touch_down_pressed()
+</code></pre>
+<p>on_touch_down_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste ABWÃ„RTS gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+<h3>on_touch_right_pressed</h3>
+<pre><code>alvik.on_touch_right_pressed()
+</code></pre>
+<p>on_touch_right_pressed(callback: callable, args: tuple = ())</p>
+<p><em>Registriert einen Rückruf, wenn die Berührungstaste RECHTS gedrückt wird</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>callback</strong>: der Name der aufzurufenden Funktion</li>
+<li><strong>args</strong>: optionale Argumente der Funktion</li>
+</ul>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

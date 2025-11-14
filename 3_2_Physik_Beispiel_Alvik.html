@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beschleunigte Bewegung - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <h1>Beschleunigte Bewegung</h1>
+<p>Hier wird eine beschleunigte Bewegung des Alvik nach einem Tastendruck auf den Alvik ausgelöst und die Daten werden an die phyphox App gesendet</p>
+<pre><code class="language-python">
+#  Beschleunigte Bewegung messen
+from arduino_alvik import ArduinoAlvik
+from phyphoxBLE import PhyphoxBLE
+import time
+
+# Roboter initialisieren
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# PhyphoxBLE initialisieren und starten (vor dem Tastendruck)
+p = PhyphoxBLE()
+p.start()
+print(&quot;Phyphox-Verbindung gestartet. Warte auf Tastendruck...&quot;)
+
+# Warte auf Tastendruck und führe dann die Messung durch
+while True:
+    taste = alvik.get_touch_any()
+    if taste == True:
+        print(&quot;Taste erkannt! Starte Beschleunigungsmessung...&quot;)
+
+        # Parameter für die Beschleunigung
+        start_geschw = 0  # cm/s
+        max_geschw = 30   # cm/s
+        beschleunigungs_zeit = 30  # Sekunden
+
+        print(f&quot;Beschleunige von {start_geschw} auf {max_geschw} cm/s in {beschleunigungs_zeit} Sekunden&quot;)
+
+        # Beschleunigung berechnen (a = Î”v/Î”t)
+        beschleunigung = (max_geschw - start_geschw) / beschleunigungs_zeit
+        print(f&quot;Berechnete Beschleunigung: {beschleunigung:.2f} cm/s²&quot;)
+
+        # Bewegung starten und Messung beginnen
+        startzeit = time.time()
+        alvik.drive(start_geschw, 0)
+
+        # Während der Beschleunigung
+        while True:
+            aktuelle_zeit = time.time() - startzeit
+
+            # Neue Geschwindigkeit basierend auf Beschleunigung berechnen (v = v₀ + a·t)
+            neue_geschw = start_geschw + beschleunigung * aktuelle_zeit
+
+            # Begrenze auf Maximalgeschwindigkeit
+            if neue_geschw &gt; max_geschw:
+                neue_geschw = max_geschw
+
+            # Setze neue Geschwindigkeit
+            alvik.drive(neue_geschw, 0)
+
+            # Aktuelle Geschwindigkeit messen
+            _, gemessene_geschw = alvik.get_drive_speed()
+
+            # Zurückgelegte Strecke berechnen (s = v₀·t + Â½·a·t²)
+            position = start_geschw * aktuelle_zeit + 0.5 * beschleunigung * aktuelle_zeit**2
+
+            # Daten an Phyphox senden (Zeit, Position, Geschwindigkeit, Beschleunigung)
+            p.write(aktuelle_zeit, position, gemessene_geschw, beschleunigung)
+
+            print(f&quot;Zeit: {aktuelle_zeit:.2f}s, v: {gemessene_geschw:.2f}cm/s, s: {position:.2f}cm&quot;)
+
+            # Beende die Beschleunigung nach der festgelegten Zeit
+            if aktuelle_zeit &gt;= beschleunigungs_zeit:
+                # Fahre noch kurz mit konstanter Geschwindigkeit weiter
+                alvik.drive(max_geschw, 0)
+                time.sleep(2)
+                break
+
+            time.sleep(0.1)
+
+        alvik.stop()
+        print(&quot;Beschleunigungsmessung abgeschlossen&quot;)
+
+
+    time.sleep(0.1)  # Kleine Pause, um die CPU nicht zu belasten
+</code></pre>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

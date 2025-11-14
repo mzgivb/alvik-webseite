@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvik mit phyphox - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <p>Man kann alle Werte die ein Arduino Alvik ermitteln kann auch an die Phyphox App senden. Das funktioniert mit dem phyphox – Microphython Library. Sie müssen diese Bibliothek zuerst auf den Alvik übertragen.</p>
+<ol>
+<li>Erstellen Sie hierzu im Ordner lib einen Ordner phyphoxBLE.</li>
+<li>Übertrage sie nun jede einzelne Datei aus dem <a href="https://github.com/phyphox/phyphox-micropython/tree/main/phyphoxBLE">Github Repo</a><br />
+auf den Alvik. </li>
+<li>Öffne ein leeres Dokument</li>
+<li>Übertrage den Code per Copy und Paste und achte darauf, den Dateinamen korrekt abzuspeichern.</li>
+<li>Darauf achten das alle Dateien korrekt gespeichert wurden <code>__init__.py</code>2 underscore lines!!!</li>
+</ol>
+<p><img alt="Bild" src="assets/Bildschirmfoto 2025-04-16 um 12.43.42.png" /></p>
+<p>In diesem Beispiel werden Geschwindigkeitswerte an die App gesendet während er ein Viereck fährt. Das Beispiel verwendet einen Timer, der in einem speziellen Zeitintervall eine Messung ausführt.</p>
+<pre><code class="language-python">from machine import Timer
+from arduino_alvik import ArduinoAlvik
+from phyphoxBLE import PhyphoxBLE
+import time
+
+alvik = ArduinoAlvik()
+alvik.begin()
+p = PhyphoxBLE()
+p.start()
+
+def drive_speed(timer):
+    angular_velocity, linear_velocity = alvik.get_drive_speed()  # Geschwindigkeit messen
+    print(f&quot;Die Geschwindigkeit beträgt = {linear_velocity} cm/s&quot;)
+    p.write(linear_velocity)  # Wert an die Phyphox-App senden
+
+# Timer initialisieren, der alle 200 ms die Geschwindigkeit sendet
+timer = Timer(-1)
+timer.init(period=200, mode=Timer.PERIODIC, callback=drive_speed)
+
+# Hauptschleife für Bewegungsablauf
+while True:
+    for _ in range(4):
+        alvik.move(50)
+        alvik.rotate(90)
+        time.sleep(1)
+
+
+</code></pre>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

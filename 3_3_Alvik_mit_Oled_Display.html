@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvik mit OLED Display - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <p>Es besteht die Möglichkeit ein 128x64 OLED Display über I2C an den Arduino Alvik anzuschlieÃŸen. Hierzu muss man zuerst die notwendige Bibliothek auf den Arduino Alvik übertragen. Klicken sie hierzu in der Software Thonny im Menü Werkzeuge auf den Bereich verwaltete Pakete und suchen sie nach SSD1306. Installieren Sie diese Bibliothek auf den Arduino Alvik.</p>
+<p>Es bietet sich nun an Messwerte aus dem Alvik auf dem OLED Display auszugeben, hier ein Beispiel:<br />
+<img alt="Bild" src="assets/Bildschirmfoto 2025-05-12 um 13.30.31.png" /></p>
+<p>Dieser Code gibt den Abstand eines Objektes und die Farbe des Untergrundes über den Farbsensor.</p>
+<pre><code class="language-python">from machine import Pin, I2C
+import ssd1306
+from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+# Initialisierung OELD Display
+
+i2c = I2C(sda=Pin(11), scl=Pin(12))
+display = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+while True:
+    color = alvik.get_color_label() # Farbe auslesen
+    lt, clt, ct, crt, rt = alvik.get_distance() # mittleren TOF sensors auslesen
+    display.text(f'Abstand: {ct}', 0, 0, 1) # Abstand ausgeben
+    display.text(f'Farbe: {color}', 0, 20, 1) # Farbe ausgeben
+    display.show()
+    sleep_ms(2000)
+    display.fill(0) #löscht das Display nach jeder Messung
+
+</code></pre>
+<p>Man kann nun z.B. auch die Sensorwerte eines bme680 auslesen und auf dem Oled Display ausgeben lassen. Hier ein Beispielcode:</p>
+<pre><code class="language-python">from machine import Pin, I2C
+import bme680
+import time
+import ssd1306
+
+# I2C initialisieren (GPIO 12 = SCL, GPIO 11 = SDA)
+i2c = I2C(0, scl=Pin(12), sda=Pin(11), freq=100000)
+
+# Display initialisieren
+display = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+try:
+    # Sensor initialisieren
+    sensor = bme680.BME680_I2C(i2c=i2c, address=0x76)
+    print(&quot;BME680 erfolgreich erkannt!&quot;)
+except OSError:
+    print(&quot;Sensor nicht gefunden. Mögliche Ursachen:&quot;)
+    print(&quot;- Falsche I2C-Adresse (versuche address=0x76 oder 0x77)&quot;)
+    print(&quot;- Defekte Verkabelung&quot;)
+    raise SystemExit
+
+# Hauptschleife
+while True:
+    try:
+        # Sensordaten auslesen
+        temperature = sensor.temperature
+        humidity = sensor.humidity
+        pressure = sensor.pressure
+        gas_resistance = sensor.gas
+
+        # Display löschen
+        display.fill(0)
+
+        # Text anzeigen (max. 6 Zeilen bei 8px Höhe)
+        display.text(&quot;Sensordaten:&quot;, 0, 0)
+        display.text(f&quot;T: {temperature:.1f} C&quot;, 0, 10)
+        display.text(f&quot;RH: {humidity:.1f} %&quot;, 0, 20)
+        display.text(f&quot;P: {pressure:.1f} hPa&quot;, 0, 30)
+        display.text(f&quot;Gas: {gas_resistance/1000:.1f} kOhm&quot;, 0, 40)
+
+        display.show()
+        time.sleep(2)
+
+    except Exception as e:
+        print(&quot;Fehler beim Lesen:&quot;, str(e))
+
+    time.sleep(3)
+</code></pre>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

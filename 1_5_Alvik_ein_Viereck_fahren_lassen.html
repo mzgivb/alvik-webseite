@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viereck fahren - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <p>Der Arduino Alvik ist ein Lernroboter der fahren kann. Es gibt drei wesentliche Befehle, die man benötigt, um den Alvik fahren zu lassen. </p>
+<div class="tip-box">💡 <strong>Tipp:</strong><br>- alvik.move()
+- alvik.rotate()
+- alvik.stop()
+</div>
+
+<p><code>alvik.move()</code></p>
+<p><em>Bewegt den Roboter um eine bestimmte Entfernung</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li><strong>Entfernung</strong>: der Entfernungswert (20)</li>
+<li><strong>Einheit</strong>: die Entfernungseinheit (cm). <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-distance-unit">?</a></li>
+<li><strong>Blockierung</strong>: <em>Richtig</em> oder <em>falsch</em>, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#blocking-or-non-blocking">?</a></li>
+</ul>
+<pre><code>alvik.rotate()
+
+</code></pre>
+<p>rotate(angle: float, unit: str = 'deg', blocking: bool = True)</p>
+<p><em>Rotates the robot by given angle</em></p>
+<p><strong>Eingaben</strong></p>
+<ul>
+<li>Winkel: the angle value</li>
+<li><strong>unit</strong>: <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-angle-unit">angle unit</a></li>
+<li><strong>blocking</strong>:<a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#blocking-or-non-blocking"><em>True</em> or <em>False</em></a></li>
+</ul>
+<p><code>alvik.stop()</code></p>
+<p><strong>Keine Eingaben</strong></p>
+<ul>
+<li>Stoppt alles</li>
+</ul>
+<h4>Viereck fahren</h4>
+<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep 
+alvik = ArduinoAlvik()
+alvik.begin()
+# Viereck fahren
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+
+# stoppen
+alvik.stop()
+</code></pre>
+<h4>Viereck fahren als Funktion</h4>
+<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep
+alvik = ArduinoAlvik()
+alvik.begin()
+# Viereck fahren
+
+def viereck():
+    for _ in range(4):
+        alvik.move(50)
+        alvik.rotate(90)
+        sleep(1)
+viereck()
+
+</code></pre>
+<p>`</p>
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html" class="active">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <h2>MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</h2>
+<h2><strong>Stunde 1: Erste Bewegungen programmieren</strong></h2>
+<p><strong>1. Aufgabe:</strong><br />
+Verbinde den Arduino Alvik mit deinem Computer und öffne die Micro-Python-Programmierumgebung Thonny.</p>
+<p><strong>2. Aufgabe:</strong><br />
+Schreibe ein Programm, das den Roboter 2 Sekunden lang vorwärtsfahren lässt.<br />
+Starte das Programm und beobachte das Verhalten des Roboters. Schaue in der  <a href="1_1_Alvik_API.html">1.1 Alvik API</a> nach folgenden Befehl.</p>
+<p><strong>alvik.set.wheels_speed</strong>(x,x)</p>
+<p><em><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">5.1.2 Lösung 1.Stunde Aufgabe</a><em></p>
+<p><strong>3. Aufgabe:</strong><br />
+Erweitere dein Programm so, dass der Roboter anschließend 2 Sekunden rückwärts fährt.</p>
+<p><em><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">5.1.3 Lösung 1 Stunde Aufgabe 3</a></em></p>
+<p><strong>4. Aufgabe:</strong><br />
+Füge deinem Programm eine Drehung um 90 Grad nach links hinzu.</p>
+<p><strong>5. Zusatzaufgabe:</strong><br />
+Programmiere eine Schleife, in der der Roboter ein Quadrat fährt.<br />
+(Hinweis: Ein Quadrat besteht aus vier gleich langen Strecken und vier 90-Grad-Drehungen.)</p>
+<h2><strong>Stunde 2: Hindernisse erkennen und umfahren</strong></h2>
+<p><strong>1. Aufgabe:</strong><br />
+Lese mit Mikro-Python die Werte des Entfernungssensors aus und lasse sie dir auf dem Bildschirm anzeigen.</p>
+<p>siehe: <a href="3_0_Alvik_Sensoren_auslesen.html">3.0 Alvik Sensoren auslesen</a></p>
+<p><strong>2. Aufgabe:</strong><br />
+Schreibe ein Programm, das den Roboter vorwärtsfahren lässt, bis ein Hindernis in weniger als 20 Zentimeter Entfernung erkannt wird.<br />
+Der Roboter soll dann anhalten.</p>
+<p><strong>3. Aufgabe:</strong><br />
+Erweitere das Programm so, dass der Roboter bei einem Hindernis um 90 Grad nach rechts dreht und dann weiterfährt.</p>
+<p><strong>4. Zusatzaufgabe:</strong><br />
+Programmiere eine Schleife, sodass der Roboter immer wieder Hindernissen ausweicht, solange er eingeschaltet ist.</p>
+<h2><strong>Stunde 3: Mit Farben interagieren</strong></h2>
+<p><strong>1. Aufgabe:</strong><br />
+Lese mit Mikro-Python die Werte des Farbsensors aus und lasse dir die erkannten Farben auf dem Bildschirm anzeigen.</p>
+<p>siehe: <a href="3_0_Alvik_Sensoren_auslesen.html">3.0 Alvik Sensoren auslesen</a></p>
+<p><strong>2. Aufgabe:</strong><br />
+Schreibe ein Programm, das den Roboter unterschiedlich reagieren lässt:</p>
+<ul>
+<li>
+<p>Erkennt der Sensor <strong>Rot</strong>, soll der Roboter anhalten.</p>
+</li>
+<li>
+<p>Erkennt der Sensor <strong>Grün</strong>, soll der Roboter weiterfahren.</p>
+</li>
+<li>
+<p>Erkennt der Sensor <strong>Blau</strong>, soll der Roboter eine Drehung machen.</p>
+</li>
+</ul>
+<p><strong>3. Zusatzaufgabe:</strong><br />
+Lege verschiedenfarbige Papierstücke auf den Boden. Lasse den Roboter darüber fahren und beobachte, ob er richtig auf die Farben reagiert.</p>
+<h6>4. <strong>Masteraufgabe:</strong></h6>
+<p>Aufgabe: Erstelle ein Programm, das den Farbsensor kontinuierlich ausliest und je nach erkannter Farbe die internen LED(s) des Alvik in einer passenden Farbe leuchten lässt.</p>
+<p>Deine Aufgabenstellung im Detail:</p>
+<ol>
+<li>
+<p>Messe fortlaufend die Farbwerte über den eingebauten Farbsensor. Verarbeite diese Werte, sodass du eine Farbbezeichnung (wie z. B. "RED", "GREEN", "BLUE") erhältst – nutze dabei übliche Konvertierungsfunktionen.</p>
+</li>
+<li>
+<p>Programmiere eine Entscheidungslogik:<br />
+ • Wird beispielsweise Rot erkannt, dann soll eine bestimmte LED (oder beide, je nach deinem Konzept) in Rot aufleuchten.<br />
+ • Bei Grün könnte die LED grün leuchten.<br />
+ • Bei Blau sollte die LED blau leuchten oder sogar in einem Blinkmuster aktiviert werden.<br />
+ • Erkennst du einen Farbwert, den du nicht eindeutig zuordnen kannst (etwa "UNDEFINED"), so kannst du entweder alle LED(s) ausschalten oder ein spezielles Blinkmuster programmieren.</p>
+</li>
+<li>
+<p>Erweitere dein Programm optional:<br />
+ • Integriere eine Anzeige auf dem Bildschirm oder in einer Konsole, die den aktuell erkannten Farbstatus ausgibt.<br />
+ • Experimentiere mit unterschiedlichen Blinkvarianten oder Helligkeitsanpassungen in Abhängigkeit von der Intensität bzw. Helligkeit des erkannten Lichts.</p>
+</li>
+<li>
+<p>Überlege dir am Ende, wie du das System mit realen farbigen Objekten testen kannst, zum Beispiel indem du verschiedenfarbige Papierstücke auf den Boden legst und beobachtest, ob die LED(s) korrekt auf die erkannten Farben reagieren.</p>
+</li>
+</ol>
+<p>Hinweise zur Umsetzung:<br />
+- Beginne mit dem Einlesen der Farbdaten und der Umwandlung in ein Farblabel.<br />
+- Implementiere die Steuerungslogik für die LED(s) so, dass sie unmittelbar auf Farbänderungen reagieren.<br />
+- Achte darauf, eventuelle Verzögerungen (etwa beim Blinken) so abzustimmen, dass der Roboter flüssig reagiert.<br />
+- Denke daran, für die sichere und verständliche Programmierung sinnvolle Kommentare und eine übersichtliche Struktur zu verwenden.</p>
+<p>Viel Erfolg bei der Implementierung und beim kreativen Experimentieren mit den LED(s) und der Farberkennung!</p>
+<h2><strong>Stunde 4: Abschlussprojekt – Deine Roboter-Challenge</strong></h2>
+<p><strong>1. Aufgabe:</strong><br />
+Überlege dir eine eigene kleine Roboter-Challenge. Beispiele:</p>
+<ul>
+<li>
+<p>Der Roboter fährt durch einen Parcours mit Hindernissen und farbigen Feldern.</p>
+</li>
+<li>
+<p>Der Roboter sucht ein bestimmtes Farbfeld und bleibt darauf stehen.</p>
+</li>
+<li>
+<p>Der Roboter zählt, wie oft er eine bestimmte Farbe erkennt, und gibt die Zahl aus.</p>
+</li>
+</ul>
+<p><strong>2. Aufgabe:</strong><br />
+Plane, wie du deine Idee mit MicroPython umsetzen kannst. Schreibe dazu einen kurzen Ablaufplan.</p>
+<p><strong>3. Aufgabe:</strong><br />
+Programmiere deinen Roboter so, dass er deine Challenge bewältigt.</p>
+<p><strong>4. Aufgabe:</strong><br />
+Teste dein Programm und verbessere es, falls nötig.</p>
+<p><strong>5. Aufgabe:</strong><br />
+Präsentiere dein Projekt und deinen Code der Klasse. Erkläre, wie du vorgegangen bist und welche Probleme du gelöst hast.</p>
+<p><strong>Viel Erfolg und Spaß beim Programmieren!</strong></p>
+<h6>6. Masteraufgabe:</h6>
+<p>Hier eine kreative Herausforderung, die verschiedene Elemente der Roboterprogrammierung miteinander verbindet:</p>
+<p><strong>Aufgabe: Entwickle ein autonomes Hindernisvermeidungssystem mit zufälliger Richtungswahl</strong></p>
+<p>Aufgabenbeschreibung:<br />
+1. Dein Roboter soll zunächst kontinuierlich vorwärtsfahren.<br />
+2. Während der Fahrt liest er ständig den Abstand des Hindernissensors aus.<br />
+3. Sobald ein Objekt in einer vordefinierten Entfernung (zum Beispiel 20 cm) erkannt wird, soll der Roboter anhalten.<br />
+4. Danach soll der Roboter zufällig entscheiden, ob er sich nach links oder rechts drehen möchte, um den Hindernissen auszuweichen.<br />
+5. Nachdem der Roboter gedreht hat, soll er wieder in den Vorwärtsmodus wechseln und die Umgebung erneut scannen.<br />
+6. Wiederhole diese Abfolge in einer Schleife, damit der Roboter fortlaufend seine Umgebung erkundet und flexibel auf Hindernisse reagiert.</p>
+<h4>Hinweise zur Umsetzung:</h4>
+<p>• Arbeite zunächst daran, den Abstandssensor korrekt auszulesen und die Rückgabewerte auf dem Bildschirm anzuzeigen.<br />
+• Überlege, wie du eine Zufallsauswahl (zum Beispiel über eine Zufallsfunktion) implementieren kannst, um die Drehrichtung zu bestimmen.<br />
+• Achte beim Drehen darauf, dass der Roboter sich um feste Winkel, etwa 90 Grad, dreht – passe dies ggf. an.<br />
+• Denke auch an ein Sicherheitskonzept: Was passiert, wenn nach einer Drehung erneut direkt ein Hindernis auftaucht?<br />
+• Optional: Integriere eine Statusanzeige (zum Beispiel über LEDs oder im Thonny-Fenster), um zu signalisieren, ob sich der Roboter im "Fahrmodus", "Anhalte- oder Hindernismodus" oder "Drehmodus" befindet.</p>
+<p><strong>Pseudo-Ablaufplan (ohne konkrete Codezeilen):</strong><br />
+• Initialisiere den Roboter und starte die Sensorüberwachung.<br />
+• Starte eine Endlosschleife:<br />
+ ○ Lies den Abstandssensor aus.<br />
+ ○ Wenn kein Hindernis erkannt wird, lasse den Roboter vorwärts fahren.<br />
+ ○ Wird ein Hindernis (z.B. Abstand &lt; 20 cm) gemeldet:<br />
+  — Stoppe den Roboter.<br />
+  — Wähle zufällig eine Drehaktion (links oder rechts, z.B. Drehung um 90 Grad).<br />
+  — Führ die Drehung aus.<br />
+  — Fahre wieder vorwärts.<br />
+• Beende die Schleife nur auf Anforderung.</p>
+<hr />
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

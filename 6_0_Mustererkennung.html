@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustererkennung mit dem Alvik - Arduino Alvik Lernplattform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation - Mustererkennung und Machine Learning">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="logo">
+            <div>
+                <h1>Arduino Alvik</h1>
+                <p>MicroPython Lernplattform</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <div class="search-box">
+  <input type="text" id="search-input" placeholder="Suche...">
+</div>
+<div class="nav-section">
+  <h3>Erste Schritte</h3>
+  <ul>
+    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
+    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Erweiterungen</h3>
+  <ul>
+    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Projekte & Beispiele</h3>
+  <ul>
+    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Ressourcen</h3>
+  <ul>
+    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Übungen</h3>
+  <ul>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+  </ul>
+</div>
+<div class="nav-section">
+  <h3>Abschnitt 999</h3>
+  <ul>
+    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
+  </ul>
+</div>
+
+        </aside>
+        
+        <main class="main-content">
+            <h2>Mustererkennung mit dem Alvik</h2>
+
+<div class="intro-box">
+    <p>Der Alvik-Roboter lernt durch Farbkarten ein Bewegungsmuster wie eine KI. <strong>Rot</strong> bedeutet vorwärts, <strong>Gelb</strong> rückwärts, <strong>Grün</strong> Rechtsdrehung und <strong>Blau</strong> Linksdrehung. Nach dem Scannen von 5 Farbkarten speichert der Roboter die Sequenz und führt sie autonom aus. Diese Demo zeigt die Grundprinzipien von Machine Learning: Dateneingabe, Mustererkennung und autonome Ausführung.</p>
+</div>
+
+<h3>Technische Funktionen und Code-Struktur</h3>
+
+<h4>Genutzte Alvik-Funktionen</h4>
+
+<p><strong>Sensorik:</strong></p>
+<ul>
+    <li><code>get_color()</code> und <code>rgb2hsv()</code> – Liest RGB-Farbwerte und konvertiert sie in HSV-Format für zuverlässige Farberkennung</li>
+    <li><code>get_color_label()</code> – Gibt Farbbezeichnungen zurück (wird durch eigene HSV-Erkennung ersetzt)</li>
+    <li><code>set_illuminator(True)</code> – Aktiviert die LED-Beleuchtung für konstante Lichtverhältnisse</li>
+</ul>
+
+<p><strong>Bewegung:</strong></p>
+<ul>
+    <li><code>move(distance, 'cm', blocking=True)</code> – Fährt geradeaus (Rot/Gelb)</li>
+    <li><code>rotate(angle, 'deg', blocking=True)</code> – Dreht auf der Stelle (Grün/Blau)</li>
+</ul>
+
+<p><strong>Feedback:</strong></p>
+<ul>
+    <li><code>left_led.set_color(r, g, b)</code> / <code>right_led.set_color(r, g, b)</code> – Visuelles Feedback während Erkennung</li>
+    <li><code>get_touch_ok()</code> – Wartet auf Nutzerbestätigung zum Start</li>
+</ul>
+
+<p><strong>Display (I2C):</strong></p>
+<ul>
+    <li><code>ssd1306.SSD1306_I2C()</code> – Initialisiert das OLED-Display über I2C (Pins 11/12)</li>
+    <li><code>display.text()</code>, <code>display.fill()</code>, <code>display.show()</code> – Textausgabe und Fortschrittsbalken</li>
+</ul>
+
+<h3>Code-Struktur (4 Phasen)</h3>
+
+<ol>
+    <li><strong>Initialisierung:</strong> Display- und Roboter-Setup, Beleuchtung einschalten, Startbildschirm</li>
+    <li><strong>Lernphase:</strong> Schleife erfasst 5 Farben mit <code>detect_color_calibrated()</code>, speichert sie in <code>pattern_memory[]</code>, zeigt Fortschritt am Display</li>
+    <li><strong>Bestätigung:</strong> Blink-Animation bis OK-Taste gedrückt wird, zeigt gelerntes Muster als Symbolsequenz</li>
+    <li><strong>Ausführung:</strong> For-Schleife iteriert durch <code>pattern_memory[]</code> und führt entsprechende Bewegungsbefehle aus, Display zeigt Live-Fortschritt</li>
+</ol>
+
+<p><strong>Kern-Algorithmus:</strong> Die Funktion <code>detect_color_calibrated()</code> nimmt 5 HSV-Messungen, bildet Durchschnittswerte und vergleicht diese mit kalibrierten Bereichen (H: Farbton 0-360°, S: Sättigung 0-1, V: Helligkeit 0-1) für präzise Farberkennung.</p>
+
+<div class="image-container">
+    <img src="assets/IMG_4055.jpg" alt="Alvik Roboter mit Farbkarten" style="max-width: 100%; height: auto; border-radius: 8px;">
+    <p style="text-align: center; color: #666; margin-top: 10px; font-style: italic;">Alvik-Roboter bei der Mustererkennung</p>
+</div>
+
+<h3>Python Code</h3>
+
+<pre><code>from machine import Pin, I2C
+import ssd1306
+from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+# ==================== DISPLAY KONFIGURATION ====================
+i2c = I2C(sda=Pin(11), scl=Pin(12))
+display = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+def display_text(lines, clear=True):
+    if clear:
+        display.fill(0)
+    y = 0
+    for line in lines:
+        display.text(line, 0, y, 1)
+        y += 10
+    display.show()
+
+def display_progress_bar(current, total, label=""):
+    display.fill(0)
+    display.text(label, 0, 0, 1)
+    bar_width = int((current / total) * 120)
+    display.rect(4, 20, 120, 15, 1)
+    display.fill_rect(5, 21, bar_width, 13, 1)
+    percent = f"{current}/{total}"
+    x = (128 - len(percent) * 8) // 2
+    display.text(percent, x, 45, 1)
+    display.show()
+
+# ==================== PERFEKT KALIBRIERTE FARBERKENNUNG ====================
+def detect_color_calibrated(alvik):
+    """
+    Exakte Farberkennung mit ALLEN gemessenen HSV-Werten:
+    
+    ROT:    h=5.11,   s=0.68, v=0.59 (hohe Sättigung, mittlere Helligkeit)
+    GELB:   h=40.04,  s=0.59, v=0.92 (SEHR hell!)
+    GRÜN:   h=96.76,  s=0.37, v=0.56 (niedrige Sättigung, niedrige Helligkeit)
+    BLAU:   h=198.13, s=0.36, v=0.80 (niedrige Sättigung, hohe Helligkeit)
+    """
+    
+    # 5 Messungen für maximale Stabilität
+    h_values = []
+    s_values = []
+    v_values = []
+    
+    for _ in range(5):
+        r, g, b = alvik.get_color()
+        h, s, v = alvik.rgb2hsv(r, g, b)
+        h_values.append(h)
+        s_values.append(s)
+        v_values.append(v)
+        sleep_ms(30)
+    
+    # Durchschnittswerte berechnen
+    h = sum(h_values) / len(h_values)
+    s = sum(s_values) / len(s_values)
+    v = sum(v_values) / len(v_values)
+    
+    # Optional: Debug-Ausgabe (auskommentieren zum Testen)
+    # print(f"H:{h:.1f} S:{s:.2f} V:{v:.2f}")
+    
+    # Zu dunkel = keine gültige Farbe
+    if v &lt; 0.10:
+        return None
+    
+    # Zu geringe Sättigung UND zu dunkel = Schwarz/Grau
+    if s &lt; 0.15 and v &lt; 0.40:
+        return None
+    
+    # ===== PRÄZISE FARBERKENNUNG MIT ALLEN PARAMETERN =====
+    
+    # ROT: h=5.11, s=0.68, v=0.59
+    # Einzige Farbe mit HOHER Sättigung + mittlerer Helligkeit
+    if (h &lt; 25 or h &gt; 340) and 0.50 &lt; s &lt; 0.85 and 0.40 &lt; v &lt; 0.75:
+        return 'RED'
+    
+    # GELB: h=40.04, s=0.59, v=0.92
+    # SEHR HELL (v=0.92) unterscheidet es von allen anderen!
+    elif 28 &lt; h &lt; 52 and 0.40 &lt; s &lt; 0.75 and 0.80 &lt; v:
+        return 'YELLOW'
+    
+    # GRÜN: h=96.76, s=0.37, v=0.56
+    # Niedrige Sättigung + niedrigste Helligkeit
+    elif 72 &lt; h &lt; 122 and 0.20 &lt; s &lt; 0.55 and 0.40 &lt; v &lt; 0.70:
+        return 'GREEN'
+    
+    # BLAU: h=198.13, s=0.36, v=0.80
+    # Niedrige Sättigung aber HOHE Helligkeit (unterscheidet von Grün!)
+    elif 173 &lt; h &lt; 223 and 0.20 &lt; s &lt; 0.50 and 0.65 &lt; v &lt; 0.95:
+        return 'BLUE'
+    
+    return None
+
+# ==================== FARB-KONFIGURATION ====================
+COLOR_ACTIONS = {
+    'RED': {'name': 'Vorwaerts', 'symbol': '^', 'led': (1, 0, 0)},
+    'YELLOW': {'name': 'Rueckw.', 'symbol': 'v', 'led': (1, 1, 0)},
+    'GREEN': {'name': 'Rechts', 'symbol': '&gt;', 'led': (0, 1, 0)},
+    'BLUE': {'name': 'Links', 'symbol': '&lt;', 'led': (0, 0, 1)}
+}
+
+MAX_PATTERN_LENGTH = 5
+MOVE_DISTANCE = 15
+ROTATION_ANGLE = 90
+
+# ==================== INITIALISIERUNG ====================
+alvik = ArduinoAlvik()
+alvik.begin()
+alvik.set_illuminator(True)
+sleep_ms(500)
+
+# Startbildschirm
+display_text([
+    "==================",
+    " ALVIK KI-DEMO",
+    "==================",
+    "",
+    "Perfekt",
+    "kalibriert!"
+])
+sleep_ms(2000)
+
+# LEDs Begrüßung
+for _ in range(3):
+    alvik.left_led.set_color(1, 1, 1)
+    alvik.right_led.set_color(1, 1, 1)
+    sleep_ms(300)
+    alvik.left_led.set_color(0, 0, 0)
+    alvik.right_led.set_color(0, 0, 0)
+    sleep_ms(300)
+
+# ==================== PHASE 1: LERNEN ====================
+display_text([
+    "LERNPHASE",
+    "----------",
+    "Zeige Farben:",
+    "ROT   = ^",
+    "GELB  = v",
+    "GRUEN = &gt;",
+    "BLAU  = &lt;"
+])
+sleep_ms(3000)
+
+pattern_memory = []
+last_color = None
+no_color_counter = 0
+
+while len(pattern_memory) &lt; MAX_PATTERN_LENGTH:
+    display_progress_bar(len(pattern_memory), MAX_PATTERN_LENGTH, "Lerne Farben...")
+    
+    # Nutze perfekt kalibrierte Farberkennung
+    current_color = detect_color_calibrated(alvik)
+    
+    if current_color and current_color != last_color:
+        pattern_memory.append(current_color)
+        action = COLOR_ACTIONS[current_color]
+        
+        # LED-Feedback
+        alvik.left_led.set_color(*action['led'])
+        alvik.right_led.set_color(*action['led'])
+        
+        # Display-Anzeige
+        display.fill(0)
+        display.text(f"Farbe {len(pattern_memory)}/{MAX_PATTERN_LENGTH}", 10, 0, 1)
+        display.text(current_color, 20, 20, 1)
+        display.text(action['symbol'] * 5, 20, 35, 1)
+        display.text(action['name'], 15, 50, 1)
+        display.show()
+        
+        last_color = current_color
+        no_color_counter = 0
+        sleep_ms(1500)
+        
+        alvik.left_led.set_color(0, 0, 0)
+        alvik.right_led.set_color(0, 0, 0)
+    
+    elif current_color is None:
+        no_color_counter += 1
+        if no_color_counter &gt; 15:  # 1.5 Sekunden ohne Farbe
+            last_color = None
+            no_color_counter = 0
+    
+    sleep_ms(100)
+
+# Gelerntes Muster anzeigen
+display.fill(0)
+display.text("Gelernt:", 0, 0, 1)
+pattern_str = "".join([COLOR_ACTIONS[c]['symbol'] for c in pattern_memory])
+x = (128 - len(pattern_str) * 8) // 2
+display.text(pattern_str, x, 28, 1)
+display.show()
+sleep_ms(2000)
+
+# ==================== PHASE 2: BESTÄTIGUNG ====================
+blink_state = True
+while not alvik.get_touch_ok():
+    display.fill(0)
+    if blink_state:
+        display.text("Bereit!", 35, 15, 1)
+        display.text("Druecke OK", 20, 35, 1)
+    display.show()
+    blink_state = not blink_state
+    sleep_ms(500)
+
+# ==================== PHASE 3: AUSFÜHREN ====================
+display.fill(0)
+display.text("START!", 40, 28, 1)
+display.show()
+sleep_ms(1000)
+
+for i, color in enumerate(pattern_memory):
+    action = COLOR_ACTIONS[color]
+    
+    display.fill(0)
+    display.text(f"Schritt {i+1}/{len(pattern_memory)}", 10, 0, 1)
+    done_pattern = "".join([COLOR_ACTIONS[c]['symbol'] for c in pattern_memory[:i+1]])
+    display.text(done_pattern, 5, 20, 1)
+    display.text(action['symbol'] * 3, 40, 35, 1)
+    display.text(action['name'], 20, 50, 1)
+    display.show()
+    
+    alvik.left_led.set_color(*action['led'])
+    alvik.right_led.set_color(*action['led'])
+    
+    if color == 'RED':
+        alvik.move(MOVE_DISTANCE, 'cm', blocking=True)
+    elif color == 'YELLOW':
+        alvik.move(-MOVE_DISTANCE, 'cm', blocking=True)
+    elif color == 'GREEN':
+        alvik.rotate(-ROTATION_ANGLE, 'deg', blocking=True)
+    elif color == 'BLUE':
+        alvik.rotate(ROTATION_ANGLE, 'deg', blocking=True)
+    
+    sleep_ms(300)
+    alvik.left_led.set_color(0, 0, 0)
+    alvik.right_led.set_color(0, 0, 0)
+
+# ==================== ABSCHLUSS ====================
+display_text(["", "  FERTIG!", "", "  Muster", "  ausgefuehrt!", "", "  :-)"])
+
+for _ in range(5):
+    alvik.left_led.set_color(0, 1, 0)
+    alvik.right_led.set_color(0, 1, 0)
+    sleep_ms(200)
+    alvik.left_led.set_color(0, 0, 0)
+    alvik.right_led.set_color(0, 0, 0)
+    sleep_ms(200)
+
+alvik.brake()
+alvik.set_illuminator(False)
+sleep_ms(5000)
+display.fill(0)
+display.show()
+</code></pre>
+
+        </main>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
+        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
