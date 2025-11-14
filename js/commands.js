@@ -67,41 +67,39 @@ time.sleep(2)
 alvik.brake()  # Sofortiger Stopp`
     },
     {
-        name: 'alvik.get_wheels_position(unit)',
+        name: 'alvik.get_wheels_position()',
         category: 'bewegung',
-        description: 'Gibt die Position der Räder zurück (in Grad oder Umdrehungen).',
-        parameters: [
-            { name: 'unit', desc: 'DEGREES oder REVOLUTIONS' }
-        ],
-        example: `# Position in Grad abrufen
-left, right = alvik.get_wheels_position(alvik.DEGREES)
+        description: 'Gibt die Position der Räder zurück in Grad (Standard).',
+        parameters: [],
+        example: `# Position in Grad abrufen (Standard)
+left, right = alvik.get_wheels_position()
 print(f"Links: {left}°, Rechts: {right}°")
 
-# Position in Umdrehungen
-left, right = alvik.get_wheels_position(alvik.REVOLUTIONS)
-print(f"Links: {left} U, Rechts: {right} U")`
+# Mehrere Positionen vergleichen
+for i in range(5):
+    left, right = alvik.get_wheels_position()
+    print(f"Messung {i+1}: L={left}°, R={right}°")
+    alvik.move(10)`
     },
     
     // Sensoren
     {
-        name: 'alvik.get_distance(unit)',
+        name: 'alvik.get_distance()',
         category: 'sensoren',
-        description: 'Misst die Entfernung zum nächsten Objekt mit dem Ultraschallsensor.',
-        parameters: [
-            { name: 'unit', desc: 'CM (Zentimeter) oder INCH (Zoll)' }
-        ],
-        example: `# Entfernung in Zentimetern messen
-distance = alvik.get_distance(alvik.CM)
+        description: 'Misst die Entfernung zum nächsten Objekt mit dem Ultraschallsensor in cm (Standard).',
+        parameters: [],
+        example: `# Entfernung in Zentimetern messen (Standard)
+distance = alvik.get_distance()
 print(f"Entfernung: {distance} cm")
 
 # Kollisionsvermeidung
 while True:
-    distance = alvik.get_distance(alvik.CM)
+    distance = alvik.get_distance()
     if distance < 20:
         alvik.brake()
         print("Hindernis erkannt!")
         break
-    alvik.move(30)`
+    alvik.move(10)`
     },
     {
         name: 'alvik.get_line_sensors()',
