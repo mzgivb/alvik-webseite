@@ -81,6 +81,11 @@
         </aside>
         
         <main class="main-content">
+            <h2>Kollisionsvermeidung – Ein reaktives Programmierprinzip</h2>
+            
+            <p>Bei der Kollisionsvermeidung liest der Roboter kontinuierlich seine Abstandssensoren aus und reagiert sofort auf Hindernisse in seiner Umgebung. Wenn ein Hindernis zu nah kommt (hier: unter 15 cm), unterbricht der Roboter seine Vorwärtsbewegung und dreht sich um einen festgelegten Winkel. Erst wenn der Weg wieder frei ist, setzt er seine Fahrt fort – so navigiert er autonom durch den Raum, ohne anzustoßen.</p>
+            
+            <h3>Code-Beispiel</h3>
             <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
 from time import sleep_ms
 
