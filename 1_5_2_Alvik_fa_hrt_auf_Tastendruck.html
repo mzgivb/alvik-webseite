@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>get_touch_center - Arduino Alvik Lernplattform</title>
+    <title>Alvik auf Tastendruck fahren - Arduino Alvik Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
     <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
 </head>
@@ -81,20 +81,65 @@
         </aside>
         
         <main class="main-content">
-            <h2>get_touch_center</h2>
-<p><strong>Beispiel:</strong> Bei gerücktem mittlerem <em>Touch Button</em> fährt der Alvik 20 cm vorwärts</p>
-<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+            <h2>Alvik auf Tastendruck fahren – Interaktive Steuerung</h2>
+            
+            <p>Der Arduino Alvik verfügt über drei kapazitive Touch-Buttons (links, mitte, rechts), die berührungsempfindlich sind und ohne mechanischen Druck funktionieren. Diese Buttons ermöglichen eine einfache Interaktion mit dem Roboter ohne zusätzliche Hardware. Mit dem Touch-Button in der Mitte kannst du den Alvik starten lassen, sobald du ihn berührst.</p>
+            
+            <h3>Die Touch-Button Funktionen</h3>
+            <p>Der Alvik bietet drei Funktionen zum Auslesen der Touch-Buttons:</p>
+            <ul>
+                <li><code>get_touch_left()</code> – Linker Touch-Button</li>
+                <li><code>get_touch_center()</code> – Mittlerer Touch-Button</li>
+                <li><code>get_touch_right()</code> – Rechter Touch-Button</li>
+            </ul>
+            <p>Alle drei Funktionen geben <code>True</code> zurück, wenn der entsprechende Button berührt wird, andernfalls <code>False</code>.</p>
+            
+            <h3>Beispiel: Fahren auf Tastendruck</h3>
+            <p>In diesem Beispiel wartet der Alvik in einer Endlosschleife auf eine Berührung des mittleren Touch-Buttons. Sobald dieser gedrückt wird, fährt der Roboter 20 cm vorwärts. Nach einer Sekunde Pause prüft er erneut, ob der Button gedrückt wurde.</p>
+            
+            <h4>Code-Beispiel</h4>
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
 import time
+
 alvik = ArduinoAlvik()
 alvik.begin()
 
 while True:
-
-        touch_center = alvik.get_touch_center()
-        if touch_center:
-            alvik.move(20)
-        time.sleep(1)
+    # Touch-Button Status abfragen
+    touch_center = alvik.get_touch_center()
+    
+    # Wenn Button gedrückt: 20 cm vorwärts fahren
+    if touch_center:
+        alvik.move(20)
+    
+    # Kurze Pause, um nicht zu oft zu prüfen
+    time.sleep(1)
 </code></pre>
+
+            <h3>Wie funktioniert der Code?</h3>
+            <ol>
+                <li><strong>Initialisierung:</strong> Der Alvik wird initialisiert mit <code>alvik.begin()</code></li>
+                <li><strong>Endlosschleife:</strong> <code>while True:</code> sorgt dafür, dass der Code kontinuierlich läuft</li>
+                <li><strong>Button abfragen:</strong> <code>get_touch_center()</code> prüft, ob der mittlere Button berührt wird</li>
+                <li><strong>Bewegung ausführen:</strong> Bei Berührung fährt der Alvik 20 cm vorwärts</li>
+                <li><strong>Pause:</strong> <code>time.sleep(1)</code> verhindert zu schnelle Wiederholungen</li>
+            </ol>
+            
+            <h3>Praktische Anwendungen</h3>
+            <p>Touch-Buttons eignen sich hervorragend für:</p>
+            <ul>
+                <li>Manuelle Startfunktionen für autonome Programme</li>
+                <li>Einfache Steuerung ohne zusätzliche Hardware</li>
+                <li>Interaktive Demonstrationen und Vorführungen</li>
+                <li>Notfallstopps oder Pausenfunktionen</li>
+            </ul>
+            
+            <h3>Tipps & Erweiterungen</h3>
+            <ul>
+                <li><strong>Mehrere Buttons kombinieren:</strong> Nutze alle drei Buttons für verschiedene Bewegungen (links = links drehen, mitte = vorwärts, rechts = rechts drehen)</li>
+                <li><strong>Entprellung:</strong> Füge eine längere <code>time.sleep()</code> Pause hinzu, um Mehrfachauslösungen zu vermeiden</li>
+                <li><strong>LED-Feedback:</strong> Kombiniere Touch-Buttons mit LED-Signalen, um zu zeigen, dass eine Eingabe erkannt wurde</li>
+            </ul>
         </main>
     </div>
     
