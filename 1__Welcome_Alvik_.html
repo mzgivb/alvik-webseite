@@ -4,9 +4,146 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Der Aufbau - Arduino Alvik Lernplattform</title>
+    <title>Willkommen beim Arduino Alvik - MicroPython Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
     <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            color: white !important;
+            border: none !important;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .setup-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            background: white;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+        
+        .step-card h3 {
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .image-gallery img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #00979D 0%, #00A1A6 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .cta-box h3 {
+            color: white !important;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,89 +160,193 @@
         <aside class="sidebar">
             <h2>Navigation</h2>
             <div class="search-box">
-  <input type="text" id="search-input" placeholder="Suche...">
-</div>
-<div class="nav-section">
-  <h3>Erste Schritte</h3>
-  <ul>
-    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
-    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
-    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
-    <li><a href="command-center.html">🚀 Command Center</a></li>
-    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
-    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
-    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
-    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
-	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
-    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
-    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Erweiterungen</h3>
-  <ul>
-    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
-    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Projekte & Beispiele</h3>
-  <ul>
-    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
-    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
-    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
-    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
-    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Ressourcen</h3>
-  <ul>
-    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Übungen</h3>
-  <ul>
-    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
-    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
-    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Abschnitt 999</h3>
-  <ul>
-    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
-  </ul>
-</div>
-
+                <input type="text" id="search-input" placeholder="Suche...">
+            </div>
+            <div class="nav-section">
+                <h3>Erste Schritte</h3>
+                <ul>
+                    <li><a href="1__Welcome_Alvik_.html" class="active">Der Aufbau</a></li>
+                    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+                    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
+                    <li><a href="command-center.html">🚀 Command Center</a></li>
+                    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+                    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+                    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+                    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+                    <li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+                    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+                    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Erweiterungen</h3>
+                <ul>
+                    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+                    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Projekte & Beispiele</h3>
+                <ul>
+                    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+                    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+                    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+                    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+                    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Ressourcen</h3>
+                <ul>
+                    <li><a href="4_0_Alvik_Kurse_online.html">Online-Kurse</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Übungen</h3>
+                <ul>
+                    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+                    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik</a></li>
+                    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+                </ul>
+            </div>
         </aside>
         
         <main class="main-content">
-            <p>Herzlich willkommen zum <strong>Micropython</strong>  - Kurs mit dem <strong>Arduino Alvik</strong>. Der Arduino Alvik lässt auch mit C++ und Scratch Programmieren, aber hier soll es nur um Micropython gehen. Der Arduino Alvik überzeugt durch seine hochpräzisen Motoren mit Hall-Effekt-Encodern, die exakte Bewegungen ermöglichen. Dank seiner vielseitigen Sensorik und Erweiterbarkeit eignet sich der Alvik besonders gut für den Einsatz im pädagogischen Bereich, von der Mittel- bis zur Hochschulbildung. </p>
-<p><img alt="Bild" src="assets/C500-AKX00066_10.EXTRA.jpg" /></p>
-<blockquote>
-<p>Lernende profitieren von praxisnahen Projekten auf dieser Webseite und können spielerisch Kompetenzen in Robotik, Informatik und Problemlösung entwickeln. So verbindet der Alvik präzise Technik mit optimaler Eignung für den modernen Unterricht.</p>
-</blockquote>
-<h1>1.0.1 Der Aufbau</h1>
-<p><img alt="Bild" src="assets/prj-00-robot-illustration.png.webp" /><br />
-<img alt="Bild" src="assets/prj-00-components.png.webp" /></p>
-<div class="warning-box">⚠️ <strong>Wichtig:</strong><br>Alles, was Sie hier lesen, bezieht sich darauf, den Arduino Alvik mit Micropython zu betreiben. 
-</div>
+            <div class="hero-section">
+                <h1>🤖 Willkommen beim Arduino Alvik!</h1>
+                <p>Entdecke die Welt der Robotik mit MicroPython. Der Arduino Alvik überzeugt durch hochpräzise Motoren, vielseitige Sensorik und ist perfekt für den Bildungsbereich geeignet.</p>
+            </div>
 
-<h1>1.0.2 Update</h1>
-<p>Es ist wichtig den Alvik immer aktuell zu halten, hierzu sollten sie regelmäÃŸig den Alvik Updater nutzen und den Alvik damit verbinden.</p>
-<p>https://alvikupdate.arduino.cc/</p>
-<h1>1.0.3 Software</h1>
-<p>Ich empfehle zum Programmieren des Alviks die Software Thonny.</p>
-<p>https://thonny.org</p>
-<p>Laden Sie Thonny für ihr Betriebssystem herunter und verbinden Sie den Alvik mit dem Computer per USB-Kabel.</p>
-<p>Rechts unten im Eck befindet sich die Auswahl des Interpreters, wählen Sie MicroPython (ESP32)</p>
-<p><img alt="Bild" src="assets/Bildschirmfoto 2025-04-16 um 11.16.02.png" /></p>
-<h1>1.0.4 Eingebaute Programme</h1>
-<p>Der Arduino Alvik hat drei fest eingebaute Programme, mit denen man gut in die Thematik des Programmierens einsteigen kann. </p>
-<p><img alt="Bild" src="assets/select-examples.gif" /></p>
-<p>Für unseren Kurs nutzen wir das rot Programm: für Microcontroller angepasste Python version: Ein <strong>Hall-Effekt-Encoder</strong> ist ein Sensor, der die Drehbewegung (Rotation) einer Achse oder Welle erfasst und in ein digitales Signal umwandelt. Er nutzt den <strong>Hall-Effekt</strong>, um magnetische Felder zu detektieren</p>
+            <div class="tip-box" style="border-left-color: #FF6B35;">
+                <strong>💡 Hinweis:</strong> Diese Plattform konzentriert sich auf MicroPython. Der Alvik unterstützt auch C++ und Scratch, aber hier liegt der Fokus auf Python!
+            </div>
+
+            <h2>🎯 Was macht den Alvik besonders?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Präzise Motoren</h3>
+                    <p>Hall-Effekt-Encoder ermöglichen exakte Bewegungen und präzise Positionierung</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3>Vielfältige Sensorik</h3>
+                    <p>IMU, Farbsensor, Liniensensoren, Ultraschall und Touch-Buttons</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Erweiterbar</h3>
+                    <p>I2C-Schnittstelle für zusätzliche Sensoren und Module</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Bildungsfreundlich</h3>
+                    <p>Perfekt für Mittel- bis Hochschulbildung mit praxisnahen Projekten</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🐍</div>
+                    <h3>MicroPython</h3>
+                    <p>Programmierung in der beliebten Sprache Python, angepasst für Microcontroller</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>RGB-LEDs</h3>
+                    <p>Zwei steuerbare RGB-LEDs für visuelle Rückmeldungen</p>
+                </div>
+            </div>
+
+            <h2>📸 Der Alvik im Detail</h2>
+            
+            <div class="image-gallery">
+                <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik Roboter">
+                <img src="assets/prj-00-robot-illustration.png.webp" alt="Alvik Illustration">
+                <img src="assets/prj-00-components.png.webp" alt="Alvik Komponenten">
+            </div>
+
+            <div class="info-box">
+                <p><strong>🎯 Lernziele:</strong> Mit dem Alvik entwickeln Lernende spielerisch Kompetenzen in Robotik, Informatik und Problemlösung. Die Plattform verbindet präzise Technik mit optimaler Eignung für den modernen Unterricht.</p>
+            </div>
+
+            <h2>🚀 Schnellstart - In 4 Schritten loslegen</h2>
+            
+            <div class="setup-section">
+                <div class="step-card">
+                    <h3>
+                        <span class="step-number">1</span>
+                        Firmware aktualisieren
+                    </h3>
+                    <p>Halte deinen Alvik immer auf dem neuesten Stand mit dem offiziellen Updater:</p>
+                    <p><a href="https://alvikupdate.arduino.cc/" target="_blank" style="color: var(--primary-color); font-weight: 600;">→ Zum Alvik Updater</a></p>
+                    <div class="tip-box" style="margin-top: 1rem;">
+                        <strong>💡 Tipp:</strong> Führe regelmäßig Updates durch, um neue Features und Bugfixes zu erhalten.
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <h3>
+                        <span class="step-number">2</span>
+                        Thonny IDE installieren
+                    </h3>
+                    <p>Wir empfehlen die benutzerfreundliche Thonny IDE zum Programmieren:</p>
+                    <ul>
+                        <li>✅ Einfache Bedienung für Einsteiger</li>
+                        <li>✅ Integrierter Debugger</li>
+                        <li>✅ Direkter Zugriff auf MicroPython</li>
+                        <li>✅ Verfügbar für Windows, Mac und Linux</li>
+                    </ul>
+                    <p><a href="https://thonny.org" target="_blank" style="color: var(--primary-color); font-weight: 600;">→ Thonny herunterladen</a></p>
+                </div>
+
+                <div class="step-card">
+                    <h3>
+                        <span class="step-number">3</span>
+                        Alvik verbinden
+                    </h3>
+                    <p>Verbinde den Alvik per USB-Kabel mit deinem Computer und wähle in Thonny:</p>
+                    <p><strong>Rechts unten → Interpreter → MicroPython (ESP32)</strong></p>
+                    <img src="assets/Bildschirmfoto 2025-04-16 um 11.16.02.png" alt="Thonny Interpreter Auswahl" style="margin-top: 1rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                </div>
+
+                <div class="step-card">
+                    <h3>
+                        <span class="step-number">4</span>
+                        Erste Programme testen
+                    </h3>
+                    <p>Der Alvik kommt mit drei vorinstallierten Demo-Programmen:</p>
+                    <p><strong>🔴 MicroPython Modus</strong> - Das ist unser Fokus!</p>
+                    <img src="assets/select-examples.gif" alt="Programmauswahl" style="margin-top: 1rem; border-radius: 8px;">
+                    <div class="tip-box" style="margin-top: 1rem;">
+                        <strong>🎯 Nächster Schritt:</strong> Probiere die Demo-Programme aus und schau dir dann das <a href="1_2_Alvik_Grundgeru_st.html">Code-Grundgerüst</a> an!
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <h3>🚀 Bereit zum Programmieren?</h3>
+                <p style="margin-bottom: 1.5rem;">Entdecke die wichtigsten Funktionen und starte dein erstes Projekt!</p>
+                <a href="command-center.html" class="cta-button">→ Zum Command Center</a>
+                <a href="1_2_Alvik_Grundgeru_st.html" class="cta-button">→ Code-Grundgerüst</a>
+            </div>
+
+            <div class="warning-box">
+                <p><strong>⚠️ Wichtig:</strong> Alle Inhalte auf dieser Webseite beziehen sich ausschließlich auf die Programmierung des Arduino Alvik mit MicroPython.</p>
+            </div>
+
+            <h2>📚 Was ist ein Hall-Effekt-Encoder?</h2>
+            <p>Ein <strong>Hall-Effekt-Encoder</strong> ist ein Sensor, der die Drehbewegung (Rotation) einer Achse oder Welle erfasst und in ein digitales Signal umwandelt. Er nutzt den <strong>Hall-Effekt</strong>, um magnetische Felder zu detektieren.</p>
+            <p>Beim Alvik sorgen diese Encoder für:</p>
+            <ul>
+                <li>✅ Präzise Geschwindigkeitsmessung</li>
+                <li>✅ Genaue Positionsbestimmung</li>
+                <li>✅ Exakte Distanzmessungen beim Fahren</li>
+                <li>✅ Zuverlässige Drehwinkelerkennung</li>
+            </ul>
         </main>
     </div>
     
