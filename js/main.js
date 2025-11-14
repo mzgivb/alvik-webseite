@@ -139,16 +139,16 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // Parallax effect for images
-    const images = document.querySelectorAll('.main-content img');
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        images.forEach(img => {
-            const speed = 0.5;
-            const yPos = -(scrolled * speed);
-            img.style.transform = `translateY(${yPos}px)`;
-        });
-    });
+    // Parallax effect for images - DEAKTIVIERT
+    // const images = document.querySelectorAll('.main-content img');
+    // window.addEventListener('scroll', () => {
+    //     const scrolled = window.pageYOffset;
+    //     images.forEach(img => {
+    //         const speed = 0.5;
+    //         const yPos = -(scrolled * speed);
+    //         img.style.transform = `translateY(${yPos}px)`;
+    //     });
+    // });
     
     // Add ripple effect to buttons
     document.querySelectorAll('.cta-button, .filter-btn').forEach(button => {
