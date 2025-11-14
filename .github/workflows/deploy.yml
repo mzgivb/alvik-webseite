@@ -19,7 +19,7 @@ jobs:
         server: w00d4b57.kasserver.com
         username: w00d4b57
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /
+        server-dir: /alvik.mzgivb.de/
         exclude: |
           **/.git*
           **/.git*/**
