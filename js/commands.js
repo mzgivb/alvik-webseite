@@ -2,24 +2,26 @@
 const commands = [
     // Bewegung
     {
-        name: 'alvik.move(speed, degrees)',
+        name: 'alvik.move(distance)',
         category: 'bewegung',
-        description: 'Bewegt den Alvik vorwärts oder rückwärts mit einer bestimmten Geschwindigkeit.',
+        description: 'Bewegt den Alvik eine bestimmte Strecke vorwärts oder rückwärts.',
         parameters: [
-            { name: 'speed', desc: 'Geschwindigkeit (-100 bis 100), negativ = rückwärts' },
-            { name: 'degrees', desc: 'Optional: Rotation in Grad (360° = 1 Umdrehung)' }
+            { name: 'distance', desc: 'Wegstrecke in cm (positiv = vorwärts, negativ = rückwärts)' }
         ],
         example: `from arduino_alvik import ArduinoAlvik
 alvik = ArduinoAlvik()
 alvik.begin()
 
-# Vorwärts fahren mit Geschwindigkeit 50
+# 50 cm vorwärts fahren
 alvik.move(50)
-alvik.brake()
 
-# Rückwärts fahren
-alvik.move(-50)
-alvik.brake()`
+# 30 cm rückwärts fahren
+alvik.move(-30)
+
+# Quadrat fahren (mit rotate)
+for i in range(4):
+    alvik.move(40)    # 40 cm vorwärts
+    alvik.rotate(90)  # 90° rechts drehen`
     },
     {
         name: 'alvik.rotate(degrees)',
