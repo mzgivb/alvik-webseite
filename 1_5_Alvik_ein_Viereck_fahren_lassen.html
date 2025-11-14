@@ -81,74 +81,163 @@
         </aside>
         
         <main class="main-content">
-            <p>Der Arduino Alvik ist ein Lernroboter der fahren kann. Es gibt drei wesentliche Befehle, die man benötigt, um den Alvik fahren zu lassen. </p>
-<div class="tip-box">💡 <strong>Tipp:</strong><br>- alvik.move()
-- alvik.rotate()
-- alvik.stop()
-</div>
+            <h2>Ein Viereck fahren – Grundlegende Bewegungsbefehle</h2>
+            
+            <p>Der Arduino Alvik ist ein Lernroboter, der präzise gesteuert werden kann. Um komplexere Fahrmanöver wie ein Viereck zu programmieren, benötigst du drei grundlegende Bewegungsbefehle. In diesem Tutorial lernst du, wie du diese Befehle kombinierst, um geometrische Formen zu fahren.</p>
+            
+            <h3>Die drei wichtigsten Bewegungsbefehle</h3>
+            
+            <div class="tip-box">
+                💡 <strong>Grundbefehle:</strong><br>
+                • <code>alvik.move()</code> – Vorwärts/Rückwärts fahren<br>
+                • <code>alvik.rotate()</code> – Drehen auf der Stelle<br>
+                • <code>alvik.stop()</code> – Alle Motoren stoppen
+            </div>
 
-<p><code>alvik.move()</code></p>
-<p><em>Bewegt den Roboter um eine bestimmte Entfernung</em></p>
-<p><strong>Eingaben</strong></p>
-<ul>
-<li><strong>Entfernung</strong>: der Entfernungswert (20)</li>
-<li><strong>Einheit</strong>: die Entfernungseinheit (cm). <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-distance-unit">?</a></li>
-<li><strong>Blockierung</strong>: <em>Richtig</em> oder <em>falsch</em>, <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#blocking-or-non-blocking">?</a></li>
-</ul>
-<pre><code>alvik.rotate()
+            <h4>1. alvik.move() – Bewegen</h4>
+            <p>Bewegt den Roboter um eine bestimmte Entfernung vorwärts oder rückwärts.</p>
+            
+            <p><strong>Syntax:</strong></p>
+            <pre><code class="language-python">alvik.move(distance, unit='cm', blocking=True)</code></pre>
+            
+            <p><strong>Parameter:</strong></p>
+            <ul>
+                <li><strong>distance</strong> (float): Die Entfernung, die gefahren werden soll (z.B. 50)</li>
+                <li><strong>unit</strong> (str): Die Einheit – <code>'cm'</code> für Zentimeter oder <code>'deg'</code> für Raddrehung</li>
+                <li><strong>blocking</strong> (bool): <code>True</code> = Wartet bis Bewegung fertig, <code>False</code> = Führt Code sofort weiter aus</li>
+            </ul>
+            
+            <p><strong>Beispiel:</strong></p>
+            <pre><code class="language-python">alvik.move(50)  # Fährt 50 cm vorwärts</code></pre>
 
-</code></pre>
-<p>rotate(angle: float, unit: str = 'deg', blocking: bool = True)</p>
-<p><em>Rotates the robot by given angle</em></p>
-<p><strong>Eingaben</strong></p>
-<ul>
-<li>Winkel: the angle value</li>
-<li><strong>unit</strong>: <a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#the-angle-unit">angle unit</a></li>
-<li><strong>blocking</strong>:<a href="https://docs.arduino.cc/tutorials/alvik/api-overview/#blocking-or-non-blocking"><em>True</em> or <em>False</em></a></li>
-</ul>
-<p><code>alvik.stop()</code></p>
-<p><strong>Keine Eingaben</strong></p>
-<ul>
-<li>Stoppt alles</li>
-</ul>
-<h4>Viereck fahren</h4>
-<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep 
+            <h4>2. alvik.rotate() – Drehen</h4>
+            <p>Dreht den Roboter um einen bestimmten Winkel auf der Stelle.</p>
+            
+            <p><strong>Syntax:</strong></p>
+            <pre><code class="language-python">alvik.rotate(angle, unit='deg', blocking=True)</code></pre>
+            
+            <p><strong>Parameter:</strong></p>
+            <ul>
+                <li><strong>angle</strong> (float): Der Drehwinkel (z.B. 90 für 90°)</li>
+                <li><strong>unit</strong> (str): Die Einheit – <code>'deg'</code> für Grad oder <code>'rad'</code> für Radiant</li>
+                <li><strong>blocking</strong> (bool): <code>True</code> = Wartet bis Drehung fertig, <code>False</code> = Führt Code sofort weiter aus</li>
+            </ul>
+            
+            <p><strong>Beispiel:</strong></p>
+            <pre><code class="language-python">alvik.rotate(90)  # Dreht 90° im Uhrzeigersinn</code></pre>
+
+            <h4>3. alvik.stop() – Stoppen</h4>
+            <p>Stoppt alle Motoren sofort. Dieser Befehl benötigt keine Parameter.</p>
+            
+            <p><strong>Beispiel:</strong></p>
+            <pre><code class="language-python">alvik.stop()  # Stoppt den Roboter</code></pre>
+
+            <h3>Beispiel 1: Viereck fahren (einfach)</h3>
+            <p>Ein Viereck besteht aus vier gleich langen Seiten und vier 90°-Drehungen. Hier ist die einfachste Variante:</p>
+            
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep
+
 alvik = ArduinoAlvik()
 alvik.begin()
-# Viereck fahren
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
+
+# Erste Seite
 alvik.move(50)
 alvik.rotate(90)
 sleep(1)
 
-# stoppen
+# Zweite Seite
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+
+# Dritte Seite
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+
+# Vierte Seite
+alvik.move(50)
+alvik.rotate(90)
+sleep(1)
+
+# Stoppen
 alvik.stop()
 </code></pre>
-<h4>Viereck fahren als Funktion</h4>
-<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+
+            <h3>Wie funktioniert das Viereck?</h3>
+            <ol>
+                <li><strong>Seite fahren:</strong> <code>alvik.move(50)</code> fährt 50 cm geradeaus</li>
+                <li><strong>Ecke drehen:</strong> <code>alvik.rotate(90)</code> dreht 90° für die nächste Ecke</li>
+                <li><strong>Pause:</strong> <code>sleep(1)</code> wartet 1 Sekunde (optional, zur besseren Beobachtung)</li>
+                <li><strong>Wiederholen:</strong> Diese Schritte werden 4 mal ausgeführt</li>
+            </ol>
+
+            <h3>Beispiel 2: Viereck mit Funktion (besser)</h3>
+            <p>Wiederholungen schreibt man eleganter mit Schleifen und Funktionen:</p>
+            
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
 from time import sleep
+
 alvik = ArduinoAlvik()
 alvik.begin()
-# Viereck fahren
 
-def viereck():
-    for _ in range(4):
-        alvik.move(50)
+def viereck(seitenlaenge=50, pause=1):
+    """
+    Lässt den Alvik ein Viereck fahren.
+    
+    Parameter:
+    - seitenlaenge: Länge einer Seite in cm (Standard: 50)
+    - pause: Pause nach jeder Ecke in Sekunden (Standard: 1)
+    """
+    for i in range(4):
+        alvik.move(seitenlaenge)
         alvik.rotate(90)
-        sleep(1)
+        sleep(pause)
+
+# Viereck fahren
 viereck()
 
+# Optional: Mehrere Vierecke mit unterschiedlichen Größen
+# viereck(30)  # Kleines Viereck
+# viereck(70, 0.5)  # Großes Viereck mit kürzerer Pause
 </code></pre>
-<p>`</p>
+
+            <h3>Vorteile der Funktions-Variante</h3>
+            <ul>
+                <li><strong>Kürzer:</strong> Nur 4 Zeilen statt 16</li>
+                <li><strong>Flexibler:</strong> Seitenlänge und Pause sind einstellbar</li>
+                <li><strong>Wiederverwendbar:</strong> Funktion kann mehrfach aufgerufen werden</li>
+                <li><strong>Übersichtlicher:</strong> Code ist besser strukturiert</li>
+            </ul>
+
+            <h3>Erweiterungsideen</h3>
+            <p>Nachdem du das Viereck gemeistert hast, probiere diese Variationen:</p>
+            
+            <ul>
+                <li><strong>Rechteck:</strong> Verwende unterschiedliche Längen für die Seiten</li>
+                <li><strong>Dreieck:</strong> 3 Seiten mit jeweils 120° Drehung</li>
+                <li><strong>Sechseck:</strong> 6 Seiten mit jeweils 60° Drehung</li>
+                <li><strong>Spirale:</strong> Erhöhe die Seitenlänge nach jeder Runde</li>
+                <li><strong>Mehrfach-Vierecke:</strong> Fahre mehrere Vierecke unterschiedlicher Größe</li>
+            </ul>
+
+            <h3>Tipps für präzises Fahren</h3>
+            <ul>
+                <li><strong>Ebener Untergrund:</strong> Teste auf glattem Boden für beste Ergebnisse</li>
+                <li><strong>Batterie laden:</strong> Schwache Batterien beeinflussen die Präzision</li>
+                <li><strong>Kalibrierung:</strong> Bei Abweichungen kannst du die Werte anpassen (z.B. 89° statt 90°)</li>
+                <li><strong>Blocking-Parameter:</strong> Standardmäßig ist <code>blocking=True</code>, was bedeutet, dass jeder Befehl abgewartet wird</li>
+            </ul>
+
+            <h3>Mathematischer Hintergrund</h3>
+            <p>Die Summe aller Außenwinkel eines Vierecks beträgt immer 360°. Bei einem Quadrat sind das vier mal 90°. Für andere regelmäßige Formen gilt:</p>
+            <ul>
+                <li><strong>Dreieck:</strong> 360° ÷ 3 = 120°</li>
+                <li><strong>Fünfeck:</strong> 360° ÷ 5 = 72°</li>
+                <li><strong>Sechseck:</strong> 360° ÷ 6 = 60°</li>
+                <li><strong>Achteck:</strong> 360° ÷ 8 = 45°</li>
+            </ul>
         </main>
     </div>
     
