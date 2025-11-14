@@ -86,16 +86,16 @@ for i in range(5):
     {
         name: 'alvik.get_distance()',
         category: 'sensoren',
-        description: 'Misst die Entfernung zum nächsten Objekt mit dem Ultraschallsensor in cm (Standard).',
+        description: 'Misst 5 Entfernungen mit TOF-Sensoren: links (45°), center_left (22°), center (0°), center_right (22°), rechts (45°) in cm.',
         parameters: [],
-        example: `# Entfernung in Zentimetern messen (Standard)
-distance = alvik.get_distance()
-print(f"Entfernung: {distance} cm")
+        example: `# Entfernungen in cm messen (gibt 5 Werte zurück!)
+left, center_left, center, center_right, right = alvik.get_distance()
+print(f"Links: {left}, Mitte: {center}, Rechts: {right} cm")
 
-# Kollisionsvermeidung
+# Kollisionsvermeidung mit mittlerem Sensor
 while True:
-    distance = alvik.get_distance()
-    if distance < 20:
+    _, _, center, _, _ = alvik.get_distance()
+    if center < 20:
         alvik.brake()
         print("Hindernis erkannt!")
         break
@@ -154,39 +154,39 @@ print(f"Helligkeit: {brightness}")`
     {
         name: 'alvik.get_imu()',
         category: 'sensoren',
-        description: 'Liest alle Werte des IMU-Sensors aus (Beschleunigung, Rotation, Magnetfeld).',
+        description: 'Liest alle IMU-Werte aus: Beschleunigung (ax, ay, az) und Gyroskop (gx, gy, gz).',
         parameters: [],
-        example: `# IMU-Daten abrufen
-imu = alvik.get_imu()
-ax, ay, az = imu.accelerations
-gx, gy, gz = imu.gyro
-mx, my, mz = imu.magnetic
+        example: `# IMU-Daten abrufen (gibt 6 Werte zurück)
+ax, ay, az, gx, gy, gz = alvik.get_imu()
 
 print(f"Beschleunigung: x={ax}, y={ay}, z={az}")
-print(f"Rotation: x={gx}, y={gy}, z={gz}")
-print(f"Magnetfeld: x={mx}, y={my}, z={mz}")`
+print(f"Gyroskop: x={gx}, y={gy}, z={gz}")
+
+# Einzelne Sensoren abrufen
+ax, ay, az = alvik.get_accelerations()  # Nur Beschleunigung
+gx, gy, gz = alvik.get_gyros()          # Nur Gyroskop`
     },
     {
-        name: 'alvik.get_touch(button)',
+        name: 'alvik.get_touch_ok() / get_touch_up() etc.',
         category: 'sensoren',
-        description: 'Prüft, ob ein Touch-Button gedrückt ist.',
-        parameters: [
-            { name: 'button', desc: 'TOUCH_UP, TOUCH_DOWN, TOUCH_LEFT, TOUCH_RIGHT, TOUCH_CENTER, TOUCH_OK' }
-        ],
-        example: `# Einzelnen Button prüfen
-if alvik.get_touch(alvik.TOUCH_OK):
+        description: 'Prüft, ob ein Touch-Button gedrückt ist. Verschiedene Funktionen für jeden Button.',
+        parameters: [],
+        example: `# Einzelne Button-Funktionen verwenden
+if alvik.get_touch_ok():
     print("OK-Button gedrückt!")
 
 # Auf Button-Druck warten
-while not alvik.get_touch(alvik.TOUCH_OK):
+while not alvik.get_touch_ok():
     time.sleep(0.1)
 print("Los geht's!")
 
 # Mehrere Buttons prüfen
-if alvik.get_touch(alvik.TOUCH_UP):
+if alvik.get_touch_up():
     alvik.move(50)
-elif alvik.get_touch(alvik.TOUCH_DOWN):
-    alvik.move(-50)`
+elif alvik.get_touch_down():
+    alvik.move(-50)
+elif alvik.get_touch_left() or alvik.get_touch_right():
+    print("Links oder Rechts gedrückt")`
     },
     
     // LEDs
