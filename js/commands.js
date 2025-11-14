@@ -14,11 +14,11 @@ alvik = ArduinoAlvik()
 alvik.begin()
 
 # Vorwärts fahren mit Geschwindigkeit 50
-alvik.drive(50)
+alvik.move(50)
 alvik.brake()
 
 # Rückwärts fahren
-alvik.drive(-50)
+alvik.move(-50)
 alvik.brake()`
     },
     {
@@ -60,7 +60,7 @@ alvik.set_wheels_speed(50, 50)`
         description: 'Stoppt beide Motoren sofort und hält die Position.',
         parameters: [],
         example: `# Fahren und stoppen
-alvik.drive(50)
+alvik.move(50)
 time.sleep(2)
 alvik.brake()  # Sofortiger Stopp`
     },
