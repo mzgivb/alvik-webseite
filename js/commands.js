@@ -2,7 +2,7 @@
 const commands = [
     // Bewegung
     {
-        name: 'alvik.drive(speed, degrees)',
+        name: 'alvik.move(speed, degrees)',
         category: 'bewegung',
         description: 'Bewegt den Alvik vorwärts oder rückwärts mit einer bestimmten Geschwindigkeit.',
         parameters: [
@@ -99,7 +99,7 @@ while True:
         alvik.brake()
         print("Hindernis erkannt!")
         break
-    alvik.drive(30)`
+    alvik.move(30)`
     },
     {
         name: 'alvik.get_line_sensors()',
@@ -113,7 +113,7 @@ print(f"L: {left}, M: {center}, R: {right}")
 # Linienfolger
 left, center, right = alvik.get_line_sensors()
 if center > 50:  # Linie in der Mitte
-    alvik.drive(40)
+    alvik.move(40)
 elif left > 50:  # Linie links
     alvik.set_wheels_speed(20, 50)
 elif right > 50:  # Linie rechts
@@ -184,9 +184,9 @@ print("Los geht's!")
 
 # Mehrere Buttons prüfen
 if alvik.get_touch(alvik.TOUCH_UP):
-    alvik.drive(50)
+    alvik.move(50)
 elif alvik.get_touch(alvik.TOUCH_DOWN):
-    alvik.drive(-50)`
+    alvik.move(-50)`
     },
     
     // LEDs
@@ -298,7 +298,7 @@ print("Alvik bereit!")`
 alvik.reset_pose()
 
 # Neue Fahrt starten
-alvik.drive(50, 360)  # Genau eine Radumdrehung`
+alvik.move(50, 360)  # Genau eine Radumdrehung`
     },
     {
         name: 'alvik.get_battery_charge()',

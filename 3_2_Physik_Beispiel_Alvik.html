@@ -123,7 +123,7 @@ while True:
 
         # Bewegung starten und Messung beginnen
         startzeit = time.time()
-        alvik.drive(start_geschw, 0)
+        alvik.move(start_geschw, 0)
 
         # Während der Beschleunigung
         while True:
@@ -137,7 +137,7 @@ while True:
                 neue_geschw = max_geschw
 
             # Setze neue Geschwindigkeit
-            alvik.drive(neue_geschw, 0)
+            alvik.move(neue_geschw, 0)
 
             # Aktuelle Geschwindigkeit messen
             _, gemessene_geschw = alvik.get_drive_speed()
@@ -153,7 +153,7 @@ while True:
             # Beende die Beschleunigung nach der festgelegten Zeit
             if aktuelle_zeit &gt;= beschleunigungs_zeit:
                 # Fahre noch kurz mit konstanter Geschwindigkeit weiter
-                alvik.drive(max_geschw, 0)
+                alvik.move(max_geschw, 0)
                 time.sleep(2)
                 break
 
