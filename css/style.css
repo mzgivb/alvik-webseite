@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    /* Modernere Farbpalette */
-    --primary-color: #004a95;
-    --primary-dark: #003366;
-    --secondary-color: #51b047;
-    --accent-color: #ef7e26;
-    --accent-dark: #dd2e34;
-    --success-color: #51b047;
-    --warning-color: #ef7e26;
-    --danger-color: #e30613;
+    /* Medienzentrum Gießen-Vogelsberg Farbpalette */
+    --primary-color: #E30613;     /* MZ Rot */
+    --primary-dark: #B8050F;      /* Dunkleres Rot */
+    --secondary-color: #67747A;   /* MZ Grau */
+    --accent-color: #4A5459;      /* Dunkles Grau */
+    --accent-dark: #3A4044;       /* Noch dunkleres Grau */
+    --success-color: #51b047;     /* Grün */
+    --warning-color: #ef7e26;     /* Orange */
+    --danger-color: #E30613;      /* Rot */
     
     /* Neutrals */
     --bg-color: #F9FAFB;
@@ -47,7 +47,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background: linear-gradient(135deg, #004a95 0%, #51b047 100%);
+    background: linear-gradient(135deg, #E30613 0%, #67747A 50%, #4A5459 100%);
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -61,7 +61,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(227, 6, 19, 0.05) 0%, rgba(103, 116, 122, 0.05) 50%, rgba(74, 84, 89, 0.05) 100%);
     pointer-events: none;
     z-index: -1;
 }
@@ -418,8 +418,8 @@ header p {
 }
 
 .info-box {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.1));
-    border-left: 4px solid #3B82F6;
+    background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(227, 6, 19, 0.04));
+    border-left: 4px solid var(--primary-color);
 }
 
 .tip-box {
