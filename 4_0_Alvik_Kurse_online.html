@@ -6,12 +6,210 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online-Kurse - Arduino Alvik Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+    <meta name="description" content="Arduino Alvik MicroPython Online-Kurse und Lernressourcen">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-section h2 {
+            color: white !important;
+            border: none !important;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .course-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+        
+        .course-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-provider {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .course-body {
+            padding: 1.5rem;
+        }
+        
+        .course-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .badge-beginner {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        
+        .badge-intermediate {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+        
+        .badge-advanced {
+            background: #FCE4EC;
+            color: #C2185B;
+        }
+        
+        .badge-free {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+        
+        .badge-paid {
+            background: #FFF9C4;
+            color: #F57F17;
+        }
+        
+        .badge-german {
+            background: #FFE0B2;
+            color: #E65100;
+        }
+        
+        .badge-english {
+            background: #E1F5FE;
+            color: #01579B;
+        }
+        
+        .course-features {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .course-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #555;
+        }
+        
+        .course-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .course-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .course-button:hover {
+            background: var(--primary-color);
+            transform: scale(1.02);
+        }
+        
+        .recommended-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #FFD700;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .video-card {
+            background: #f8f9fa;
+            border-left-color: #FF0000;
+        }
+        
+        .community-card {
+            background: #f8f9fa;
+            border-left-color: #00C853;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
-            <a href="index.html" style="text-decoration: none;"><img src="assets/MZ_GIVB_Logo.svg" alt="Medienzentrum Gießen-Vogelsberg" class="logo" style="cursor: pointer;"></a>
+            <a href="index.html" style="text-decoration: none;">
+                <img src="assets/MZ_GIVB_Logo.svg" alt="Medienzentrum Gießen-Vogelsberg" class="logo" style="cursor: pointer;">
+            </a>
             <div>
                 <h1>Arduino Alvik</h1>
                 <p>MicroPython Lernplattform<br><small style="font-size: 0.8em; opacity: 0.9;">Medienzentrum Gießen-Vogelsberg</small></p>
@@ -23,71 +221,283 @@
         <aside class="sidebar">
             <h2>Navigation</h2>
             <div class="search-box">
-  <input type="text" id="search-input" placeholder="Suche...">
-</div>
-<div class="nav-section">
+                <input type="text" id="search-input" placeholder="Suche...">
+            </div>
+            <div class="nav-section">
                 <ul>
                     <li><a href="index.html">🏠 Startseite</a></li>
                 </ul>
             </div>
             <div class="nav-section">
                 <h3>Erste Schritte</h3>
-  <ul>
-    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
-    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
-    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
-    <li><a href="command-center.html">🚀 Command Center</a></li>
-    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
-    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
-    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
-    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
-	<li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
-    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
-    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Erweiterungen</h3>
-  <ul>
-    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
-    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Projekte & Beispiele</h3>
-  <ul>
-    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
-    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
-    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
-    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
-    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Ressourcen</h3>
-  <ul>
-    <li><a href="4_0_Alvik_Kurse_online.html" class="active">Online-Kurse</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Übungen</h3>
-  <ul>
-    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
-    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
-    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
-  </ul>
-</div>
-<div class="nav-section">
-  <h3>Abschnitt 999</h3>
-  <ul>
-    <li><a href="bme680_py.html">BME680 Bibliothek (Python)</a></li>
-  </ul>
-</div>
-
+                <ul>
+                    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
+                    <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
+                    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
+                    <li><a href="command-center.html">🚀 Command Center</a></li>
+                    <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
+                    <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
+                    <li><a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a></li>
+                    <li><a href="1_5_Alvik_ein_Viereck_fahren_lassen.html">Viereck fahren</a></li>
+                    <li><a href="1_5_2_Alvik_fa_hrt_auf_Tastendruck.html">auf Tastendruck fahren</a></li>
+                    <li><a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel betreiben</a></li>
+                    <li><a href="1_3_1_LED_blinken_lassen.html">LED blinken lassen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Erweiterungen</h3>
+                <ul>
+                    <li><a href="2_1_Alvik_mit_bme680.html">Alvik mit BME680 Sensor</a></li>
+                    <li><a href="2_0_Alvik_I2C_testen.html">I2C Schnittstelle testen</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Projekte & Beispiele</h3>
+                <ul>
+                    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
+                    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
+                    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
+                    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+                    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Ressourcen</h3>
+                <ul>
+                    <li><a href="4_0_Alvik_Kurse_online.html" class="active">Online-Kurse</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Übungen</h3>
+                <ul>
+                    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+                    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik</a></li>
+                    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
+                </ul>
+            </div>
         </aside>
         
         <main class="main-content">
-			<p><a href="https://courses.arduino.cc/explore-robotics-micropython/">Arduino Online Kurs</a></p>
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <h2>📚 Online-Kurse & Lernressourcen</h2>
+                <p>Entdecke strukturierte Kurse, Video-Tutorials und Community-Projekte, um deine Alvik-Programmierung auf das nächste Level zu bringen!</p>
+            </div>
+            
+            <!-- Offizielle Arduino Kurse -->
+            <h2 class="section-title">🎓 Offizielle Arduino Kurse</h2>
+            <div class="courses-grid">
+                <!-- Kurs 1: Explore Robotics MicroPython -->
+                <div class="course-card" style="position: relative;">
+                    <span class="recommended-badge">⭐ Empfohlen</span>
+                    <div class="course-header">
+                        <div class="course-title">Explore Robotics MicroPython</div>
+                        <div class="course-provider">Arduino Education</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-beginner">🎯 Anfänger</span>
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-english">🇬🇧 Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Der offizielle Arduino-Kurs für den Alvik. Lerne die Grundlagen der Robotik und MicroPython-Programmierung in einem strukturierten, interaktiven Format.
+                        </p>
+                        <ul class="course-features">
+                            <li>8 umfassende Lektionen</li>
+                            <li>Schritt-für-Schritt Anleitungen</li>
+                            <li>Interaktive Code-Beispiele</li>
+                            <li>Projekte und Herausforderungen</li>
+                            <li>Zertifikat nach Abschluss</li>
+                        </ul>
+                        <a href="https://courses.arduino.cc/explore-robotics-micropython/" target="_blank" class="course-button">
+                            Kurs starten →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video-Tutorials -->
+            <h2 class="section-title">🎥 Video-Tutorials</h2>
+            <div class="courses-grid">
+                <!-- Video 1: Arduino Official YouTube -->
+                <div class="course-card video-card">
+                    <div class="course-header">
+                        <div class="course-title">Arduino Alvik Playlist</div>
+                        <div class="course-provider">Arduino Official YouTube</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-beginner">🎯 Anfänger</span>
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-english">🇬🇧 Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Offizielle Video-Reihe von Arduino mit Unboxing, Setup-Anleitungen und ersten Projekten für den Alvik.
+                        </p>
+                        <ul class="course-features">
+                            <li>Visuelle Schritt-für-Schritt Anleitungen</li>
+                            <li>Tipps & Tricks vom Arduino-Team</li>
+                            <li>Regelmäßige Updates</li>
+                        </ul>
+                        <a href="https://www.youtube.com/@Arduino" target="_blank" class="course-button">
+                            Videos ansehen →
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Video 2: Community Tutorials -->
+                <div class="course-card video-card">
+                    <div class="course-header">
+                        <div class="course-title">Community Video-Tutorials</div>
+                        <div class="course-provider">YouTube Community</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-intermediate">🎯 Fortgeschritten</span>
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-german">🇩🇪 Deutsch/Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Community-erstellte Tutorials zu speziellen Projekten, Erweiterungen und fortgeschrittenen Techniken mit dem Alvik.
+                        </p>
+                        <ul class="course-features">
+                            <li>Spezielle Projektideen</li>
+                            <li>Verschiedene Schwierigkeitsgrade</li>
+                            <li>Kreative Lösungsansätze</li>
+                        </ul>
+                        <a href="https://www.youtube.com/results?search_query=arduino+alvik" target="_blank" class="course-button">
+                            Suche starten →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Community Ressourcen -->
+            <h2 class="section-title">🌐 Community & Foren</h2>
+            <div class="courses-grid">
+                <!-- Community 1: Arduino Forum -->
+                <div class="course-card community-card">
+                    <div class="course-header">
+                        <div class="course-title">Arduino Forum</div>
+                        <div class="course-provider">Arduino Community</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-english">🇬🇧 Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Das offizielle Arduino-Forum mit einer aktiven Community. Stelle Fragen, teile Projekte und lerne von anderen Alvik-Nutzern.
+                        </p>
+                        <ul class="course-features">
+                            <li>Hilfe bei Problemen</li>
+                            <li>Projekt-Inspiration</li>
+                            <li>Code-Sharing</li>
+                            <li>Aktive Community</li>
+                        </ul>
+                        <a href="https://forum.arduino.cc/" target="_blank" class="course-button">
+                            Zum Forum →
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Community 2: GitHub Projekte -->
+                <div class="course-card community-card">
+                    <div class="course-header">
+                        <div class="course-title">GitHub Projekte</div>
+                        <div class="course-provider">Open Source Community</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-intermediate">🎯 Fortgeschritten</span>
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-english">🇬🇧 Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Entdecke Open-Source-Projekte, Bibliotheken und Code-Beispiele für den Arduino Alvik auf GitHub.
+                        </p>
+                        <ul class="course-features">
+                            <li>Fertige Code-Beispiele</li>
+                            <li>Eigene Bibliotheken</li>
+                            <li>Kollaborative Projekte</li>
+                            <li>Best Practices</li>
+                        </ul>
+                        <a href="https://github.com/search?q=arduino+alvik" target="_blank" class="course-button">
+                            Projekte erkunden →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dokumentation -->
+            <h2 class="section-title">📖 Offizielle Dokumentation</h2>
+            <div class="courses-grid">
+                <!-- Doku 1: Arduino Docs -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">Arduino Alvik Dokumentation</div>
+                        <div class="course-provider">Arduino Docs</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-english">🇬🇧 Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Die vollständige technische Dokumentation mit API-Referenz, Hardware-Spezifikationen und Programmieranleitungen.
+                        </p>
+                        <ul class="course-features">
+                            <li>Komplette API-Referenz</li>
+                            <li>Hardware-Details</li>
+                            <li>Troubleshooting-Guide</li>
+                            <li>Beispiel-Code</li>
+                        </ul>
+                        <a href="https://docs.arduino.cc/hardware/alvik/" target="_blank" class="course-button">
+                            Dokumentation öffnen →
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Doku 2: MicroPython Docs -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">MicroPython Dokumentation</div>
+                        <div class="course-provider">MicroPython.org</div>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span class="badge badge-intermediate">🎯 Fortgeschritten</span>
+                            <span class="badge badge-free">💰 Kostenlos</span>
+                            <span class="badge badge-english">🇬🇧 Englisch</span>
+                        </div>
+                        <p class="course-description">
+                            Lerne MicroPython von Grund auf - die Python-Variante für Mikrocontroller und eingebettete Systeme.
+                        </p>
+                        <ul class="course-features">
+                            <li>Python-Grundlagen</li>
+                            <li>MicroPython-Spezifika</li>
+                            <li>Bibliotheken-Übersicht</li>
+                            <li>Best Practices</li>
+                        </ul>
+                        <a href="https://docs.micropython.org/" target="_blank" class="course-button">
+                            Zur Dokumentation →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tipps Box -->
+            <div class="tip-box" style="margin-top: 3rem;">
+                <h3>💡 Lern-Tipps</h3>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Für Anfänger:</strong> Starte mit dem offiziellen "Explore Robotics MicroPython" Kurs</li>
+                    <li><strong>Praxis-Lernen:</strong> Nutze die Video-Tutorials parallel zu eigenen Experimenten</li>
+                    <li><strong>Community:</strong> Tritt dem Arduino-Forum bei für schnelle Hilfe und Inspiration</li>
+                    <li><strong>Dokumentation:</strong> Halte die API-Referenz immer griffbereit</li>
+                    <li><strong>Projekte:</strong> Stöbere auf GitHub für fortgeschrittene Projektideen</li>
+                </ul>
+            </div>
         </main>
     </div>
     
