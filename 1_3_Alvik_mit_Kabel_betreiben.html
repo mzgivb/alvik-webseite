@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alvik mit Kabel betreiben - Arduino Alvik Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+    <meta name="description" content="Warum das USB-Kabel am Anfang so wichtig ist - Der Alvik hat keinen Monitor!">
 </head>
 <body>
     <header>
@@ -35,7 +35,7 @@
   <ul>
    <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
     <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
-    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
     <li><a href="command-center.html">🚀 Command Center</a></li>
     <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
     <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
@@ -60,6 +60,7 @@
     <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
     <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
     <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
+    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
   </ul>
 </div>
 <div class="nav-section">
@@ -71,11 +72,9 @@
 <div class="nav-section">
   <h3>Übungen</h3>
   <ul>
-    <li><a href="3_1_Alvik_mit_phyphox.html">Alvik mit phyphox</a></li>
-    <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
-    <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
-    <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
-    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+    <li><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">Lösung Aufgabe 2</a></li>
+    <li><a href="5_0_Beispielaufgaben_Alvik.html">MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</a></li>
+    <li><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">Lösung Aufgabe 3</a></li>
   </ul>
 </div>
 <div class="nav-section">
@@ -88,30 +87,294 @@
         </aside>
         
         <main class="main-content">
-            <h1>Alvik mit Kabel betreiben</h1>
-<p>Sie müssen sich nun entscheiden, ob sie den Alvik mit oder ohne Kabel betreiben wollen. Die hört sich erst einmal komisch an aber es gibt viele Szenarien, in denen es sich empfiehlt denn Alvik auch einmal mit Kabel zu betreiben.</p>
-<p>In diesem Fall öffnen sie einfach ein neues Dokument und schreiben sie ihren Code, den Sie ausführen möchten. </p>
-<p><strong>Beispiel:</strong></p>
-<pre><code class="language-python"># Das ist mein erstes Programm in micropython
+            <h2>🔌 Alvik mit Kabel betreiben – Warum das am Anfang super wichtig ist!</h2>
 
-print (&quot;Hallo Alvik!&quot;)
+            <h3>🤔 Das Problem: Alvik hat keinen Bildschirm!</h3>
 
+            <p><strong>Stell dir vor:</strong></p>
+            <ul>
+                <li>Dein Smartphone hätte <strong>keinen Bildschirm</strong> 📱❌</li>
+                <li>Du könntest nicht sehen, was passiert</li>
+                <li>Keine Fehlermeldungen, keine Antworten, nichts!</li>
+            </ul>
 
+            <p><strong>Genau so ist der Alvik!</strong></p>
+
+            <p>Der Alvik ist im Grunde ein <strong>fahrendes ESP32-Mikrocontroller</strong> – ein winziger Computer ohne Monitor. Er hat:</p>
+            <ul>
+                <li>✅ Einen Prozessor</li>
+                <li>✅ Speicher</li>
+                <li>✅ Sensoren</li>
+                <li>✅ Motoren</li>
+                <li>❌ <strong>KEINEN Bildschirm</strong></li>
+            </ul>
+
+            <div class="info-box">
+                💡 <strong>Die Lösung: Das USB-Kabel!</strong> 🔌
+            </div>
+
+            <h3>💡 Mit Kabel = Dein Computer wird zum Monitor</h3>
+
+            <p>Wenn du den Alvik per USB-Kabel mit deinem Computer verbindest:</p>
+
+            <pre><code>Alvik (ohne Display) ←→ USB-Kabel ←→ Dein Computer (mit Display)
 </code></pre>
-<p><strong>Ausgabe:</strong></p>
-<pre><code class="language-repl">MPY: soft reboot
-Hallo Alvik!
-&gt;&gt;&gt; 
+
+            <p>Jetzt kannst du:</p>
+            <ul>
+                <li>👀 <strong>Sehen</strong> was der Roboter "denkt"</li>
+                <li>📊 <strong>Sensor-Werte</strong> ablesen</li>
+                <li>❌ <strong>Fehler</strong> sofort erkennen</li>
+                <li>💬 <strong>Mit dem Roboter chatten</strong> (input/print)</li>
+            </ul>
+
+            <div class="tip-box">
+                💡 <strong>Das nennt man REPL</strong> (Read-Eval-Print-Loop) = Eine Konsole zum Testen!
+            </div>
+
+            <h3>🎯 Zwei Modi: Mit Kabel vs. Autonom</h3>
+
+            <table>
+                <tr>
+                    <th>Mit USB-Kabel 🔌</th>
+                    <th>Ohne Kabel (Autonom) 🔋</th>
+                </tr>
+                <tr>
+                    <td>✅ Du siehst alle Ausgaben (print)</td>
+                    <td>❌ Keine print-Ausgaben sichtbar</td>
+                </tr>
+                <tr>
+                    <td>✅ Fehler werden angezeigt</td>
+                    <td>❌ Roboter stoppt einfach - warum?</td>
+                </tr>
+                <tr>
+                    <td>✅ Sensor-Werte live anschauen</td>
+                    <td>❌ Keine Daten sichtbar</td>
+                </tr>
+                <tr>
+                    <td>✅ Code sofort ausprobieren</td>
+                    <td>⚠️ Erst in main.py speichern</td>
+                </tr>
+                <tr>
+                    <td>❌ Roboter muss am Tisch bleiben</td>
+                    <td>✅ Roboter fährt frei herum</td>
+                </tr>
+                <tr>
+                    <td><strong>✅ Perfekt zum LERNEN</strong></td>
+                    <td><strong>✅ Perfekt für DEMOS</strong></td>
+                </tr>
+            </table>
+
+            <h3>📚 Am Anfang: IMMER mit Kabel!</h3>
+
+            <p><strong>Warum?</strong></p>
+
+            <h4>1. Du siehst, was passiert! 👀</h4>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Mit Kabel siehst du das:
+print("Roboter startet...")
+
+d_l, d_cl, d_c, d_cr, d_r = alvik.get_distance()
+print(f"Abstand vorne: {d_c} cm")
+
+# Ohne Kabel? Du siehst NICHTS! 😵
 </code></pre>
-<p>Sie können nun jeglichen Python (micropython Code ausführen)</p>
-<p><strong>Abfrage deines Namens:</strong></p>
-<pre><code class="language-python"># Das ist mein zweites Programm in micropython
 
-name = input (&quot;Hallo ich mein name ist Alvik, wie ist dein Name? &quot;)
-
-print (f&quot; Cool {name} ist ein schöner Name&quot;)
-
+            <p><strong>Ausgabe im REPL:</strong></p>
+            <pre><code>Roboter startet...
+Abstand vorne: 23.5 cm
 </code></pre>
+
+            <h4>2. Fehler sofort finden! 🐛</h4>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+alvik.move(10)  # Richtig
+alvik.mov(10)   # FEHLER! (Tippfehler)
+</code></pre>
+
+            <p><strong>Mit Kabel siehst du:</strong></p>
+            <pre><code>AttributeError: 'ArduinoAlvik' object has no attribute 'mov'
+</code></pre>
+
+            <p><strong>Ohne Kabel:</strong> Roboter macht einfach nichts. Du rätselst warum! 🤷</p>
+
+            <h4>3. Experimentieren ohne Risiko! 🧪</h4>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Teste verschiedene Werte
+for speed in [5, 10, 15, 20]:
+    print(f"Teste Geschwindigkeit: {speed} cm/s")
+    alvik.move(speed, 0, linear_unit='cm/s')
+    sleep_ms(1000)
+    alvik.stop()
+    
+    # Du siehst jeden Schritt!
+</code></pre>
+
+            <h3>🚀 Praktisches Beispiel: Sensor-Dashboard</h3>
+
+            <p><strong>Mit Kabel - Du siehst ALLES:</strong></p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+print("=== SENSOR DASHBOARD ===")
+print("Bewege deine Hand vor dem Roboter!\n")
+
+while True:
+    # Alle Sensoren auslesen
+    d_l, d_cl, d_c, d_cr, d_r = alvik.get_distance()
+    battery = alvik.get_battery_charge()
+    
+    # Anzeigen!
+    print(f"🎯 Abstand Mitte: {d_c:.1f} cm")
+    print(f"🔋 Batterie: {battery}%")
+    print("-" * 30)
+    
+    sleep_ms(500)
+</code></pre>
+
+            <p><strong>Du siehst live:</strong></p>
+            <pre><code>=== SENSOR DASHBOARD ===
+Bewege deine Hand vor dem Roboter!
+
+🎯 Abstand Mitte: 25.3 cm
+🔋 Batterie: 87%
+------------------------------
+🎯 Abstand Mitte: 12.7 cm  ← Hand näher!
+🔋 Batterie: 87%
+------------------------------
+</code></pre>
+
+            <div class="info-box">
+                ❌ <strong>Ohne Kabel? Du siehst nichts!</strong>
+            </div>
+
+            <h3>🔋 Wann brauchst du KEIN Kabel?</h3>
+
+            <p>Wenn dein Programm fertig ist und du willst:</p>
+            <ul>
+                <li>🏁 Eine Demo vorführen</li>
+                <li>🤖 Den Roboter frei fahren lassen</li>
+                <li>🎪 Einen Parcours absolvieren</li>
+            </ul>
+
+            <p><strong>Dann:</strong> Speichere Code in <code>main.py</code> → Siehe <a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel</a></p>
+
+            <h3>🎮 Interaktives Beispiel: Chat mit Alvik</h3>
+
+            <p><strong>Nur mit Kabel möglich!</strong></p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Alvik stellt sich vor
+print("🤖 Hallo! Ich bin Alvik.")
+
+# Du kannst antworten!
+name = input("Wie heißt du? ")
+
+print(f"Cool, {name}! Lass uns gemeinsam programmieren lernen! 🚀")
+
+# Abfrage
+antwort = input("Soll ich meine LED rot machen? (ja/nein) ")
+
+if antwort == "ja":
+    alvik.left_led.set_color(1, 0, 0)
+    alvik.right_led.set_color(1, 0, 0)
+    print("✅ LEDs sind jetzt rot!")
+else:
+    print("Ok, vielleicht später!")
+</code></pre>
+
+            <p><strong>Ausgabe:</strong></p>
+            <pre><code>🤖 Hallo! Ich bin Alvik.
+Wie heißt du? Max
+Cool, Max! Lass uns gemeinsam programmieren lernen! 🚀
+Soll ich meine LED rot machen? (ja/nein) ja
+✅ LEDs sind jetzt rot!
+</code></pre>
+
+            <div class="tip-box">
+                💡 <strong>Das geht NUR mit Kabel!</strong> 🔌
+            </div>
+
+            <h3>🛠️ So arbeitest du mit Kabel</h3>
+
+            <p><strong>Schritt-für-Schritt:</strong></p>
+            <ol>
+                <li><strong>Alvik einschalten</strong> ⚡</li>
+                <li><strong>USB-Kabel anschließen</strong> (Alvik ↔ Computer)</li>
+                <li><strong>Arduino Lab für MicroPython öffnen</strong></li>
+                <li><strong>Board verbinden</strong> (oben rechts: "Connect")</li>
+                <li><strong>Code schreiben</strong> (neue Datei oder Befehlszeile)</li>
+                <li><strong>Ausführen</strong> ▶️</li>
+                <li><strong>Ausgaben im REPL beobachten</strong> 👀</li>
+            </ol>
+
+            <h3>📊 Vergleich: Lern-Phase vs. Demo-Phase</h3>
+
+            <p><strong>Am Anfang (Lern-Phase):</strong></p>
+            <pre><code>🔌 MIT KABEL
+├─ Sensoren verstehen
+├─ Befehle ausprobieren
+├─ Fehler finden
+├─ Werte testen
+└─ Experimente machen
+</code></pre>
+
+            <p><strong>Später (Demo-Phase):</strong></p>
+            <pre><code>🔋 OHNE KABEL (main.py)
+├─ Hindernisparcours
+├─ Linienfolger
+├─ Autonome Navigation
+└─ Präsentationen
+</code></pre>
+
+            <h3>💡 Später: Display als Alternative</h3>
+
+            <p><strong>Fortgeschritten:</strong> Wenn du viel gelernt hast, kannst du auch ein <strong>OLED-Display</strong> über I2C anschließen. Dann hat der Alvik einen eigenen kleinen Bildschirm!</p>
+
+            <p><strong>Aber:</strong> Das ist komplexer und kommt später. Siehe: <a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></p>
+
+            <div class="tip-box">
+                💡 <strong>Am Anfang: USB-Kabel ist viel einfacher!</strong> ✅
+            </div>
+
+            <h3>✅ Zusammenfassung</h3>
+
+            <p><strong>USB-Kabel = Dein Fenster in den Roboter!</strong></p>
+
+            <ul>
+                <li>🔌 <strong>Mit Kabel:</strong> Lernen, Testen, Debuggen</li>
+                <li>🔋 <strong>Ohne Kabel:</strong> Fertige Programme, Demos</li>
+                <li>👶 <strong>Am Anfang:</strong> IMMER mit Kabel arbeiten!</li>
+                <li>🚀 <strong>Später:</strong> Autonome Programme in main.py</li>
+            </ul>
+
+            <div class="info-box">
+                🚀 <strong>Nächster Schritt:</strong> <a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a> – Jetzt weißt du, warum das Kabel so wichtig ist!
+            </div>
+
         </main>
     </div>
     

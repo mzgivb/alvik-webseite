@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alvik Grundgerüst - Arduino Alvik Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+    <meta name="description" content="Verstehe das Code-Grundgerüst für Arduino Alvik - Bibliotheken, Klassen und Instanzen einfach erklärt">
 </head>
 <body>
     <header>
@@ -37,7 +37,7 @@
   <ul>
   <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
     <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
-    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
     <li><a href="command-center.html">🚀 Command Center</a></li>
     <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
     <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
@@ -62,7 +62,7 @@
     <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
     <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
     <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
-    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
   </ul>
 </div>
 <div class="nav-section">
@@ -89,20 +89,298 @@
         </aside>
         
         <main class="main-content">
-			
-			<h2>Das Codegrundgerüst</h2><br>
-            <p>Um den Arduino <strong>Alvik</strong> mit Micropython mit den typischen Bibliotheken in Betrieb nehmen zu können, benötigt man ein paar Zeilen Code in jedem Programm  – <strong>Spoiler</strong> „Man sollte diese Zeilen immer nutzen, wenn man auf Aktoren und Sensoren des Alvik zugreifen möchte!“ </p>
-<div class="tip-box">💡 <strong>Tipp:</strong><br>Fangen sie jedes Programm mit diesem Codeschnipsel an
-</div>
+            <h2>📚 Das Code-Grundgerüst – Dein Einstieg in die Programmierung</h2>
 
-<pre><code class="language-python">
-from arduino_alvik import ArduinoAlvik<br />
-from time import sleep_ms<br />
-alvik = ArduinoAlvik()<br />
+            <p><strong>Stell dir vor:</strong> Du willst ein Haus bauen. Bevor du anfangen kannst, brauchst du:</p>
+            <ul>
+                <li>🧰 <strong>Werkzeuge</strong> (Hammer, Säge, Bohrmaschine)</li>
+                <li>📋 <strong>Bauplan</strong> (wie baut man ein Haus?)</li>
+                <li>🏠 <strong>Dein eigenes Haus</strong> (das du nach dem Plan baust)</li>
+            </ul>
+
+            <p><strong>Genauso ist es beim Programmieren des Alvik!</strong></p>
+
+            <h3>🎯 Die 4 magischen Zeilen</h3>
+
+            <p>Jedes Alvik-Programm startet mit diesen Zeilen:</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+alvik = ArduinoAlvik()
+alvik.begin()
+</code></pre>
+
+            <div class="tip-box">
+                💡 <strong>Tipp:</strong><br>
+                Fange jedes Programm mit diesem Code-Schnipsel an!
+            </div>
+
+            <p><strong>❓ Was passiert hier eigentlich?</strong></p>
+
+            <h3>📦 Zeile 1: Die Werkzeugkiste holen</h3>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+</code></pre>
+
+            <p><strong>Alltagsvergleich:</strong><br>
+            Du gehst in den Werkzeugschuppen und holst die Alvik-Werkzeugkiste raus.</p>
+
+            <p><strong>Was bedeutet das?</strong></p>
+            <ul>
+                <li><code>arduino_alvik</code> = die <strong>Bibliothek</strong> (wie ein Werkzeugschuppen voller Tools)</li>
+                <li><code>ArduinoAlvik</code> = die <strong>Werkzeugkiste</strong> für den Roboter</li>
+                <li><code>import</code> = "hole mir diese Werkzeugkiste"</li>
+            </ul>
+
+            <div class="info-box">
+                💡 <strong>Bibliothek = Sammlung von fertigen Code-Bausteinen</strong><br>
+                Ohne diese Zeile könntest du dem Alvik nichts befehlen – du hättest keine Werkzeuge!
+            </div>
+
+            <h3>⏰ Zeile 2: Die Stoppuhr holen</h3>
+
+            <pre><code class="language-python">from time import sleep_ms
+</code></pre>
+
+            <p><strong>Alltagsvergleich:</strong><br>
+            Du holst dir eine Stoppuhr, um Pausen einzubauen.</p>
+
+            <p><strong>Was bedeutet das?</strong></p>
+            <ul>
+                <li><code>time</code> = die Zeit-Bibliothek</li>
+                <li><code>sleep_ms</code> = eine Funktion für Pausen (in Millisekunden)</li>
+                <li><code>ms</code> = Millisekunden (1000 ms = 1 Sekunde)</li>
+            </ul>
+
+            <p><strong>Beispiel:</strong><br>
+            <code>sleep_ms(2000)</code> = Warte 2 Sekunden</p>
+
+            <h3>🏗️ Zeile 3: Deinen eigenen Roboter erschaffen</h3>
+
+            <pre><code class="language-python">alvik = ArduinoAlvik()
+</code></pre>
+
+            <p><strong>Das ist der coolste Teil! Hier wird's interessant:</strong></p>
+
+            <p><strong>Alltagsvergleich:</strong></p>
+            <ul>
+                <li><code>ArduinoAlvik()</code> = der <strong>Bauplan</strong> für einen Roboter (die Klasse)</li>
+                <li><code>alvik</code> = <strong>DEIN</strong> Roboter, den du nach dem Bauplan baust (die Instanz)</li>
+                <li><code>=</code> bedeutet: "Erschaffe!"</li>
+            </ul>
+
+            <div class="info-box">
+                🤔 <strong>Klasse vs. Instanz – Was ist der Unterschied?</strong>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Konzept</th>
+                    <th>Bauplan-Metapher</th>
+                    <th>Code-Begriff</th>
+                </tr>
+                <tr>
+                    <td><strong>Klasse</strong></td>
+                    <td>Bauplan für ein Auto (auf Papier)</td>
+                    <td><code>ArduinoAlvik()</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Instanz</strong></td>
+                    <td>Dein echtes Auto, das du fährst</td>
+                    <td><code>alvik</code></td>
+                </tr>
+            </table>
+
+            <p><strong>Beispiel aus dem echten Leben:</strong></p>
+
+            <pre><code class="language-python"># IKEA hat einen Bauplan für einen Stuhl
+# Du baust nach dem Bauplan DEINEN Stuhl
+
+mein_stuhl = IKEA_Stuhl()  # Du baust Stuhl Nr. 1
+zweiter_stuhl = IKEA_Stuhl()  # Du baust noch einen
+
+# Beide Stühle sind gleich gebaut, aber es sind 2 verschiedene!
+</code></pre>
+
+            <p><strong>Beim Alvik:</strong></p>
+
+            <pre><code class="language-python">alvik = ArduinoAlvik()  # DU erschaffst DEINEN Roboter
+# Jetzt kannst du mit "alvik" arbeiten!
+</code></pre>
+
+            <h3>▶️ Zeile 4: Roboter einschalten!</h3>
+
+            <pre><code class="language-python">alvik.begin()
+</code></pre>
+
+            <p><strong>Alltagsvergleich:</strong><br>
+            Du drückst den Power-Knopf deines Roboters.</p>
+
+            <p><strong>Was passiert:</strong></p>
+            <ul>
+                <li>Der Roboter wacht auf</li>
+                <li>Alle Sensoren werden aktiviert</li>
+                <li>Die Motoren sind bereit</li>
+                <li>LEDs können leuchten</li>
+            </ul>
+
+            <div class="tip-box">
+                ⚠️ <strong>Ohne <code>alvik.begin()</code> ist der Roboter wie im Tiefschlaf!</strong>
+            </div>
+
+            <h3>🔍 Zeile für Zeile erklärt</h3>
+
+            <pre><code class="language-python"># 1. Hole die Alvik-Werkzeugkiste aus dem Schuppen
+from arduino_alvik import ArduinoAlvik
+
+# 2. Hole die Stoppuhr für Pausen
+from time import sleep_ms
+
+# 3. Erschaffe DEINEN Roboter nach dem Bauplan
+alvik = ArduinoAlvik()
+
+# 4. Schalte deinen Roboter ein
 alvik.begin()
 
+# AB JETZT kannst du Befehle geben!
+alvik.left_led.set_color(1, 0, 0)  # LED rot machen
 </code></pre>
-<p>Mircopython ist eine auf Microcontroller angepasste Python Version: Aktoren sind z.B Motoren oder LED´s: Sensoren können Werte messen und ausgeben z.B. Temperatur oder Koordinaten wie z.B ein Gyrosensor</p>
+
+            <h3>❌ Was passiert OHNE das Grundgerüst?</h3>
+
+            <p><strong>Versuch 1: Ohne import</strong></p>
+
+            <pre><code class="language-python">alvik = ArduinoAlvik()  # ❌ FEHLER!
+# Python weiß nicht, was "ArduinoAlvik" ist!
+</code></pre>
+
+            <p><strong>Fehlermeldung:</strong></p>
+            <pre><code>NameError: name 'ArduinoAlvik' is not defined
+</code></pre>
+
+            <p><strong>Versuch 2: Ohne begin()</strong></p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+alvik = ArduinoAlvik()
+# alvik.begin()  # &lt;-- VERGESSEN!
+
+alvik.move(10)  # ❌ Roboter reagiert nicht!
+</code></pre>
+
+            <p><strong>Der Roboter macht nichts, weil er noch "schläft"!</strong></p>
+
+            <h3>🎮 Jetzt du! Mini-Challenge</h3>
+
+            <p><strong>Finde den Fehler:</strong></p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+
+roboter = ArduinoAlvik()
+# Was fehlt hier?
+
+roboter.left_led.set_color(0, 1, 0)
+</code></pre>
+
+            <details>
+                <summary>💡 Lösung anzeigen</summary>
+                <p>Es fehlt <code>roboter.begin()</code> – der Roboter wurde nicht eingeschaltet!</p>
+            </details>
+
+            <h3>🧩 Das Ganze im Zusammenhang</h3>
+
+            <pre><code class="language-python"># SCHRITT 1: Werkzeuge holen
+from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+# SCHRITT 2: Deinen Roboter erschaffen
+alvik = ArduinoAlvik()
+
+# SCHRITT 3: Roboter einschalten
+alvik.begin()
+
+# SCHRITT 4: Jetzt kannst du loslegen!
+while True:
+    alvik.left_led.set_color(1, 0, 0)  # Rot
+    sleep_ms(500)
+    alvik.left_led.set_color(0, 0, 0)  # Aus
+    sleep_ms(500)
+</code></pre>
+
+            <h3>🤔 Häufige Fragen</h3>
+
+            <p><strong>Q: Warum heißt es "alvik" und nicht "roboter" oder "r2d2"?</strong></p>
+
+            <p>A: Du kannst es nennen wie du willst!</p>
+
+            <pre><code class="language-python">roboter = ArduinoAlvik()
+roboter.begin()
+
+mein_bot = ArduinoAlvik()
+mein_bot.begin()
+
+r2d2 = ArduinoAlvik()
+r2d2.begin()
+</code></pre>
+
+            <p><strong>Aber:</strong> Fast alle Beispiele nutzen <code>alvik</code>, damit es nicht verwirrend wird.</p>
+
+            <hr>
+
+            <p><strong>Q: Muss ich das auswendig lernen?</strong></p>
+
+            <p>A: Nein! Kopiere diese 4 Zeilen einfach an den Anfang jedes Programms. Mit der Zeit wirst du sie automatisch verstehen.</p>
+
+            <hr>
+
+            <p><strong>Q: Kann ich mehrere Alviks gleichzeitig steuern?</strong></p>
+
+            <p>A: Theoretisch ja, aber du hast wahrscheinlich nur einen 😊</p>
+
+            <pre><code class="language-python">alvik1 = ArduinoAlvik()
+alvik1.begin()
+
+alvik2 = ArduinoAlvik()  # Zweiter Roboter
+alvik2.begin()
+</code></pre>
+
+            <h3>📋 Zusammenfassung</h3>
+
+            <table>
+                <tr>
+                    <th>Zeile</th>
+                    <th>Was macht sie?</th>
+                    <th>Metapher</th>
+                </tr>
+                <tr>
+                    <td><code>from arduino_alvik import ArduinoAlvik</code></td>
+                    <td>Werkzeuge holen</td>
+                    <td>Werkzeugkiste aus dem Schuppen</td>
+                </tr>
+                <tr>
+                    <td><code>from time import sleep_ms</code></td>
+                    <td>Stoppuhr holen</td>
+                    <td>Für Pausen</td>
+                </tr>
+                <tr>
+                    <td><code>alvik = ArduinoAlvik()</code></td>
+                    <td>Roboter erschaffen</td>
+                    <td>Nach dem Bauplan bauen</td>
+                </tr>
+                <tr>
+                    <td><code>alvik.begin()</code></td>
+                    <td>Roboter einschalten</td>
+                    <td>Power-Knopf drücken</td>
+                </tr>
+            </table>
+
+            <h3>🚀 Nächste Schritte</h3>
+
+            <ul>
+                <li>✅ Kopiere diese 4 Zeilen an den Anfang deines ersten Programms</li>
+                <li>✅ Probiere das <a href="command-center.html">Command Center</a> aus</li>
+                <li>✅ Schau dir die <a href="1_1_Alvik_API.html">API-Liste</a> an – was kann dein Roboter alles?</li>
+            </ul>
+
         </main>
     </div>
     
