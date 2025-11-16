@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensoren auslesen - Arduino Alvik Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+    <meta name="description" content="Lerne alle Alvik Sensoren kennen - Interaktive Challenges für die 8. Klasse">
 </head>
 <body>
     <header>
@@ -35,7 +35,7 @@
   <ul>
     <li><a href="1__Welcome_Alvik_.html">Der Aufbau</a></li>
     <li><a href="1_2_Alvik_Grundgeru_st.html">Alvik Grundgerüst</a></li>
-    <li><a href="1_1_Alvik_API.html" class="active">API-Liste</a></li>
+    <li><a href="1_1_Alvik_API.html">API-Liste</a></li>
     <li><a href="command-center.html">🚀 Command Center</a></li>
     <li><a href="1_5_1_Alvik_exakt_fahren_lassen.html">Exakt fahren</a></li>
     <li><a href="1_3_Alvik_mit_Kabel_betreiben.html">Alvik mit Kabel betreiben</a></li>
@@ -60,7 +60,7 @@
     <li><a href="3_2_Physik_Beispiel_Alvik.html">Beschleunigte Bewegung</a></li>
     <li><a href="3_3_Alvik_mit_Oled_Display.html">Alvik mit OLED Display</a></li>
     <li><a href="3_0_Alvik_Sensoren_auslesen.html">Sensoren auslesen</a></li>
-    <li><a href="6_0_Mustererkennung.html" class="active">Mustererkennung & KI</a></li>
+    <li><a href="6_0_Mustererkennung.html">Mustererkennung & KI</a></li>
   </ul>
 </div>
 <div class="nav-section">
@@ -87,40 +87,276 @@
         </aside>
         
         <main class="main-content">
-			
-			<h2>Sensoren auslesen</h2><br>
-            <p>Hier habe ich ein Beispiel wie man bestimmte Daten über die API auf dem Alvik auslesen kann, <strong>Lage</strong>, <strong>Farbe</strong> des unteren Sensors und <strong>Abstand</strong> zu einem Gegenstand.</p>
-<pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+            <h2>🎯 Sensoren auslesen – Verstehen statt Kopieren!</h2>
+
+            <div class="info-box">
+                📚 <strong>Hilfe brauchst du hier:</strong><br>
+                • <a href="1_1_Alvik_API.html">API-Liste</a> – Alle Befehle mit genauer Syntax<br>
+                • <a href="command-center.html">Command Center</a> – Schnell Befehle ausprobieren ohne Code zu schreiben
+            </div>
+
+            <h3>🔌 Wichtig: USB vs. Autonom</h3>
+
+            <p><strong>Zum Experimentieren (USB-Kabel):</strong></p>
+            <ul>
+                <li>Einfach Code im Editor ausführen</li>
+                <li>Du siehst alle Werte im REPL</li>
+            </ul>
+
+            <p><strong>Für autonomes Fahren (ohne Kabel):</strong></p>
+            <ul>
+                <li>Code muss in <code>main.py</code> gespeichert werden</li>
+                <li>Alvik startet das Programm beim Einschalten</li>
+                <li>Nur LED-Feedback möglich (kein print!)</li>
+            </ul>
+
+            <h3>📊 Challenge 1: Baue dein eigenes Dashboard</h3>
+
+            <p><strong>Deine Aufgabe:</strong> Ergänze den Code, damit ALLE Sensoren ausgelesen werden!</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
 from time import sleep_ms
 
 alvik = ArduinoAlvik()
 alvik.begin()
 
 while True:
-
-    ax, ay ,az, gx, gy, gz = alvik.get_imu()
-
-    print (f&quot; accelleration on x {ax}&quot;) # Lagesensor auslesen
-
-    sleep_ms(2000)
-
-    print (f&quot; agular accerlation on x {gx}&quot;)
-
-    sleep_ms(2000)
-
-    color = alvik.get_color_label() # Farbe auslesen
-
-    print (f&quot; die gemessene Farbe ist {color}&quot;)
-
-    sleep_ms(2000)
-
-    lt, clt, ct, crt, rt = alvik.get_distance() #Abstand des mittleren TOF Senors 
-
-    print (f&quot; der Abstand zum Objekt = {ct}&quot;)
-
-    sleep_ms(2000)
-
+    # TODO: Lies die Abstandssensoren aus
+    # Tipp: alvik.get_distance() gibt 5 Werte zurück
+    d_l, d_cl, d_c, d_cr, d_r = # &lt;-- DEIN CODE
+    
+    # TODO: Lies den Farbsensor aus
+    color = # &lt;-- DEIN CODE
+    
+    # TODO: Lies die Batterie aus
+    battery = # &lt;-- DEIN CODE
+    
+    print("=" * 40)
+    print(f"🎯 Mitte: {d_c:.1f} cm")
+    print(f"🎨 Farbe: {color}")
+    print(f"🔋 Akku: {battery}%")
+    
+    sleep_ms(500)
 </code></pre>
+
+            <div class="tip-box">
+                💡 <strong>Stuck?</strong><br>
+                Schau in die <a href="1_1_Alvik_API.html">API-Liste</a> unter "get_distance", "get_color_label" und "get_battery_charge"
+            </div>
+
+            <p><strong>❓ Fragen zum Nachdenken:</strong></p>
+            <ul>
+                <li>Warum gibt <code>get_distance()</code> 5 Werte zurück?</li>
+                <li>Was bedeutet <code>:.1f</code> beim print?</li>
+                <li>Was passiert wenn du <code>sleep_ms(500)</code> auf 100 änderst?</li>
+            </ul>
+
+            <h3>🚦 Challenge 2: Abstands-Ampel</h3>
+
+            <p><strong>Ziel:</strong> LEDs sollen rot/gelb/grün leuchten je nach Abstand</p>
+
+            <p><strong>Schritt 1:</strong> Verstehe den Code</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+while True:
+    d_l, d_cl, d_c, d_cr, d_r = alvik.get_distance()
+    
+    # Nur mittlerer Sensor wird genutzt
+    if d_c &lt; 10:
+        # ROT bei weniger als 10cm
+        alvik.left_led.set_color(1, 0, 0)
+        alvik.right_led.set_color(1, 0, 0)
+    
+    # TODO: GELB bei 10-20cm
+    # elif d_c &lt; ???:
+    #     alvik.left_led.set_color(???)  # Welche Zahlen für GELB?
+    
+    # TODO: GRÜN bei mehr als 20cm
+    # else:
+    #     alvik.left_led.set_color(???)
+    
+    sleep_ms(100)
+</code></pre>
+
+            <p><strong>📝 Aufgaben:</strong></p>
+            <ol>
+                <li>Ergänze den Code für GELB und GRÜN</li>
+                <li>Teste: Bewege deine Hand vor dem Sensor</li>
+                <li>Speichere in <code>main.py</code> und teste ohne Kabel</li>
+            </ol>
+
+            <div class="tip-box">
+                💡 <strong>LED-Farben:</strong><br>
+                ROT = (1,0,0) | GELB = (1,1,0) | GRÜN = (0,1,0)<br>
+                Mehr dazu: <a href="1_1_Alvik_API.html">API → left_led.set_color</a>
+            </div>
+
+            <p><strong>🎯 Level-Up:</strong></p>
+            <ul>
+                <li>Was wenn links und rechts unterschiedliche Abstände haben?</li>
+                <li>Kann der Roboter unterschiedliche LEDs für links/rechts zeigen?</li>
+            </ul>
+
+            <h3>🎨 Challenge 3: Farb-Detektor mit Bug! 🐛</h3>
+
+            <p><strong>Problem:</strong> Dieser Code hat einen Fehler. Findest du ihn?</p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+last_color = ""
+
+while True:
+    color = alvik.get_color_label()
+    
+    # Zeige nur NEUE Farben an
+    if color != last_color:
+        print(f"🎨 Farbe: {color}")
+        last_color = color
+    
+    sleep_ms(200)
+</code></pre>
+
+            <p><strong>❓ Was ist das Problem?</strong></p>
+            <details>
+                <summary>💡 Tipp (klicken zum Aufdecken)</summary>
+                <p>Was passiert, wenn der Sensor "UNDEFINED" zurückgibt?</p>
+            </details>
+
+            <p><strong>🔧 Deine Lösung:</strong> Wie würdest du das beheben?</p>
+
+            <div class="info-box">
+                🎮 <strong>Schnell testen?</strong><br>
+                Nutze das <a href="command-center.html">Command Center</a> um <code>get_color_label()</code> direkt auszuprobieren!
+            </div>
+
+            <h3>🎢 Challenge 4: Neigungsmelder</h3>
+
+            <p><strong>Start-Code (unvollständig):</strong></p>
+
+            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+while True:
+    ax, ay, az, gx, gy, gz = alvik.get_imu()
+    
+    # ax = Neigung vorwärts/rückwärts
+    # ay = Neigung links/rechts
+    
+    if ax &gt; ???:  # &lt;-- Welcher Wert macht Sinn?
+        print("⬆️ Nach vorne gekippt!")
+        # TODO: Welche LED-Farbe würde passen?
+        alvik.left_led.set_color(???)
+    
+    # TODO: Ergänze die anderen Richtungen
+    # - Nach hinten (ax &lt; -5)
+    # - Nach links (ay &gt; 5)  
+    # - Nach rechts (ay &lt; -5)
+    
+    sleep_ms(500)
+</code></pre>
+
+            <div class="tip-box">
+                💡 <strong>Was bedeutet ax, ay, az?</strong><br>
+                Schau in die <a href="1_1_Alvik_API.html">API-Liste → get_imu()</a> für Details zur IMU
+            </div>
+
+            <p><strong>Experimentier-Aufgaben:</strong></p>
+            <ol>
+                <li>Probiere verschiedene Schwellenwerte (3, 5, 10)</li>
+                <li>Was ist ein guter Wert für "gekippt"?</li>
+                <li>Ergänze alle 4 Richtungen</li>
+                <li>Bonus: Kombiniere mit LEDs in unterschiedlichen Farben</li>
+            </ol>
+
+            <h3>🧪 Sensor-Experimente</h3>
+
+            <p><strong>Versuch 1: Messwert-Grenzen</strong></p>
+
+            <pre><code class="language-python"># Finde heraus: Was sind die Min/Max-Werte?
+from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+max_distance = 0
+min_distance = 999
+
+while True:
+    d_l, d_cl, d_c, d_cr, d_r = alvik.get_distance()
+    
+    # TODO: Aktualisiere max_distance und min_distance
+    # Tipp: if d_c &gt; max_distance: ...
+    
+    print(f"Min: {min_distance} | Jetzt: {d_c} | Max: {max_distance}")
+    sleep_ms(200)
+</code></pre>
+
+            <p><strong>❓ Aufgabe:</strong> Ergänze den Code und finde die Sensor-Grenzen!</p>
+
+            <h3>📋 Sensor-Cheatsheet</h3>
+
+            <table>
+                <tr>
+                    <th>Sensor</th>
+                    <th>Code</th>
+                    <th>Gibt zurück</th>
+                </tr>
+                <tr>
+                    <td>🎯 Abstand</td>
+                    <td><code>alvik.get_distance()</code></td>
+                    <td><code>d_l, d_cl, d_c, d_cr, d_r</code> (cm)</td>
+                </tr>
+                <tr>
+                    <td>🎨 Farbe</td>
+                    <td><code>alvik.get_color_label()</code></td>
+                    <td><code>"RED"</code>, <code>"GREEN"</code>, <code>"BLUE"</code> usw.</td>
+                </tr>
+                <tr>
+                    <td>📐 IMU</td>
+                    <td><code>alvik.get_imu()</code></td>
+                    <td><code>ax, ay, az, gx, gy, gz</code></td>
+                </tr>
+                <tr>
+                    <td>🔋 Batterie</td>
+                    <td><code>alvik.get_battery_charge()</code></td>
+                    <td><code>0-100</code> (Prozent)</td>
+                </tr>
+            </table>
+
+            <div class="info-box">
+                📖 <strong>Alle Sensoren im Detail:</strong><br>
+                Die vollständige Liste aller Sensor-Befehle findest du in der <a href="1_1_Alvik_API.html">API-Liste</a>
+            </div>
+
+            <h3>💡 Denk-Fragen zum Schluss</h3>
+
+            <ol>
+                <li><strong>Warum</strong> gibt es 5 Abstandssensoren und nicht nur 1?</li>
+                <li><strong>Was passiert</strong>, wenn du <code>sleep_ms(100)</code> auf <code>sleep_ms(10)</code> änderst?</li>
+                <li><strong>Wie oft</strong> pro Sekunde werden die Sensoren bei <code>sleep_ms(200)</code> ausgelesen?</li>
+                <li><strong>Warum</strong> sollte man Farb-Änderungen speichern (<code>last_color</code>)?</li>
+            </ol>
+
+            <div class="tip-box">
+                🚀 <strong>Weiter geht's:</strong><br>
+                • Probiere die Befehle im <a href="command-center.html">Command Center</a> aus<br>
+                • Alle Befehle nachschlagen: <a href="1_1_Alvik_API.html">API-Liste</a><br>
+                • Beispiele: <a href="1_5_3_Alvik_API_Collisionsvermeidung.html">Kollisionsvermeidung</a>
+            </div>
+
         </main>
     </div>
     
