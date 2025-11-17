@@ -350,9 +350,10 @@ while True:
     distance_l, distance_cl, distance_c, distance_r, distance_cr = alvik.get_distance()
     
     if distance_c &lt; distance_threshold:
+        alvik.set_wheels_speed(0, 0)
         alvik.rotate(45)
     else:
-        alvik.move(10)
+        alvik.set_wheels_speed(10, 10)
     
     sleep_ms(100)
 </code></pre>
