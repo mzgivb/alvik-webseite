@@ -210,62 +210,217 @@
         </aside>
         
         <main class="main-content">
-            <p>Man kann mit dem Alvik auf externe Messwerte auslesen über I2C. Hier am Beispiel des sehr genauen bme680. Verbinden Sie den Sensor mit dem i2C Connector am hinteren Teil des Alvik. Zuvor müssen sie jedoch die entsprechende Bibliothek <a href="bme680_py.html">bme680.py</a> einspielen. </p>
-<p><img alt="Bild" src="assets/bme680.jpg" /></p>
+            <h2>BME680 Umweltsensor: Wetter messen mit dem Alvik 🌡️</h2>
+
+            <p>Mit dem BME680-Sensor kann dein Alvik zum Wetter-Roboter werden! Dieser kleine Sensor misst gleichzeitig Temperatur, Luftfeuchtigkeit, Luftdruck und sogar die Luftqualität.</p>
+
+            <div class="info-box">
+                🌡️ <strong>Was kann der BME680?</strong><br>
+                • <strong>Temperatur:</strong> -40°C bis +85°C<br>
+                • <strong>Luftfeuchtigkeit:</strong> 0-100%<br>
+                • <strong>Luftdruck:</strong> 300-1100 hPa (Wettervorhersage!)<br>
+                • <strong>Luftqualität:</strong> Gaswiderstand (z.B. für CO₂-Erkennung)
+            </div>
+
+            <h3>Schritt 1: Sensor anschließen</h3>
+
+            <p><img alt="BME680 Sensor" src="assets/bme680.jpg" style="max-width: 100%; border-radius: 8px; margin: 1rem 0;" /></p>
+
+            <p><strong>So geht's:</strong></p>
+            <ol>
+                <li>Finde einen der 4 Grove-Anschlüsse am Alvik (hinten)</li>
+                <li>Stecke den BME680-Sensor ein</li>
+                <li>Fertig! Der Sensor bekommt Strom und ist über I2C verbunden</li>
+            </ol>
+
+            <div class="tip-box">
+                📍 <strong>Wichtig:</strong> Der BME680 hat die I2C-Adresse <code>0x76</code> oder <code>0x77</code>. Mit dem I2C-Scanner kannst du herausfinden, welche dein Sensor hat!
+            </div>
+
+            <h3>Schritt 2: Bibliothek installieren</h3>
+
+            <p>Damit Python mit dem Sensor sprechen kann, brauchst du die Datei <a href="bme680_py.html">bme680.py</a>. Lade sie herunter und kopiere sie auf den Alvik (in Arduino Lab ins "MicroPython device" kopieren).</p>
+
+            <h3>Schritt 3: Das Programm</h3>
+
+            <p>Hier ist ein einfaches Programm zum Auslesen des Sensors:</p>
 <pre><code class="language-python">from machine import Pin, I2C
 import bme680
 import time
 
-# I2C initialisieren (GPIO 12 = SCL, GPIO 11 = SDA)
-i2c = I2C(0, scl=Pin(12), sda=Pin(11), freq=100000)
+# 1. I2C-Verbindung aufbauen
+i2c = I2C(0, scl=Pin(12), sda=Pin(11))
 
-try:
-    # Sensor initialisieren
-    sensor = bme680.BME680_I2C(i2c=i2c, address=0x76)  # Standardadresse ist 0x76
-    print(&quot;BME680 erfolgreich erkannt!&quot;)
-except OSError:
-    print(&quot;Sensor nicht gefunden. Mögliche Ursachen:&quot;)
-    print(&quot;- Falsche I2C-Adresse (versuche address=0x77)&quot;)
-    print(&quot;- Defekte Verkabelung&quot;)
-    raise SystemExit
+# 2. Sensor verbinden
+sensor = bme680.BME680_I2C(i2c=i2c, address=0x76)
+print("✅ Sensor gefunden!")
 
-# Hauptschleife zum Lesen der Sensordaten
+# 3. Daten auslesen in einer Schleife
 while True:
-    try:
-        # Temperatur auslesen
-        temperature = sensor.temperature
-        # Luftfeuchtigkeit auslesen
-        humidity = sensor.humidity
-        # Luftdruck auslesen
-        pressure = sensor.pressure
-        # Gaswiderstand auslesen (falls verfügbar)
-        gas_resistance = sensor.gas
+    # Messwerte holen
+    temp = sensor.temperature
+    hum = sensor.humidity
+    press = sensor.pressure
+    gas = sensor.gas
 
-        # Ausgabe der Daten
-        print(&quot;\n--- Sensordaten ---&quot;)
-        print(f&quot;Temperatur: {temperature:.2f} °C&quot;)
-        print(f&quot;Luftfeuchtigkeit: {humidity:.2f} %&quot;)
-        print(f&quot;Luftdruck: {pressure:.2f} hPa&quot;)
-        print(f&quot;Gaswiderstand: {gas_resistance / 1000:.2f} kΩ&quot;)
-        print(&quot;-------------------&quot;)
+    # Schön formatiert ausgeben
+    print("\n🌡️ === Wetterdaten ===")
+    print(f"Temperatur:      {temp:.1f} °C")
+    print(f"Luftfeuchtigkeit: {hum:.1f} %")
+    print(f"Luftdruck:       {press:.0f} hPa")
+    print(f"Luftqualität:    {gas/1000:.1f} kΩ")
 
-    except Exception as e:
-        print(&quot;Fehler beim Lesen der Sensordaten:&quot;, str(e))
-
-    time.sleep(5)  # Wartezeit zwischen den Messungen
-
-
-
+    time.sleep(5)  # Alle 5 Sekunden messen
 </code></pre>
 
-    <div class="challenge-box" style="margin:4rem 0 2rem; padding:2.5rem; background:linear-gradient(135deg,rgba(227,6,19,0.08),rgba(103,116,122,0.08)); border-radius:20px; border:3px solid var(--primary-color);">
-        <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
-            <span style="font-size:3rem;">🎯</span>
-            <h2 style="margin:0; color:var(--primary-color);">Challenge: Umwelt-Datenlogger</h2>
+            <h3>Code-Erklärung</h3>
+
+            <p><strong>Zeile 1-3:</strong> Bibliotheken importieren</p>
+            <p><strong>Zeile 6:</strong> I2C-Verbindung mit Pin 12 (SCL) und Pin 11 (SDA) aufbauen</p>
+            <p><strong>Zeile 9:</strong> Sensor an Adresse 0x76 verbinden</p>
+            <p><strong>Zeile 14-17:</strong> Messwerte vom Sensor holen</p>
+            <p><strong>Zeile 19-23:</strong> Werte schön formatiert ausgeben</p>
+            <p><strong>Zeile 25:</strong> 5 Sekunden warten bis zur nächsten Messung</p>
+
+            <div class="tip-box">
+                💡 <strong>Fehlersuche:</strong><br>
+                Wenn "Sensor nicht gefunden" erscheint, versuche <code>address=0x77</code> statt 0x76!
+            </div>
+
+    <!-- Challenge-Bereich -->
+    <div class="challenge-box" style="margin: 4rem 0 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+        <div class="challenge-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--primary-color);">
+            <span style="font-size: 3rem;">🎯</span>
+            <div>
+                <h2 style="margin: 0; font-size: 2rem; color: var(--primary-color);">Challenge: Wetterstation bauen</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Messe das Wetter wie ein Profi!</p>
+            </div>
         </div>
-        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="padding:0.75rem 1.5rem; background:rgba(103,116,122,0.15); border:2px solid var(--secondary-color); border-radius:8px; cursor:pointer; font-weight:600;">💡 Lösung anzeigen</button>
-        <pre style="display:none; background:#2d3748; color:#e2e8f0; padding:1.5rem; border-radius:8px; margin-top:1rem;"><code>for i in range(60): log.append(sensor.data.temperature); sleep(10)</code></pre>
+
+        <div class="quiz-section" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>🧠</span>
+                <span>Wissens-Check</span>
+            </h3>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">1. Was kann der BME680 messen?</h4>
+                <div class="quiz-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_bme" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Nur Temperatur</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_bme" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Temperatur, Luftfeuchtigkeit, Luftdruck und Luftqualität</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_bme" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Nur Entfernungen</span>
+                    </label>
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz1_bme()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz1_bme-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz1_bme() {
+                const selected = document.querySelector('input[name="quiz1_bme"]:checked');
+                const feedback = document.getElementById('quiz1_bme-feedback');
+                const options = document.querySelectorAll('input[name="quiz1_bme"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Richtig! Der BME680 ist ein 4-in-1 Sensor!';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Der BME680 misst 4 Werte: Temperatur, Luftfeuchtigkeit, Luftdruck und Luftqualität!';
+                }
+            }
+            </script>
+
+        </div>
+
+        <div class="self-check" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>✅</span>
+                <span>Selbsttest: Das kann ich jetzt!</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="margin-bottom: 1rem;"><strong>Hake ab, was du verstanden hast:</strong></p>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_bme(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>BME680 anschließen und verbinden</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_bme(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Bibliothek installieren</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_bme(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Wetterdaten auslesen und anzeigen</span>
+                </label>
+
+                <div class="progress-display" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);" id="progress-counter_bme">0/3</div>
+                    <p style="margin-top: 0.5rem; color: #666;">Punkte verstanden</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function updateProgress_bme(checkbox) {
+            const item = checkbox.parentElement;
+            if (checkbox.checked) {
+                item.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                item.style.borderColor = '#10b981';
+                item.style.fontWeight = '600';
+            } else {
+                item.style.background = 'white';
+                item.style.borderColor = '#e5e7eb';
+                item.style.fontWeight = 'normal';
+            }
+
+            const total = document.querySelectorAll('.self-check-item input[type="checkbox"]').length;
+            const checked = document.querySelectorAll('.self-check-item input[type="checkbox"]:checked').length;
+            document.getElementById('progress-counter_bme').textContent = `${checked}/3`;
+        }
+        </script>
+
     </div>
+    <!-- Ende Challenge-Bereich -->
         </main>
     </div>
     
