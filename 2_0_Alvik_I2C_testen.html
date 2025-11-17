@@ -209,44 +209,183 @@
             </div>
         </aside>
         
+        
         <main class="main-content">
-            <p>Ein wichtiges Merkmal des Alvik ist seine einfache Erweiterung. Arduino Alvik hat mehrere Datenerweiterungsanschlüsse bereitgestellt, die alle den I2C-Bus verwenden. Es gibt auch einen Stecker, der zwei externe Servomotoren unterstützt.</p>
-<p>Alle Anschlüsse verwenden denselben I2C-Bus, der parallel verdrahtet ist. Hier ist ein MicroPython-Programm, das den I2C-Bus scannt, um die Adresse(n) aller angeschlossenen Geräte zu identifizieren.</p>
+            <h2>I2C-Schnittstelle testen</h2>
+            
+            <p>Der Arduino Alvik kann durch zusätzliche Sensoren erweitert werden! Alle Erweiterungsanschlüsse (Grove-Ports) nutzen die <strong>I2C-Schnittstelle</strong> - eine Technik, mit der mehrere Geräte gleichzeitig angeschlossen werden können.</p>
+
+            <div class="info-box">
+                💡 <strong>I2C einfach erklärt:</strong><br>
+                I2C ist wie ein Telefonnetz: Jedes Gerät (Sensor) hat seine eigene "Telefonnummer" (= Adresse). So kann der Alvik mit jedem Sensor einzeln sprechen.
+            </div>
+
+            <h3>Der I2C-Scanner</h3>
+            <p>Dieses Programm findet alle angeschlossenen Geräte und zeigt ihre Adressen an:</p>
+
 <pre><code class="language-python">from machine import I2C
 from machine import Pin
 
 i2c = I2C(0, scl=Pin(12, Pin.OUT), sda=Pin(11, Pin.OUT))
 
-print()
-print('Scan i2c bus...')
-print()
-
+print('🔍 Scanne I2C-Bus...')
 devices = i2c.scan()
 
 if len(devices) == 0:
-    print(&quot;No i2c device !&quot;)
+    print("Keine Geräte gefunden!")
 else:
-    print('i2c devices found:',len(devices))
-print()
+    print('Gefundene Geräte:', len(devices))
 
 for device in devices:
-    print(&quot;Decimal address: &quot;,device,&quot; | Hexa address: &quot;,hex(device))
-
-print()
+    print("Adresse:", device, "| Hex:", hex(device))
 </code></pre>
 
-    <div class="challenge-box" style="margin:4rem 0 2rem; padding:2.5rem; background:linear-gradient(135deg,rgba(227,6,19,0.08),rgba(103,116,122,0.08)); border-radius:20px; border:3px solid var(--primary-color);">
-        <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
-            <span style="font-size:3rem;">🎯</span>
-            <h2 style="margin:0; color:var(--primary-color);">Challenge: I2C-Scanner</h2>
-        </div>
-        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="padding:0.75rem 1.5rem; background:rgba(103,116,122,0.15); border:2px solid var(--secondary-color); border-radius:8px; cursor:pointer; font-weight:600;">💡 Lösung anzeigen</button>
-        <pre style="display:none; background:#2d3748; color:#e2e8f0; padding:1.5rem; border-radius:8px; margin-top:1rem;"><code>for addr in range(0x80): try: alvik.i2c.writeto(addr,b''); print(hex(addr))</code></pre>
-    </div>
+            <h3>Was bedeuten die Adressen?</h3>
+            <p>Jeder Sensor hat eine Adresse. Typische Beispiele:</p>
+            <ul>
+                <li>BME680 (Umweltsensor): <code>0x76</code> oder <code>0x77</code></li>
+                <li>OLED-Display: <code>0x3C</code></li>
+            </ul>
+
+            <!-- Challenge-Bereich -->
+            <div class="challenge-box" style="margin: 4rem 0 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                <div class="challenge-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--primary-color);">
+                    <span style="font-size: 3rem;">🎯</span>
+                    <div>
+                        <h2 style="margin: 0; font-size: 2rem; color: var(--primary-color);">Challenge: I2C-Scanner verstehen</h2>
+                        <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Finde alle angeschlossenen Geräte!</p>
+                    </div>
+                </div>
+
+                <div class="quiz-section" style="margin-bottom: 2.5rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span>🧠</span>
+                        <span>Wissens-Check</span>
+                    </h3>
+
+                    <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">1. Was macht i2c.scan()?</h4>
+                        <div class="quiz-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="quiz1_i2c" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                                <span>Es sucht alle angeschlossenen I2C-Geräte</span>
+                            </label>
+                            <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="quiz1_i2c" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                                <span>Es löscht alle Daten</span>
+                            </label>
+                            <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="quiz1_i2c" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                                <span>Es startet den Alvik neu</span>
+                            </label>
+                        </div>
+                        <button class="check-answer-btn" onclick="checkAnswer_quiz1_i2c()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Antwort prüfen
+                        </button>
+                        <div id="quiz1_i2c-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+                    </div>
+
+                    <script>
+                    function checkAnswer_quiz1_i2c() {
+                        const selected = document.querySelector('input[name="quiz1_i2c"]:checked');
+                        const feedback = document.getElementById('quiz1_i2c-feedback');
+                        const options = document.querySelectorAll('input[name="quiz1_i2c"]');
+                        const button = event.target;
+
+                        if (!selected) {
+                            feedback.style.display = 'block';
+                            feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                            feedback.style.color = '#991b1b';
+                            feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                            return;
+                        }
+
+                        button.disabled = true;
+                        button.style.opacity = '0.5';
+
+                        options.forEach((opt, idx) => {
+                            opt.parentElement.style.pointerEvents = 'none';
+                            if (idx === 0) {
+                                opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                                opt.parentElement.style.borderColor = '#10b981';
+                                opt.parentElement.style.fontWeight = '600';
+                            } else if (opt.checked) {
+                                opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                                opt.parentElement.style.borderColor = '#ef4444';
+                            }
+                        });
+
+                        feedback.style.display = 'block';
+                        if (parseInt(selected.value) === 0) {
+                            feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                            feedback.style.color = '#065f46';
+                            feedback.textContent = '✅ Richtig! scan() durchsucht alle Adressen und findet angeschlossene Geräte.';
+                        } else {
+                            feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                            feedback.style.color = '#991b1b';
+                            feedback.textContent = '❌ scan() durchsucht den I2C-Bus und findet alle angeschlossenen Geräte!';
+                        }
+                    }
+                    </script>
+
+                </div>
+
+                <div class="self-check" style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <span>✅</span>
+                        <span>Selbsttest: Das kann ich jetzt!</span>
+                    </h3>
+                    <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <p style="margin-bottom: 1rem;"><strong>Hake ab, was du verstanden hast:</strong></p>
+
+                        <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                            <input type="checkbox" onchange="updateProgress_i2c(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                            <span>Ich weiß, was I2C ist</span>
+                        </label>
+
+                        <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                            <input type="checkbox" onchange="updateProgress_i2c(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                            <span>Ich kann den I2C-Scanner nutzen</span>
+                        </label>
+
+                        <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                            <input type="checkbox" onchange="updateProgress_i2c(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                            <span>Ich verstehe, was Adressen sind</span>
+                        </label>
+
+                        <div class="progress-display" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);" id="progress-counter_i2c">0/3</div>
+                            <p style="margin-top: 0.5rem; color: #666;">Punkte verstanden</p>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                function updateProgress_i2c(checkbox) {
+                    const item = checkbox.parentElement;
+                    if (checkbox.checked) {
+                        item.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        item.style.borderColor = '#10b981';
+                        item.style.fontWeight = '600';
+                    } else {
+                        item.style.background = 'white';
+                        item.style.borderColor = '#e5e7eb';
+                        item.style.fontWeight = 'normal';
+                    }
+
+                    const total = document.querySelectorAll('.self-check-item input[type="checkbox"]').length;
+                    const checked = document.querySelectorAll('.self-check-item input[type="checkbox"]:checked').length;
+                    document.getElementById('progress-counter_i2c').textContent = `${checked}/3`;
+                }
+                </script>
+
+            </div>
+            <!-- Ende Challenge-Bereich -->
+
         </main>
     </div>
-    
-    <a href="#" class="back-to-top">↑</a>    
+
+    <a href="#" class="back-to-top">↑</a>
     <footer style="margin-top: 4rem; padding: 2rem; text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 16px;">
         <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem;">
             <div>
