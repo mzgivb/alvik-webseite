@@ -250,14 +250,121 @@ while True:
 
 </code></pre>
 
-    <div class="challenge-box" style="margin:4rem 0 2rem; padding:2.5rem; background:linear-gradient(135deg,rgba(227,6,19,0.08),rgba(103,116,122,0.08)); border-radius:20px; border:3px solid var(--primary-color);">
-        <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
-            <span style="font-size:3rem;">🎯</span>
-            <h2 style="margin:0; color:var(--primary-color);">Challenge: Beschleunigungs-Experiment</h2>
+    <!-- Challenge Sektion -->
+    <div class="challenge-box" style="margin: 4rem 0 2rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color);">
+        <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem;">
+            <span style="font-size: 3rem;">🎯</span>
+            <div>
+                <h2 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">Challenge: phyphox-Integration</h2>
+                <p style="margin: 0; opacity: 0.9;">Teste dein Wissen über phyphox und den Alvik!</p>
+            </div>
         </div>
-        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="padding:0.75rem 1.5rem; background:rgba(103,116,122,0.15); border:2px solid var(--secondary-color); border-radius:8px; cursor:pointer; font-weight:600;">💡 Lösung anzeigen</button>
-        <pre style="display:none; background:#2d3748; color:#e2e8f0; padding:1.5rem; border-radius:8px; margin-top:1rem;"><code>for v in [10,20,30]: set_speed(v); log(get_accel())</code></pre>
+
+        <!-- Quiz -->
+        <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+            <h3 style="color: var(--primary-color); margin-top: 0;">📝 Quiz</h3>
+            <p style="font-weight: 600; margin-bottom: 1rem;">Wie oft wird in diesem Code die Geschwindigkeit gemessen und an phyphox gesendet?</p>
+            <pre style="background: #f7fafc; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary-color);"><code>timer.init(period=200, mode=Timer.PERIODIC, callback=drive_speed)</code></pre>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0;">
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_phyphox" value="a" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>Einmalig beim Start</span>
+                </label>
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_phyphox" value="b" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>Alle 200 Millisekunden (5x pro Sekunde)</span>
+                </label>
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_phyphox" value="c" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>Alle 200 Sekunden</span>
+                </label>
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_phyphox" value="d" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>Nur bei Tastendruck</span>
+                </label>
+            </div>
+
+            <button onclick="checkAnswer_quiz_phyphox()" style="padding: 0.75rem 2rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">Antwort prüfen</button>
+            <div id="quiz-feedback_phyphox" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+        </div>
+
+        <!-- Programmier-Challenge -->
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 2px dashed rgba(227, 6, 19, 0.3);">
+            <h3 style="color: var(--primary-color); margin-top: 0;">💻 Programmier-Challenge</h3>
+            <p><strong>Aufgabe:</strong> Ändere das Programm so, dass die Beschleunigungswerte (statt Geschwindigkeit) an phyphox gesendet werden.</p>
+
+            <div class="tip-box" style="margin: 1.5rem 0; padding: 1.25rem; background: rgba(103, 116, 122, 0.1); border-left: 4px solid var(--secondary-color); border-radius: 8px;">
+                💡 <strong>Tipp:</strong> Verwende <code>alvik.get_accelerations()</code> statt <code>alvik.get_drive_speed()</code>
+            </div>
+
+            <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="padding: 0.75rem 1.5rem; background: rgba(103, 116, 122, 0.15); border: 2px solid var(--secondary-color); border-radius: 8px; cursor: pointer; font-weight: 600;">
+                💡 Lösung anzeigen
+            </button>
+            <pre style="display: none; background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; overflow-x: auto;"><code class="language-python">def drive_speed(timer):
+    ax, ay, az = alvik.get_accelerations()  # Beschleunigung messen
+    print(f"Beschleunigung Z = {az} m/s²")
+    p.write(az)  # Z-Achse an phyphox senden</code></pre>
+        </div>
+
+        <!-- Selbsttest -->
+        <div style="background: white; padding: 2rem; border-radius: 12px;">
+            <h3 style="color: var(--primary-color); margin-top: 0;">✅ Selbsttest</h3>
+            <p style="margin-bottom: 1.5rem;">Hake ab, was du gelernt hast:</p>
+
+            <label style="display: flex; align-items: start; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-radius: 8px; transition: background 0.2s;" onchange="updateProgress_phyphox()">
+                <input type="checkbox" style="margin-top: 0.25rem; width: 20px; height: 20px;">
+                <span>Ich kann die phyphoxBLE-Bibliothek auf den Alvik übertragen</span>
+            </label>
+
+            <label style="display: flex; align-items: start; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-radius: 8px; transition: background 0.2s;" onchange="updateProgress_phyphox()">
+                <input type="checkbox" style="margin-top: 0.25rem; width: 20px; height: 20px;">
+                <span>Ich verstehe, wie Timer funktionieren und kann die Messrate ändern</span>
+            </label>
+
+            <label style="display: flex; align-items: start; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-radius: 8px; transition: background 0.2s;" onchange="updateProgress_phyphox()">
+                <input type="checkbox" style="margin-top: 0.25rem; width: 20px; height: 20px;">
+                <span>Ich kann verschiedene Sensordaten (Geschwindigkeit, Beschleunigung) an phyphox senden</span>
+            </label>
+
+            <div id="progress-counter_phyphox" style="margin-top: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.1), rgba(103, 116, 122, 0.1)); border-radius: 8px; text-align: center; font-weight: 600;">
+                Fortschritt: <span id="progress-text_phyphox">0/3</span> ✓
+            </div>
+        </div>
     </div>
+
+    <script>
+    function checkAnswer_quiz_phyphox() {
+        const selected = document.querySelector('input[name="quiz_phyphox"]:checked');
+        const feedback = document.getElementById('quiz-feedback_phyphox');
+
+        if (!selected) {
+            feedback.style.display = 'block';
+            feedback.style.background = '#fff3cd';
+            feedback.style.border = '2px solid #ffc107';
+            feedback.innerHTML = '⚠️ Bitte wähle eine Antwort aus!';
+            return;
+        }
+
+        if (selected.value === 'b') {
+            feedback.style.display = 'block';
+            feedback.style.background = '#d4edda';
+            feedback.style.border = '2px solid #28a745';
+            feedback.innerHTML = '🎉 <strong>Richtig!</strong> Der Timer ruft alle 200 Millisekunden (= 0,2 Sekunden) die Funktion auf. Das sind 5 Messungen pro Sekunde!';
+        } else {
+            feedback.style.display = 'block';
+            feedback.style.background = '#f8d7da';
+            feedback.style.border = '2px solid #dc3545';
+            feedback.innerHTML = '❌ <strong>Nicht ganz.</strong> Schau dir die <code>period=200</code> genauer an. Das bedeutet 200 Millisekunden zwischen den Aufrufen.';
+        }
+    }
+
+    function updateProgress_phyphox() {
+        const checkboxes = document.querySelectorAll('.challenge-box input[type="checkbox"]');
+        const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+        document.getElementById('progress-text_phyphox').textContent = `${checked}/3`;
+    }
+    </script>
         </main>
     </div>
     
