@@ -210,10 +210,138 @@
         </aside>
         
         <main class="main-content">
-            <h2>Mustererkennung mit dem Alvik</h2>
+            <h2>🤖 KI auf dem Alvik: Dein Roboter lernt!</h2>
 
-<div class="intro-box">
-    <p>Der Alvik-Roboter lernt durch Farbkarten ein Bewegungsmuster wie eine KI. <strong>Rot</strong> bedeutet vorwärts, <strong>Gelb</strong> rückwärts, <strong>Grün</strong> Rechtsdrehung und <strong>Blau</strong> Linksdrehung. Nach dem Scannen von 5 Farbkarten speichert der Roboter die Sequenz und führt sie autonom aus. Diese Demo zeigt die Grundprinzipien von Machine Learning: Dateneingabe, Mustererkennung und autonome Ausführung.</p>
+<div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(59, 130, 246, 0.15)); padding: 2rem; border-radius: 16px; border: 3px solid #9333ea; margin: 2rem 0;">
+    <h3 style="margin-top: 0; color: #9333ea;">✨ Das Besondere an diesem Projekt</h3>
+    <p style="font-size: 1.1rem; line-height: 1.6;">
+        <strong>Künstliche Intelligenz ist überall</strong> – in deinem Smartphone, in Sprachassistenten, in selbstfahrenden Autos. Und jetzt auch auf deinem Alvik!
+        In diesem Projekt bringst du deinem Roboter bei, <strong>Muster zu lernen und eigenständig auszuführen</strong> – genau wie echte KI!
+    </p>
+</div>
+
+<h3>🧠 Was ist Machine Learning überhaupt?</h3>
+
+<p><strong>Machine Learning</strong> (auf Deutsch: "Maschinelles Lernen") ist ein Teilbereich der Künstlichen Intelligenz. Statt einem Computer jede einzelne Regel einzuprogrammieren, <strong>lernt er aus Beispielen</strong>!</p>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0;">
+    <div style="background: rgba(239, 68, 68, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #ef4444;">
+        <h4 style="margin-top: 0; color: #ef4444;">❌ Normale Programmierung</h4>
+        <p style="margin: 0; line-height: 1.6;">
+            "Wenn Sensor A den Wert 5 misst, dann fahre 10 cm. Wenn Sensor B den Wert 3 misst, dann drehe um 90°..."<br><br>
+            → Programmierer gibt <strong>alle Regeln</strong> vor
+        </p>
+    </div>
+    <div style="background: rgba(34, 197, 94, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #22c55e;">
+        <h4 style="margin-top: 0; color: #22c55e;">✅ Machine Learning</h4>
+        <p style="margin: 0; line-height: 1.6;">
+            "Hier sind 1000 Beispiele von roten Farben. Lerne selbst, was 'Rot' bedeutet und was du dann tun sollst!"<br><br>
+            → Computer <strong>lernt aus Beispielen</strong>
+        </p>
+    </div>
+</div>
+
+<h3>🎯 Wie funktioniert unser Mini-KI-Roboter?</h3>
+
+<p>Dein Alvik-Roboter lernt in diesem Projekt wie eine KI! Er durchläuft die gleichen Phasen wie echte Machine-Learning-Systeme:</p>
+
+<div style="background: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h4 style="color: var(--primary-color); margin-top: 0;">Die 4 Phasen des Lernens</h4>
+
+    <div style="display: flex; align-items: start; gap: 1rem; margin: 1.5rem 0; padding: 1rem; background: #fef3c7; border-radius: 8px;">
+        <span style="font-size: 2rem;">1️⃣</span>
+        <div>
+            <h5 style="margin: 0 0 0.5rem 0; color: #92400e;">TRAININGSPHASE (Lernen)</h5>
+            <p style="margin: 0;">Du zeigst dem Alvik <strong>5 Farbkarten</strong>. Er scannt jede Farbe und speichert sie.</p>
+            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li>🔴 <strong>Rot</strong> = Vorwärts fahren</li>
+                <li>🟡 <strong>Gelb</strong> = Rückwärts fahren</li>
+                <li>🟢 <strong>Grün</strong> = Rechts drehen</li>
+                <li>🔵 <strong>Blau</strong> = Links drehen</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: start; gap: 1rem; margin: 1.5rem 0; padding: 1rem; background: #dbeafe; border-radius: 8px;">
+        <span style="font-size: 2rem;">2️⃣</span>
+        <div>
+            <h5 style="margin: 0 0 0.5rem 0; color: #1e40af;">MODELL-ERSTELLUNG (Speichern)</h5>
+            <p style="margin: 0;">Der Alvik speichert die Farb-Sequenz in seinem "Gedächtnis" (der Variable <code>pattern_memory[]</code>). Das ist wie ein trainiertes KI-Modell!</p>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: start; gap: 1rem; margin: 1.5rem 0; padding: 1rem; background: #fce7f3; border-radius: 8px;">
+        <span style="font-size: 2rem;">3️⃣</span>
+        <div>
+            <h5 style="margin: 0 0 0.5rem 0; color: #9f1239;">VALIDIERUNG (Überprüfen)</h5>
+            <p style="margin: 0;">Du siehst auf dem Display, was der Alvik gelernt hat. Erst wenn du OK drückst, geht's weiter – so wie bei echten KI-Systemen, die erst getestet werden müssen!</p>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: start; gap: 1rem; margin: 1.5rem 0; padding: 1rem; background: #d1fae5; border-radius: 8px;">
+        <span style="font-size: 2rem;">4️⃣</span>
+        <div>
+            <h5 style="margin: 0 0 0.5rem 0; color: #065f46;">INFERENCE (Anwenden)</h5>
+            <p style="margin: 0;">Jetzt wird's spannend! Der Alvik führt das gelernte Muster <strong>komplett selbstständig</strong> aus – ohne dass du noch etwas eingeben musst. Das nennt man in der KI "Inference"!</p>
+        </div>
+    </div>
+</div>
+
+<div class="info-box" style="background: rgba(147, 51, 234, 0.1); border-left: 4px solid #9333ea;">
+    🤯 <strong>Vergleich mit echter KI:</strong><br>
+    <ul style="margin: 0.5rem 0 0 1.5rem; line-height: 1.8;">
+        <li><strong>ChatGPT</strong> wurde mit Millionen von Texten trainiert → erkennt Sprachmuster</li>
+        <li><strong>Gesichtserkennung</strong> wurde mit tausenden Fotos trainiert → erkennt Gesichter</li>
+        <li><strong>Dein Alvik</strong> wurde mit 5 Farbkarten trainiert → erkennt Farben und führt Bewegungen aus</li>
+    </ul>
+    Das Prinzip ist das Gleiche – nur die Datenmenge unterscheidet sich!
+</div>
+
+<h3>🔬 Das Geheimnis: Kalibrierte Farberkennung</h3>
+
+<p>Das Herzstück dieses Programms ist die Funktion <code>detect_color_calibrated()</code>. Sie arbeitet wie ein neuronales Netz bei Bilderkennung:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+    <thead>
+        <tr style="background: var(--primary-color); color: white;">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid #ddd;">Schritt</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid #ddd;">Was passiert?</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid #ddd;">KI-Vergleich</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="background: #f7fafc;">
+            <td style="padding: 0.75rem; border: 1px solid #ddd;"><strong>1. Daten sammeln</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">5 Farbmessungen (RGB) werden gemacht</td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">Wie Kamera-Bilder für Bilderkennung</td>
+        </tr>
+        <tr>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;"><strong>2. Umwandeln</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">RGB → HSV (Farbton, Sättigung, Helligkeit)</td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">Feature-Extraction (Merkmale herausfiltern)</td>
+        </tr>
+        <tr style="background: #f7fafc;">
+            <td style="padding: 0.75rem; border: 1px solid #ddd;"><strong>3. Durchschnitt</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">Mittelwert aus 5 Messungen</td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">Noise Reduction (Fehler reduzieren)</td>
+        </tr>
+        <tr>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;"><strong>4. Klassifizieren</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">Vergleich mit kalibrierten Bereichen</td>
+            <td style="padding: 0.75rem; border: 1px solid #ddd;">Classification (In Kategorien einteilen)</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="tip-box" style="margin: 1.5rem 0; padding: 1.25rem; background: rgba(227, 6, 19, 0.1); border-left: 4px solid var(--primary-color); border-radius: 8px;">
+    💡 <strong>Warum HSV statt RGB?</strong><br>
+    RGB-Werte ändern sich stark bei unterschiedlichem Licht. HSV (Hue-Saturation-Value) ist stabiler:
+    <ul style="margin: 0.5rem 0 0 1.5rem;">
+        <li><strong>H (Hue)</strong> = Farbton (0-360°) – "Welche Farbe?"</li>
+        <li><strong>S (Saturation)</strong> = Sättigung (0-1) – "Wie kräftig?"</li>
+        <li><strong>V (Value)</strong> = Helligkeit (0-1) – "Wie hell?"</li>
+    </ul>
+    Das ist wie bei Instagram-Filtern – egal wie hell/dunkel, die Farbe bleibt erkennbar!
 </div>
 
 <h3>Technische Funktionen und Code-Struktur</h3>
@@ -519,14 +647,173 @@ display.show()
 </code></pre>
 
 
-    <div class="challenge-box" style="margin:4rem 0 2rem; padding:2.5rem; background:linear-gradient(135deg,rgba(227,6,19,0.08),rgba(103,116,122,0.08)); border-radius:20px; border:3px solid var(--primary-color);">
-        <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
-            <span style="font-size:3rem;">🎯</span>
-            <h2 style="margin:0; color:var(--primary-color);">Challenge: Farberkennung</h2>
-        </div>
-        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="padding:0.75rem 1.5rem; background:rgba(103,116,122,0.15); border:2px solid var(--secondary-color); border-radius:8px; cursor:pointer; font-weight:600;">💡 Lösung anzeigen</button>
-        <pre style="display:none; background:#2d3748; color:#e2e8f0; padding:1.5rem; border-radius:8px; margin-top:1rem;"><code>r,g,b=get_color(); if r>200: stop() elif g>200: move(20)</code></pre>
+    <h3 style="margin-top: 4rem;">🚀 Deine eigenen KI-Projekte mit dem Alvik</h3>
+
+<p>Jetzt wo du verstehst, wie Machine Learning funktioniert, kannst du eigene coole KI-Projekte umsetzen! Hier sind inspirierende Ideen:</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 12px; color: white;">
+        <h4 style="margin: 0 0 1rem 0;">🎮 Gesten-Steuerung</h4>
+        <p style="margin: 0; opacity: 0.95;">Trainiere den Alvik, verschiedene Hand-Gesten zu erkennen! Nutze den Abstandssensor und lass ihn lernen: Schnelle Bewegung = Vorwärts, Langsame = Stop, Auf-Ab = Drehen</p>
     </div>
+
+    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 1.5rem; border-radius: 12px; color: white;">
+        <h4 style="margin: 0 0 1rem 0;">🎵 Ton-Erkennung</h4>
+        <p style="margin: 0; opacity: 0.95;">Lass den Alvik auf Klatschen oder Pfeifen reagieren! Messe mit dem Mikrofon verschiedene Töne und lerne: 1x Klatschen = Start, 2x = Stop, Pfeifen = Drehen</p>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 1.5rem; border-radius: 12px; color: white;">
+        <h4 style="margin: 0 0 1rem 0;">🗺️ Labyrinth-Löser</h4>
+        <p style="margin: 0; opacity: 0.95;">Der Alvik lernt, wie man Labyrinthe löst! Speichere erfolgreiche Wege und lass ihn beim nächsten Mal den gelernten Weg fahren – wie ein GPS!</p>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 1.5rem; border-radius: 12px; color: white;">
+        <h4 style="margin: 0 0 1rem 0;">🌡️ Umwelt-Assistent</h4>
+        <p style="margin: 0; opacity: 0.95;">Mit BME680-Sensor: Lerne verschiedene Raum-"Zustände" (zu warm, zu kalt, gute Luft, schlechte Luft) und lass den Alvik entsprechend reagieren!</p>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 1.5rem; border-radius: 12px; color: white;">
+        <h4 style="margin: 0 0 1rem 0;">🎨 Künstler-Roboter</h4>
+        <p style="margin: 0; opacity: 0.95;">Lass den Alvik Muster auf Papier zeichnen! Lerne ihm verschiedene Bewegungssequenzen bei und er "malt" geometrische Formen automatisch</p>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 1.5rem; border-radius: 12px; color: #333;">
+        <h4 style="margin: 0 0 1rem 0;">🏁 Rennstrecken-Lernen</h4>
+        <p style="margin: 0; opacity: 0.9;">Der Alvik fährt eine Strecke ab und lernt sie! Beim zweiten Durchgang fährt er schneller, weil er weiß wo die Kurven sind – wie Rennfahrer!</p>
+    </div>
+
+</div>
+
+<div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(249, 115, 22, 0.2)); padding: 2rem; border-radius: 16px; border: 3px solid #f59e0b; margin: 3rem 0;">
+    <h3 style="margin-top: 0; color: #92400e;">💭 Denk weiter: Was ist mit echter KI möglich?</h3>
+    <p style="font-size: 1.05rem; line-height: 1.7;">
+        Du hast jetzt die Grundlagen verstanden! In der echten KI-Welt werden ähnliche Prinzipien verwendet – nur viel komplexer:
+    </p>
+    <ul style="line-height: 1.8; margin: 1rem 0;">
+        <li><strong>🚗 Selbstfahrende Autos</strong> lernen aus Millionen Kilometer Straßenfahrten</li>
+        <li><strong>🏥 Medizinische KI</strong> erkennt Krankheiten auf Röntgenbildern – trainiert mit tausenden Beispielen</li>
+        <li><strong>♟️ Schach-Computer</strong> lernen Strategien durch Millionen gespielte Partien</li>
+        <li><strong>🎬 Netflix & YouTube</strong> lernen deine Vorlieben und empfehlen passende Inhalte</li>
+        <li><strong>🌍 Klimamodelle</strong> lernen aus historischen Wetterdaten, um die Zukunft vorherzusagen</li>
+    </ul>
+    <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 1.5rem; font-weight: 600;">
+        Mit dem Alvik hast du den ersten Schritt gemacht – wer weiß, vielleicht entwickelst du eines Tages die nächste bahnbrechende KI! 🚀
+    </p>
+</div>
+
+    <!-- Challenge Sektion -->
+    <div class="challenge-box" style="margin: 4rem 0 2rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color);">
+        <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem;">
+            <span style="font-size: 3rem;">🎯</span>
+            <div>
+                <h2 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">Challenge: Machine Learning verstehen</h2>
+                <p style="margin: 0; opacity: 0.9;">Teste dein Wissen über KI und Machine Learning!</p>
+            </div>
+        </div>
+
+        <!-- Quiz -->
+        <div style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+            <h3 style="color: var(--primary-color); margin-top: 0;">📝 Quiz</h3>
+            <p style="font-weight: 600; margin-bottom: 1rem;">Was ist der Hauptunterschied zwischen normaler Programmierung und Machine Learning?</p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0;">
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_ml" value="a" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>ML ist schneller als normale Programmierung</span>
+                </label>
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_ml" value="b" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>Bei ML lernt der Computer aus Beispielen, statt dass alle Regeln vorgegeben werden</span>
+                </label>
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_ml" value="c" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>ML braucht keine Sensoren</span>
+                </label>
+                <label style="display: flex; align-items: center; padding: 1rem; background: #f7fafc; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;">
+                    <input type="radio" name="quiz_ml" value="d" style="margin-right: 0.75rem; width: 20px; height: 20px;">
+                    <span>ML funktioniert nur mit Robotern</span>
+                </label>
+            </div>
+
+            <button onclick="checkAnswer_quiz_ml()" style="padding: 0.75rem 2rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem;">Antwort prüfen</button>
+            <div id="quiz-feedback_ml" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+        </div>
+
+        <!-- Experimentier-Challenge -->
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 2px dashed rgba(227, 6, 19, 0.3);">
+            <h3 style="color: var(--primary-color); margin-top: 0;">💡 Experimentier-Challenge</h3>
+            <p><strong>Aufgabe:</strong> Überlege dir ein eigenes Muster mit den 4 Farben und lass den Alvik es lernen!</p>
+
+            <div class="tip-box" style="margin: 1.5rem 0; padding: 1.25rem; background: rgba(103, 116, 122, 0.1); border-left: 4px solid var(--secondary-color); border-radius: 8px;">
+                💡 <strong>Ideen zum Experimentieren:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Erstelle ein Muster, das den Alvik im Kreis fahren lässt</li>
+                    <li>Lass ihn ein "L" oder "T" fahren</li>
+                    <li>Kombiniere viele Vorwärts-Bewegungen mit nur einer Drehung</li>
+                    <li>Was passiert mit 5x Rot? Probiere es aus!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Selbsttest -->
+        <div style="background: white; padding: 2rem; border-radius: 12px;">
+            <h3 style="color: var(--primary-color); margin-top: 0;">✅ Selbsttest</h3>
+            <p style="margin-bottom: 1.5rem;">Hake ab, was du gelernt hast:</p>
+
+            <label style="display: flex; align-items: start; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-radius: 8px; transition: background 0.2s;" onchange="updateProgress_ml()">
+                <input type="checkbox" style="margin-top: 0.25rem; width: 20px; height: 20px;">
+                <span>Ich verstehe den Unterschied zwischen normaler Programmierung und Machine Learning</span>
+            </label>
+
+            <label style="display: flex; align-items: start; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-radius: 8px; transition: background 0.2s;" onchange="updateProgress_ml()">
+                <input type="checkbox" style="margin-top: 0.25rem; width: 20px; height: 20px;">
+                <span>Ich kenne die 4 Phasen des Lernens (Training, Modell, Validierung, Inference)</span>
+            </label>
+
+            <label style="display: flex; align-items: start; gap: 0.75rem; padding: 0.75rem; cursor: pointer; border-radius: 8px; transition: background 0.2s;" onchange="updateProgress_ml()">
+                <input type="checkbox" style="margin-top: 0.25rem; width: 20px; height: 20px;">
+                <span>Ich kann erklären, warum HSV-Werte besser für Farberkennung sind als RGB</span>
+            </label>
+
+            <div id="progress-counter_ml" style="margin-top: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.1), rgba(103, 116, 122, 0.1)); border-radius: 8px; text-align: center; font-weight: 600;">
+                Fortschritt: <span id="progress-text_ml">0/3</span> ✓
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function checkAnswer_quiz_ml() {
+        const selected = document.querySelector('input[name="quiz_ml"]:checked');
+        const feedback = document.getElementById('quiz-feedback_ml');
+
+        if (!selected) {
+            feedback.style.display = 'block';
+            feedback.style.background = '#fff3cd';
+            feedback.style.border = '2px solid #ffc107';
+            feedback.innerHTML = '⚠️ Bitte wähle eine Antwort aus!';
+            return;
+        }
+
+        if (selected.value === 'b') {
+            feedback.style.display = 'block';
+            feedback.style.background = '#d4edda';
+            feedback.style.border = '2px solid #28a745';
+            feedback.innerHTML = '🎉 <strong>Richtig!</strong> Genau das ist Machine Learning! Der Computer lernt aus Beispielen (wie den 5 Farbkarten), statt dass man ihm jede einzelne Regel einprogrammieren muss. Das macht KI so flexibel und mächtig!';
+        } else {
+            feedback.style.display = 'block';
+            feedback.style.background = '#f8d7da';
+            feedback.style.border = '2px solid #dc3545';
+            feedback.innerHTML = '❌ <strong>Nicht ganz.</strong> Der Kern von Machine Learning ist, dass der Computer <strong>aus Beispielen lernt</strong>, statt dass alle Regeln vorprogrammiert werden. Schau dir die 4 Phasen nochmal an!';
+        }
+    }
+
+    function updateProgress_ml() {
+        const checkboxes = document.querySelectorAll('.challenge-box input[type="checkbox"]');
+        const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+        document.getElementById('progress-text_ml').textContent = `${checked}/3`;
+    }
+    </script>
         </main>
     </div>
     
