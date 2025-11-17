@@ -2,19 +2,115 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viereck fahren - Arduino Alvik Lernplattform</title>
+    <title>Arduino Alvik - MicroPython Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
+    <style>
+        /* Spezielle Header-Anpassungen für Startseite */
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+        
+        .mz-logo {
+            width: 180px;
+            height: auto;
+        }
+        
+        .header-text {
+            flex: 1;
+        }
+        
+        .header-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .alvik-logo-small {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            padding: 4px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-text p {
+            margin: 0.25rem 0 0 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .header-text small {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+    
+        /* Level-System Styles */
+        .nav-section.locked h3 {
+            opacity: 0.6;
+        }
+        
+        .nav-section.locked a.locked-link {
+            opacity: 0.5;
+            pointer-events: none;
+            color: #999;
+        }
+        
+        .completion-check {
+            font-size: 0.9rem;
+            margin-right: 0.3rem;
+        }
+        
+        .completed .completion-check {
+            color: #22c55e;
+        }
+        
+        /* Dagstuhl Legende */
+        .dagstuhl-legend {
+            background: linear-gradient(135deg, rgba(227, 6, 19, 0.05), rgba(103, 116, 122, 0.05));
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .dagstuhl-legend h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .dagstuhl-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.25rem 0;
+        }
+</style>
 </head>
 <body>
     <header>
         <div class="header-content">
-            <a href="index.html" style="text-decoration: none;"><img src="assets/MZ_GIVB_Logo.svg" alt="Medienzentrum Gießen-Vogelsberg" class="logo" style="cursor: pointer;"></a>
-            <div>
-                <h1>Arduino Alvik</h1>
-                <p>MicroPython Lernplattform<br><small style="font-size: 0.8em; opacity: 0.9;">Medienzentrum Gießen-Vogelsberg</small></p>
+            <a href="index.html" style="text-decoration: none;">
+                <img src="assets/MZ_GIVB_Logo.svg" alt="Medienzentrum Gießen-Vogelsberg" class="mz-logo" style="cursor: pointer;">
+            </a>
+            <div class="header-text">
+                <h1>
+                    Arduino Alvik
+                    <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik" class="alvik-logo-small">
+                </h1>
+                <p>MicroPython Lernplattform</p>
+                <small>Medienzentrum Gießen-Vogelsberg</small>
             </div>
         </div>
     </header>
@@ -227,171 +323,91 @@
         </aside>
         
         <main class="main-content">
-            <h2>Ein Viereck fahren – Grundlegende Bewegungsbefehle</h2>
+            <h1>🤖 Arduino Alvik MicroPython Lernplattform</h1>
             
-            <p>Der Arduino Alvik ist ein Lernroboter, der präzise gesteuert werden kann. Um komplexere Fahrmanöver wie ein Viereck zu programmieren, benötigst du drei grundlegende Bewegungsbefehle. In diesem Tutorial lernst du, wie du diese Befehle kombinierst, um geometrische Formen zu fahren.</p>
+            <p style="font-size: 1.2rem; margin: 2rem 0;">Willkommen zur <strong>MicroPython Lernplattform</strong> für den Arduino Alvik – dein Einstieg in die Welt der Robotik und Programmierung!</p>
             
-            <h3>Die drei wichtigsten Bewegungsbefehle</h3>
+            <img src="assets/C500-AKX00066_10.EXTRA.jpg" alt="Arduino Alvik Roboter" style="max-width: 600px; margin: 2rem auto; display: block;">
             
-            <div class="tip-box">
-                💡 <strong>Grundbefehle:</strong><br>
-                • <code>alvik.move()</code> – Vorwärts/Rückwärts fahren<br>
-                • <code>alvik.rotate()</code> – Drehen auf der Stelle<br>
-                • <code>alvik.stop()</code> – Alle Motoren stoppen
+            <div class="info-box" style="text-align: center; font-size: 1.1rem;">
+                <p>Der Arduino Alvik verbindet <strong>präzise Motoren</strong>, <strong>vielseitige Sensoren</strong> und <strong>flexible Programmierung</strong> – ideal für Schule, Hochschule und alle, die Robotik lernen möchten.</p>
             </div>
-
-            <h4>1. alvik.move() – Bewegen</h4>
-            <p>Bewegt den Roboter um eine bestimmte Entfernung vorwärts oder rückwärts.</p>
             
-            <p><strong>Syntax:</strong></p>
-            <pre><code class="language-python">alvik.move(distance, unit='cm', blocking=True)</code></pre>
+            <h2 style="text-align: center; margin-top: 3rem;">🚀 Starte jetzt!</h2>
             
-            <p><strong>Parameter:</strong></p>
-            <ul>
-                <li><strong>distance</strong> (float): Die Entfernung, die gefahren werden soll (z.B. 50)</li>
-                <li><strong>unit</strong> (str): Die Einheit – <code>'cm'</code> für Zentimeter oder <code>'deg'</code> für Raddrehung</li>
-                <li><strong>blocking</strong> (bool): <code>True</code> = Wartet bis Bewegung fertig, <code>False</code> = Führt Code sofort weiter aus</li>
-            </ul>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2.5rem 0;">
+                <a href="1__Welcome_Alvik_.html" style="text-decoration: none; color: inherit;">
+                    <div class="tip-box" style="cursor: pointer; height: 100%; transition: all 0.3s ease;">
+                        <h3 style="font-size: 1.3rem;">📖 Der Aufbau</h3>
+                        <p>Hardware-Details, Setup-Anleitung und erste Schritte mit dem Alvik</p>
+                        <p style="color: var(--primary-color); font-weight: 600; margin-top: 1rem;">→ Los geht's</p>
+                    </div>
+                </a>
+                
+                <a href="command-center.html" style="text-decoration: none; color: inherit;">
+                    <div class="tip-box" style="cursor: pointer; height: 100%; transition: all 0.3s ease;">
+                        <h3 style="font-size: 1.3rem;">🎮 Command Center</h3>
+                        <p>Alle API-Befehle auf einen Blick – deine zentrale Referenz</p>
+                        <p style="color: var(--primary-color); font-weight: 600; margin-top: 1rem;">→ Befehle entdecken</p>
+                    </div>
+                </a>
+                
+                <a href="1_2_Alvik_Grundgeru_st.html" style="text-decoration: none; color: inherit;">
+                    <div class="tip-box" style="cursor: pointer; height: 100%; transition: all 0.3s ease;">
+                        <h3 style="font-size: 1.3rem;">💻 Code-Grundgerüst</h3>
+                        <p>Starte mit der richtigen Struktur für deine Programme</p>
+                        <p style="color: var(--primary-color); font-weight: 600; margin-top: 1rem;">→ Code lernen</p>
+                    </div>
+                </a>
+            </div>
             
-            <p><strong>Beispiel:</strong></p>
-            <pre><code class="language-python">alvik.move(50)  # Fährt 50 cm vorwärts</code></pre>
-
-            <h4>2. alvik.rotate() – Drehen</h4>
-            <p>Dreht den Roboter um einen bestimmten Winkel auf der Stelle.</p>
+            <h2 style="margin-top: 4rem;">📚 Was dich erwartet</h2>
             
-            <p><strong>Syntax:</strong></p>
-            <pre><code class="language-python">alvik.rotate(angle, unit='deg', blocking=True)</code></pre>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div class="info-box">
+                    <h4>🎯 Erste Schritte</h4>
+                    <p>Setup, Software und grundlegende Programmierung</p>
+                </div>
+                <div class="info-box">
+                    <h4>🚗 Bewegung</h4>
+                    <p>Präzise Steuerung und Navigation</p>
+                </div>
+                <div class="info-box">
+                    <h4>📡 Sensoren</h4>
+                    <p>IMU, Farbe, Abstand und mehr nutzen</p>
+                </div>
+                <div class="info-box">
+                    <h4>🔌 Erweiterungen</h4>
+                    <p>I2C-Module und externe Sensoren</p>
+                </div>
+                <div class="info-box">
+                    <h4>🧪 Projekte</h4>
+                    <p>Physik-Experimente und praktische Anwendungen</p>
+                </div>
+                <div class="info-box">
+                    <h4>📝 Übungen</h4>
+                    <p>Aufgaben mit Lösungen zum Vertiefen</p>
+                </div>
+            </div>
             
-            <p><strong>Parameter:</strong></p>
-            <ul>
-                <li><strong>angle</strong> (float): Der Drehwinkel (z.B. 90 für 90°)</li>
-                <li><strong>unit</strong> (str): Die Einheit – <code>'deg'</code> für Grad oder <code>'rad'</code> für Radiant</li>
-                <li><strong>blocking</strong> (bool): <code>True</code> = Wartet bis Drehung fertig, <code>False</code> = Führt Code sofort weiter aus</li>
-            </ul>
+            <div class="warning-box" style="margin-top: 3rem;">
+                <p><strong>⚡ Wichtig:</strong> Halte deinen Alvik aktuell mit dem <a href="https://alvikupdate.arduino.cc/" target="_blank">Alvik Updater</a> und nutze die <a href="https://thonny.org" target="_blank">Thonny IDE</a> für optimales Programmieren!</p>
+            </div>
             
-            <p><strong>Beispiel:</strong></p>
-            <pre><code class="language-python">alvik.rotate(90)  # Dreht 90° im Uhrzeigersinn</code></pre>
-
-            <h4>3. alvik.stop() – Stoppen</h4>
-            <p>Stoppt alle Motoren sofort. Dieser Befehl benötigt keine Parameter.</p>
-            
-            <p><strong>Beispiel:</strong></p>
-            <pre><code class="language-python">alvik.stop()  # Stoppt den Roboter</code></pre>
-
-            <h3>Beispiel 1: Viereck fahren (einfach)</h3>
-            <p>Ein Viereck besteht aus vier gleich langen Seiten und vier 90°-Drehungen. Hier ist die einfachste Variante:</p>
-            
-            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep
-
-alvik = ArduinoAlvik()
-alvik.begin()
-
-# Erste Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Zweite Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Dritte Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Vierte Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Stoppen
-alvik.stop()
-</code></pre>
-
-            <h3>Wie funktioniert das Viereck?</h3>
-            <ol>
-                <li><strong>Seite fahren:</strong> <code>alvik.move(50)</code> fährt 50 cm geradeaus</li>
-                <li><strong>Ecke drehen:</strong> <code>alvik.rotate(90)</code> dreht 90° für die nächste Ecke</li>
-                <li><strong>Pause:</strong> <code>sleep(1)</code> wartet 1 Sekunde (optional, zur besseren Beobachtung)</li>
-                <li><strong>Wiederholen:</strong> Diese Schritte werden 4 mal ausgeführt</li>
-            </ol>
-
-            <h3>Beispiel 2: Viereck mit Funktion (besser)</h3>
-            <p>Wiederholungen schreibt man eleganter mit Schleifen und Funktionen:</p>
-            
-            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep
-
-alvik = ArduinoAlvik()
-alvik.begin()
-
-def viereck(seitenlaenge=50, pause=1):
-    """
-    Lässt den Alvik ein Viereck fahren.
-    
-    Parameter:
-    - seitenlaenge: Länge einer Seite in cm (Standard: 50)
-    - pause: Pause nach jeder Ecke in Sekunden (Standard: 1)
-    """
-    for i in range(4):
-        alvik.move(seitenlaenge)
-        alvik.rotate(90)
-        sleep(pause)
-
-# Viereck fahren
-viereck()
-
-# Optional: Mehrere Vierecke mit unterschiedlichen Größen
-# viereck(30)  # Kleines Viereck
-# viereck(70, 0.5)  # Großes Viereck mit kürzerer Pause
-</code></pre>
-
-            <h3>Vorteile der Funktions-Variante</h3>
-            <ul>
-                <li><strong>Kürzer:</strong> Nur 4 Zeilen statt 16</li>
-                <li><strong>Flexibler:</strong> Seitenlänge und Pause sind einstellbar</li>
-                <li><strong>Wiederverwendbar:</strong> Funktion kann mehrfach aufgerufen werden</li>
-                <li><strong>Übersichtlicher:</strong> Code ist besser strukturiert</li>
-            </ul>
-
-            <h3>Erweiterungsideen</h3>
-            <p>Nachdem du das Viereck gemeistert hast, probiere diese Variationen:</p>
-            
-            <ul>
-                <li><strong>Rechteck:</strong> Verwende unterschiedliche Längen für die Seiten</li>
-                <li><strong>Dreieck:</strong> 3 Seiten mit jeweils 120° Drehung</li>
-                <li><strong>Sechseck:</strong> 6 Seiten mit jeweils 60° Drehung</li>
-                <li><strong>Spirale:</strong> Erhöhe die Seitenlänge nach jeder Runde</li>
-                <li><strong>Mehrfach-Vierecke:</strong> Fahre mehrere Vierecke unterschiedlicher Größe</li>
-            </ul>
-
-            <h3>Tipps für präzises Fahren</h3>
-            <ul>
-                <li><strong>Ebener Untergrund:</strong> Teste auf glattem Boden für beste Ergebnisse</li>
-                <li><strong>Batterie laden:</strong> Schwache Batterien beeinflussen die Präzision</li>
-                <li><strong>Kalibrierung:</strong> Bei Abweichungen kannst du die Werte anpassen (z.B. 89° statt 90°)</li>
-                <li><strong>Blocking-Parameter:</strong> Standardmäßig ist <code>blocking=True</code>, was bedeutet, dass jeder Befehl abgewartet wird</li>
-            </ul>
-
-            <h3>Mathematischer Hintergrund</h3>
-            <p>Die Summe aller Außenwinkel eines Vierecks beträgt immer 360°. Bei einem Quadrat sind das vier mal 90°. Für andere regelmäßige Formen gilt:</p>
-            <ul>
-                <li><strong>Dreieck:</strong> 360° ÷ 3 = 120°</li>
-                <li><strong>Fünfeck:</strong> 360° ÷ 5 = 72°</li>
-                <li><strong>Sechseck:</strong> 360° ÷ 6 = 60°</li>
-                <li><strong>Achteck:</strong> 360° ÷ 8 = 45°</li>
-            </ul>
+            <div style="text-align: center; margin-top: 4rem; padding: 2rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.05), rgba(103, 116, 122, 0.05)); border-radius: 16px;">
+                <h3 style="margin-bottom: 1rem;">🎓 Bereit für dein erstes Projekt?</h3>
+                <p style="margin-bottom: 1.5rem;">Starte mit dem Aufbau und entdecke die Möglichkeiten!</p>
+                <a href="1__Welcome_Alvik_.html" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                    → Jetzt starten
+                </a>
+            </div>
         </main>
     </div>
     
     <a href="#" class="back-to-top">↑</a>
     
     <footer>
-        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
-        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+        <p>Arduino Alvik MicroPython Lernplattform © 2025 | Medienzentrum Gießen-Vogelsberg</p>
     </footer>
     
     <script src="js/main.js"></script>

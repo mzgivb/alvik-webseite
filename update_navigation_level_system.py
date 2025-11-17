@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viereck fahren - Arduino Alvik Lernplattform</title>
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <a href="index.html" style="text-decoration: none;"><img src="assets/MZ_GIVB_Logo.svg" alt="Medienzentrum Gießen-Vogelsberg" class="logo" style="cursor: pointer;"></a>
-            <div>
-                <h1>Arduino Alvik</h1>
-                <p>MicroPython Lernplattform<br><small style="font-size: 0.8em; opacity: 0.9;">Medienzentrum Gießen-Vogelsberg</small></p>
-            </div>
-        </div>
-    </header>
-    
-    <div class="container">
-                <aside class="sidebar">
+#!/usr/bin/env python3
+"""
+Script zum Aktualisieren der Navigation auf allen HTML-Seiten
+der Arduino Alvik Lernplattform mit dem neuen Level-System.
+"""
+
+import os
+import re
+from pathlib import Path
+
+# Projektverzeichnis
+PROJECT_DIR = Path("/Users/jochenleeder/Documents/alvik-webseite")
+
+# Neue Navigation (Sidebar) Template
+NEW_NAVIGATION = '''        <aside class="sidebar">
             <h2>Navigation</h2>
             
             <!-- Fortschrittsanzeige -->
@@ -60,7 +52,7 @@
             
             <div class="nav-section">
                 <ul>
-                    <li><a href="index.html">🏠 Startseite</a></li>
+                    <li><a href="index.html" class="active" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; font-weight: 600;">🏠 Startseite</a></li>
                 </ul>
             </div>
             
@@ -224,176 +216,120 @@
                     <li><a href="5_0_Beispielaufgaben_Alvik.html">📝 Beispielaufgaben</a></li>
                 </ul>
             </div>
-        </aside>
+        </aside>'''
+
+# CSS Styles die im <head> hinzugefügt werden müssen
+ADDITIONAL_STYLES = '''
+        /* Level-System Styles */
+        .nav-section.locked h3 {
+            opacity: 0.6;
+        }
         
-        <main class="main-content">
-            <h2>Ein Viereck fahren – Grundlegende Bewegungsbefehle</h2>
-            
-            <p>Der Arduino Alvik ist ein Lernroboter, der präzise gesteuert werden kann. Um komplexere Fahrmanöver wie ein Viereck zu programmieren, benötigst du drei grundlegende Bewegungsbefehle. In diesem Tutorial lernst du, wie du diese Befehle kombinierst, um geometrische Formen zu fahren.</p>
-            
-            <h3>Die drei wichtigsten Bewegungsbefehle</h3>
-            
-            <div class="tip-box">
-                💡 <strong>Grundbefehle:</strong><br>
-                • <code>alvik.move()</code> – Vorwärts/Rückwärts fahren<br>
-                • <code>alvik.rotate()</code> – Drehen auf der Stelle<br>
-                • <code>alvik.stop()</code> – Alle Motoren stoppen
-            </div>
+        .nav-section.locked a.locked-link {
+            opacity: 0.5;
+            pointer-events: none;
+            color: #999;
+        }
+        
+        .completion-check {
+            font-size: 0.9rem;
+            margin-right: 0.3rem;
+        }
+        
+        .completed .completion-check {
+            color: #22c55e;
+        }
+        
+        /* Dagstuhl Legende */
+        .dagstuhl-legend {
+            background: linear-gradient(135deg, rgba(227, 6, 19, 0.05), rgba(103, 116, 122, 0.05));
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .dagstuhl-legend h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .dagstuhl-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.25rem 0;
+        }'''
 
-            <h4>1. alvik.move() – Bewegen</h4>
-            <p>Bewegt den Roboter um eine bestimmte Entfernung vorwärts oder rückwärts.</p>
-            
-            <p><strong>Syntax:</strong></p>
-            <pre><code class="language-python">alvik.move(distance, unit='cm', blocking=True)</code></pre>
-            
-            <p><strong>Parameter:</strong></p>
-            <ul>
-                <li><strong>distance</strong> (float): Die Entfernung, die gefahren werden soll (z.B. 50)</li>
-                <li><strong>unit</strong> (str): Die Einheit – <code>'cm'</code> für Zentimeter oder <code>'deg'</code> für Raddrehung</li>
-                <li><strong>blocking</strong> (bool): <code>True</code> = Wartet bis Bewegung fertig, <code>False</code> = Führt Code sofort weiter aus</li>
-            </ul>
-            
-            <p><strong>Beispiel:</strong></p>
-            <pre><code class="language-python">alvik.move(50)  # Fährt 50 cm vorwärts</code></pre>
 
-            <h4>2. alvik.rotate() – Drehen</h4>
-            <p>Dreht den Roboter um einen bestimmten Winkel auf der Stelle.</p>
-            
-            <p><strong>Syntax:</strong></p>
-            <pre><code class="language-python">alvik.rotate(angle, unit='deg', blocking=True)</code></pre>
-            
-            <p><strong>Parameter:</strong></p>
-            <ul>
-                <li><strong>angle</strong> (float): Der Drehwinkel (z.B. 90 für 90°)</li>
-                <li><strong>unit</strong> (str): Die Einheit – <code>'deg'</code> für Grad oder <code>'rad'</code> für Radiant</li>
-                <li><strong>blocking</strong> (bool): <code>True</code> = Wartet bis Drehung fertig, <code>False</code> = Führt Code sofort weiter aus</li>
-            </ul>
-            
-            <p><strong>Beispiel:</strong></p>
-            <pre><code class="language-python">alvik.rotate(90)  # Dreht 90° im Uhrzeigersinn</code></pre>
+def update_html_file(filepath):
+    """Aktualisiert eine HTML-Datei mit der neuen Navigation"""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Skip index.html - wurde schon manuell aktualisiert
+        if filepath.name == 'index.html':
+            print(f"⏭️  Überspringe {filepath.name} (schon aktualisiert)")
+            return False
+        
+        # Finde und ersetze die alte Sidebar
+        # Pattern: Alles zwischen <aside class="sidebar"> und </aside>
+        pattern = r'(<aside class="sidebar">)(.*?)(</aside>)'
+        match = re.search(pattern, content, re.DOTALL)
+        
+        if not match:
+            print(f"⚠️  Keine Sidebar gefunden in {filepath.name}")
+            return False
+        
+        # Ersetze die alte Navigation
+        new_content = re.sub(pattern, NEW_NAVIGATION + r'\3', content, flags=re.DOTALL)
+        
+        # Füge CSS Styles hinzu, falls noch nicht vorhanden
+        if "Level-System Styles" not in new_content:
+            # Suche nach </style> Tag
+            style_pattern = r'(</style>)'
+            if re.search(style_pattern, new_content):
+                new_content = re.sub(style_pattern, ADDITIONAL_STYLES + r'\n    \1', new_content)
+        
+        # Schreibe die aktualisierte Datei
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        
+        print(f"✅ Aktualisiert: {filepath.name}")
+        return True
+        
+    except Exception as e:
+        print(f"❌ Fehler bei {filepath.name}: {e}")
+        return False
 
-            <h4>3. alvik.stop() – Stoppen</h4>
-            <p>Stoppt alle Motoren sofort. Dieser Befehl benötigt keine Parameter.</p>
-            
-            <p><strong>Beispiel:</strong></p>
-            <pre><code class="language-python">alvik.stop()  # Stoppt den Roboter</code></pre>
 
-            <h3>Beispiel 1: Viereck fahren (einfach)</h3>
-            <p>Ein Viereck besteht aus vier gleich langen Seiten und vier 90°-Drehungen. Hier ist die einfachste Variante:</p>
-            
-            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep
-
-alvik = ArduinoAlvik()
-alvik.begin()
-
-# Erste Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Zweite Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Dritte Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Vierte Seite
-alvik.move(50)
-alvik.rotate(90)
-sleep(1)
-
-# Stoppen
-alvik.stop()
-</code></pre>
-
-            <h3>Wie funktioniert das Viereck?</h3>
-            <ol>
-                <li><strong>Seite fahren:</strong> <code>alvik.move(50)</code> fährt 50 cm geradeaus</li>
-                <li><strong>Ecke drehen:</strong> <code>alvik.rotate(90)</code> dreht 90° für die nächste Ecke</li>
-                <li><strong>Pause:</strong> <code>sleep(1)</code> wartet 1 Sekunde (optional, zur besseren Beobachtung)</li>
-                <li><strong>Wiederholen:</strong> Diese Schritte werden 4 mal ausgeführt</li>
-            </ol>
-
-            <h3>Beispiel 2: Viereck mit Funktion (besser)</h3>
-            <p>Wiederholungen schreibt man eleganter mit Schleifen und Funktionen:</p>
-            
-            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep
-
-alvik = ArduinoAlvik()
-alvik.begin()
-
-def viereck(seitenlaenge=50, pause=1):
-    """
-    Lässt den Alvik ein Viereck fahren.
+def main():
+    """Hauptfunktion: Aktualisiert alle HTML-Dateien"""
+    print("🚀 Starte Navigation-Update für alle HTML-Seiten...\n")
     
-    Parameter:
-    - seitenlaenge: Länge einer Seite in cm (Standard: 50)
-    - pause: Pause nach jeder Ecke in Sekunden (Standard: 1)
-    """
-    for i in range(4):
-        alvik.move(seitenlaenge)
-        alvik.rotate(90)
-        sleep(pause)
-
-# Viereck fahren
-viereck()
-
-# Optional: Mehrere Vierecke mit unterschiedlichen Größen
-# viereck(30)  # Kleines Viereck
-# viereck(70, 0.5)  # Großes Viereck mit kürzerer Pause
-</code></pre>
-
-            <h3>Vorteile der Funktions-Variante</h3>
-            <ul>
-                <li><strong>Kürzer:</strong> Nur 4 Zeilen statt 16</li>
-                <li><strong>Flexibler:</strong> Seitenlänge und Pause sind einstellbar</li>
-                <li><strong>Wiederverwendbar:</strong> Funktion kann mehrfach aufgerufen werden</li>
-                <li><strong>Übersichtlicher:</strong> Code ist besser strukturiert</li>
-            </ul>
-
-            <h3>Erweiterungsideen</h3>
-            <p>Nachdem du das Viereck gemeistert hast, probiere diese Variationen:</p>
-            
-            <ul>
-                <li><strong>Rechteck:</strong> Verwende unterschiedliche Längen für die Seiten</li>
-                <li><strong>Dreieck:</strong> 3 Seiten mit jeweils 120° Drehung</li>
-                <li><strong>Sechseck:</strong> 6 Seiten mit jeweils 60° Drehung</li>
-                <li><strong>Spirale:</strong> Erhöhe die Seitenlänge nach jeder Runde</li>
-                <li><strong>Mehrfach-Vierecke:</strong> Fahre mehrere Vierecke unterschiedlicher Größe</li>
-            </ul>
-
-            <h3>Tipps für präzises Fahren</h3>
-            <ul>
-                <li><strong>Ebener Untergrund:</strong> Teste auf glattem Boden für beste Ergebnisse</li>
-                <li><strong>Batterie laden:</strong> Schwache Batterien beeinflussen die Präzision</li>
-                <li><strong>Kalibrierung:</strong> Bei Abweichungen kannst du die Werte anpassen (z.B. 89° statt 90°)</li>
-                <li><strong>Blocking-Parameter:</strong> Standardmäßig ist <code>blocking=True</code>, was bedeutet, dass jeder Befehl abgewartet wird</li>
-            </ul>
-
-            <h3>Mathematischer Hintergrund</h3>
-            <p>Die Summe aller Außenwinkel eines Vierecks beträgt immer 360°. Bei einem Quadrat sind das vier mal 90°. Für andere regelmäßige Formen gilt:</p>
-            <ul>
-                <li><strong>Dreieck:</strong> 360° ÷ 3 = 120°</li>
-                <li><strong>Fünfeck:</strong> 360° ÷ 5 = 72°</li>
-                <li><strong>Sechseck:</strong> 360° ÷ 6 = 60°</li>
-                <li><strong>Achteck:</strong> 360° ÷ 8 = 45°</li>
-            </ul>
-        </main>
-    </div>
+    # Finde alle HTML-Dateien (außer in Unterverzeichnissen)
+    html_files = list(PROJECT_DIR.glob("*.html"))
     
-    <a href="#" class="back-to-top">↑</a>
+    updated = 0
+    skipped = 0
+    errors = 0
     
-    <footer>
-        <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
-        <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
-    </footer>
+    for html_file in html_files:
+        result = update_html_file(html_file)
+        if result is True:
+            updated += 1
+        elif result is False and "Überspringe" in str(html_file):
+            skipped += 1
+        else:
+            errors += 1
     
-    <script src="js/main.js"></script>
-</body>
-</html>
+    print(f"\n📊 Zusammenfassung:")
+    print(f"   ✅ Aktualisiert: {updated} Dateien")
+    print(f"   ⏭️  Übersprungen: {skipped} Dateien")
+    print(f"   ❌ Fehler: {errors} Dateien")
+    print(f"\n🎉 Fertig!")
+
+
+if __name__ == "__main__":
+    main()
