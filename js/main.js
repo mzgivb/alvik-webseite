@@ -147,6 +147,58 @@ function updateCheckboxes() {
 
 // ===== SEITEN-FUNKTIONEN =====
 
+// Reset-Button zur Fortschrittsanzeige hinzufügen
+function addResetButton() {
+    const progressText = document.getElementById('progress-text');
+    if (!progressText) return;
+
+    // Prüfe ob Button bereits existiert
+    if (document.getElementById('reset-progress-btn')) return;
+
+    // Container für den Button
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.cssText = 'margin-top: 0.75rem; text-align: center;';
+
+    // Reset-Button erstellen
+    const resetButton = document.createElement('button');
+    resetButton.id = 'reset-progress-btn';
+    resetButton.innerHTML = '🔄 Fortschritt zurücksetzen';
+    resetButton.style.cssText = `
+        padding: 0.5rem 1rem;
+        background: rgba(239, 68, 68, 0.1);
+        color: #dc2626;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 100%;
+    `;
+
+    // Hover-Effekt
+    resetButton.addEventListener('mouseenter', function() {
+        this.style.background = 'rgba(239, 68, 68, 0.2)';
+        this.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+    });
+
+    resetButton.addEventListener('mouseleave', function() {
+        this.style.background = 'rgba(239, 68, 68, 0.1)';
+        this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+    });
+
+    // Click-Handler
+    resetButton.addEventListener('click', function() {
+        alvikProgress.reset();
+    });
+
+    buttonContainer.appendChild(resetButton);
+
+    // Button nach progress-text einfügen
+    const progressContainer = progressText.parentElement;
+    progressContainer.appendChild(buttonContainer);
+}
+
 // "Lektion abschließen" Button zu Seiten hinzufügen
 function addCompletionButton() {
     const currentPage = window.location.pathname.split('/').pop();
@@ -384,13 +436,16 @@ document.addEventListener('DOMContentLoaded', function() {
     updateProgressDisplay();
     updateCheckboxes();
     unlockLevels();
-    
+
+    // Reset-Button zur Sidebar hinzufügen
+    addResetButton();
+
     // Completion-Button hinzufügen
     addCompletionButton();
-    
+
     // Copy-Buttons zu Code-Blöcken hinzufügen
     addCopyButtonsToCodeBlocks();
-    
+
     // Suche initialisieren
     initSearch();
     
