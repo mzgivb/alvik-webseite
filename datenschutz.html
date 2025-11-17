@@ -7,51 +7,81 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .datenschutz-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
         
         .datenschutz-content h1 {
+            text-align: center;
+            font-size: 2.5rem;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
         
         .datenschutz-section {
             margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .datenschutz-section h2 {
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
         }
         
         .datenschutz-section h3 {
             color: var(--secondary-color);
-            margin: 1rem 0 0.5rem 0;
+            margin: 1.5rem 0 0.75rem 0;
             font-size: 1.1rem;
         }
         
         .datenschutz-section p {
+            margin: 0.75rem 0;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .datenschutz-section strong {
+            color: #222;
+        }
+        
+        .datenschutz-section ul {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
+            color: #444;
+        }
+        
+        .datenschutz-section li {
             margin: 0.5rem 0;
             line-height: 1.6;
         }
         
-        .datenschutz-section ul {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
+        .datenschutz-section code {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
         }
         
-        .datenschutz-section li {
-            margin: 0.3rem 0;
+        .datenschutz-section a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .datenschutz-section a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
