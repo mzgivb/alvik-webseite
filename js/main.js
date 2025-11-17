@@ -264,6 +264,119 @@ function initSearch() {
     });
 }
 
+// ===== CODE-KOPIER-FUNKTION =====
+
+// Copy-Buttons zu allen Code-Blöcken hinzufügen
+function addCopyButtonsToCodeBlocks() {
+    // Alle pre > code Blöcke finden
+    document.querySelectorAll('pre code').forEach(codeBlock => {
+        const pre = codeBlock.parentElement;
+        
+        // Prüfen ob bereits ein Copy-Button existiert
+        if (pre.querySelector('.copy-button')) return;
+        
+        // Wrapper für relativen Position-Context
+        pre.style.position = 'relative';
+        
+        // Copy-Button erstellen
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.innerHTML = '📋 Kopieren';
+        copyButton.style.cssText = `
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        `;
+        
+        // Hover-Effekt
+        copyButton.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(255, 255, 255, 1)';
+            this.style.transform = 'translateY(-1px)';
+            this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+        });
+        
+        copyButton.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('copied')) {
+                this.style.background = 'rgba(255, 255, 255, 0.9)';
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+            }
+        });
+        
+        // Click-Handler für Kopieren
+        copyButton.addEventListener('click', async function() {
+            const code = codeBlock.textContent;
+            
+            try {
+                // In Zwischenablage kopieren
+                await navigator.clipboard.writeText(code);
+                
+                // Visuelles Feedback
+                this.innerHTML = '✅ Kopiert!';
+                this.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                this.style.color = 'white';
+                this.style.borderColor = 'transparent';
+                this.classList.add('copied');
+                
+                // Nach 2 Sekunden zurücksetzen
+                setTimeout(() => {
+                    this.innerHTML = '📋 Kopieren';
+                    this.style.background = 'rgba(255, 255, 255, 0.9)';
+                    this.style.color = '';
+                    this.style.borderColor = 'rgba(0, 0, 0, 0.1)';
+                    this.classList.remove('copied');
+                }, 2000);
+                
+            } catch (err) {
+                // Fallback für ältere Browser
+                console.error('Clipboard API nicht verfügbar:', err);
+                
+                // Alternativer Ansatz mit execCommand
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    this.innerHTML = '✅ Kopiert!';
+                    this.style.background = '#22c55e';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '📋 Kopieren';
+                        this.style.background = 'rgba(255, 255, 255, 0.9)';
+                        this.style.color = '';
+                    }, 2000);
+                } catch (execErr) {
+                    console.error('Kopieren fehlgeschlagen:', execErr);
+                    this.innerHTML = '❌ Fehler';
+                    setTimeout(() => {
+                        this.innerHTML = '📋 Kopieren';
+                    }, 2000);
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            }
+        });
+        
+        // Button zum pre-Element hinzufügen
+        pre.appendChild(copyButton);
+    });
+}
+
 // ===== INITIALISIERUNG =====
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -274,6 +387,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Completion-Button hinzufügen
     addCompletionButton();
+    
+    // Copy-Buttons zu Code-Blöcken hinzufügen
+    addCopyButtonsToCodeBlocks();
     
     // Suche initialisieren
     initSearch();
