@@ -271,7 +271,7 @@ while True:
         alvik.rotate(degrees, 'deg')
     else:
         # Kein Hindernis: Vorwärts fahren
-        alvik.move(speed, 0.0, linear_unit='cm/s')
+        alvik.move(speed)
 
     sleep_ms(100)  # Kurze Pause vor der nächsten Messung
 </code></pre>
@@ -343,7 +343,7 @@ while True:
     
     else:
         # Weg frei: Vorwärts
-        alvik.move(speed, 0.0, linear_unit='cm/s')
+        alvik.move(speed)
 
     sleep_ms(100)
 </code></pre>
@@ -395,12 +395,12 @@ while True:
         current_speed = min_speed + (max_speed - min_speed) * speed_factor
         
         print(f"Angepasste Geschwindigkeit: {current_speed:.2f} cm/s")
-        alvik.move(current_speed, 0.0, linear_unit='cm/s')
+        alvik.move(current_speed)
     
     # Weg frei: Volle Geschwindigkeit
     else:
         print("Freie Fahrt!")
-        alvik.move(max_speed, 0.0, linear_unit='cm/s')
+        alvik.move(max_speed)
 
     sleep_ms(100)
 </code></pre>
@@ -446,16 +446,16 @@ while True:
     if distance_r &lt; wall_distance - 2:
         # Zu nah an rechter Wand: Leicht nach links lenken
         print("Zu nah an rechter Wand")
-        alvik.move(speed, 10.0, linear_unit='cm/s')
+        alvik.move(speed, 10.0)
     
     elif distance_r &gt; wall_distance + 2:
         # Zu weit von rechter Wand: Leicht nach rechts lenken
         print("Zu weit von rechter Wand")
-        alvik.move(speed, -10.0, linear_unit='cm/s')
+        alvik.move(speed, -10.0)
     
     else:
         # Perfekter Abstand: Geradeaus
-        alvik.move(speed, 0.0, linear_unit='cm/s')
+        alvik.move(speed)
 
     sleep_ms(100)
 </code></pre>
