@@ -299,19 +299,16 @@
 alvik = ArduinoAlvik()
 alvik.begin()
 
-# Mit Kabel siehst du das:
-print("Roboter startet...")
-
-d_l, d_cl, d_c, d_cr, d_r = alvik.get_distance()
-print(f"Abstand vorne: {d_c} cm")
-
-# Ohne Kabel? Du siehst NICHTS! 😵
+print("Hallo Alvik!")
+print("Du bist jetzt verbunden!")
 </code></pre>
 
             <p><strong>Ausgabe im REPL:</strong></p>
-            <pre><code>Roboter startet...
-Abstand vorne: 23.5 cm
+            <pre><code>Hallo Alvik!
+Du bist jetzt verbunden!
 </code></pre>
+
+            <p>📝 <strong>So einfach ist das!</strong> Mit dem Kabel siehst du jede Textausgabe sofort auf deinem Computer-Bildschirm.</p>
 
             <h4>2. Fehler sofort finden! 🐛</h4>
 
@@ -320,70 +317,71 @@ Abstand vorne: 23.5 cm
 alvik = ArduinoAlvik()
 alvik.begin()
 
-alvik.move(10)  # Richtig
-alvik.mov(10)   # FEHLER! (Tippfehler)
+print("Test startet...")
+alvik.move(10)  # Richtig geschrieben
+print("Bewegung klappt!")
+
+alvik.mov(10)   # FEHLER! Falscher Befehl
+print("Das hier siehst du nicht mehr")
 </code></pre>
 
-            <p><strong>Mit Kabel siehst du:</strong></p>
-            <pre><code>AttributeError: 'ArduinoAlvik' object has no attribute 'mov'
+            <p><strong>Mit Kabel siehst du die Fehlermeldung:</strong></p>
+            <pre><code>Test startet...
+Bewegung klappt!
+AttributeError: 'ArduinoAlvik' object has no attribute 'mov'
 </code></pre>
 
-            <p><strong>Ohne Kabel:</strong> Roboter macht einfach nichts. Du rätselst warum! 🤷</p>
+            <p><strong>Ohne Kabel:</strong> Der Roboter stoppt einfach - du weißt nicht warum! 🤷</p>
 
-            <h4>3. Experimentieren ohne Risiko! 🧪</h4>
+            <h4>3. Schritte verfolgen! 👣</h4>
 
             <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep_ms
 
 alvik = ArduinoAlvik()
 alvik.begin()
 
-# Teste verschiedene Werte
-for speed in [5, 10, 15, 20]:
-    print(f"Teste Geschwindigkeit: {speed} cm/s")
-    alvik.move(speed, 0, linear_unit='cm/s')
-    sleep_ms(1000)
-    alvik.stop()
-    
-    # Du siehst jeden Schritt!
+print("Schritt 1: Vorwärts fahren")
+alvik.move(10)
+
+print("Schritt 2: Stoppen")
+alvik.stop()
+
+print("Schritt 3: Fertig!")
 </code></pre>
 
-            <h3>🚀 Praktisches Beispiel: Sensor-Dashboard</h3>
+            <p><strong>Ausgabe im REPL:</strong></p>
+            <pre><code>Schritt 1: Vorwärts fahren
+Schritt 2: Stoppen
+Schritt 3: Fertig!
+</code></pre>
 
-            <p><strong>Mit Kabel - Du siehst ALLES:</strong></p>
+            <p>👀 <strong>Du siehst genau, was der Roboter gerade macht!</strong> Das hilft dir beim Verstehen und Testen.</p>
+
+            <h3>🚀 Praktisches Beispiel: Batterie anzeigen</h3>
+
+            <p><strong>Mit Kabel - Du siehst was passiert:</strong></p>
 
             <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-from time import sleep_ms
 
 alvik = ArduinoAlvik()
 alvik.begin()
 
-print("=== SENSOR DASHBOARD ===")
-print("Bewege deine Hand vor dem Roboter!\n")
+print("Batterie Check:")
 
-while True:
-    # Alle Sensoren auslesen
-    d_l, d_cl, d_c, d_cr, d_r = alvik.get_distance()
-    battery = alvik.get_battery_charge()
-    
-    # Anzeigen!
-    print(f"🎯 Abstand Mitte: {d_c:.1f} cm")
-    print(f"🔋 Batterie: {battery}%")
-    print("-" * 30)
-    
-    sleep_ms(500)
+# Batterie auslesen
+batterie = alvik.get_battery_charge()
+
+# Anzeigen!
+print("Batterie hat:")
+print(batterie)
+print("Prozent")
 </code></pre>
 
-            <p><strong>Du siehst live:</strong></p>
-            <pre><code>=== SENSOR DASHBOARD ===
-Bewege deine Hand vor dem Roboter!
-
-🎯 Abstand Mitte: 25.3 cm
-🔋 Batterie: 87%
-------------------------------
-🎯 Abstand Mitte: 12.7 cm  ← Hand näher!
-🔋 Batterie: 87%
-------------------------------
+            <p><strong>Du siehst im REPL:</strong></p>
+            <pre><code>Batterie Check:
+Batterie hat:
+87
+Prozent
 </code></pre>
 
             <div class="info-box">
@@ -401,44 +399,8 @@ Bewege deine Hand vor dem Roboter!
 
             <p><strong>Dann:</strong> Speichere Code in <code>main.py</code> → Siehe <a href="1_4_Alvik_ohne_Kabel_betreiben.html">Alvik ohne Kabel</a></p>
 
-            <h3>🎮 Interaktives Beispiel: Chat mit Alvik</h3>
-
-            <p><strong>Nur mit Kabel möglich!</strong></p>
-
-            <pre><code class="language-python">from arduino_alvik import ArduinoAlvik
-
-alvik = ArduinoAlvik()
-alvik.begin()
-
-# Alvik stellt sich vor
-print("🤖 Hallo! Ich bin Alvik.")
-
-# Du kannst antworten!
-name = input("Wie heißt du? ")
-
-print(f"Cool, {name}! Lass uns gemeinsam programmieren lernen! 🚀")
-
-# Abfrage
-antwort = input("Soll ich meine LED rot machen? (ja/nein) ")
-
-if antwort == "ja":
-    alvik.left_led.set_color(1, 0, 0)
-    alvik.right_led.set_color(1, 0, 0)
-    print("✅ LEDs sind jetzt rot!")
-else:
-    print("Ok, vielleicht später!")
-</code></pre>
-
-            <p><strong>Ausgabe:</strong></p>
-            <pre><code>🤖 Hallo! Ich bin Alvik.
-Wie heißt du? Max
-Cool, Max! Lass uns gemeinsam programmieren lernen! 🚀
-Soll ich meine LED rot machen? (ja/nein) ja
-✅ LEDs sind jetzt rot!
-</code></pre>
-
             <div class="tip-box">
-                💡 <strong>Das geht NUR mit Kabel!</strong> 🔌
+                ⚠️ <strong>Wichtig:</strong> Ohne Kabel siehst du keine print()-Ausgaben! Der Roboter führt den Code aus, aber du bist "blind". Deshalb: Am Anfang IMMER mit Kabel arbeiten!
             </div>
 
             <h3>🛠️ So arbeitest du mit Kabel</h3>
@@ -677,10 +639,9 @@ Soll ich meine LED rot machen? (ja/nein) ja
                 <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; border-radius: 4px;">
                     <strong style="color: #1e40af;">💡 Hinweise:</strong>
                     <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
-                        <li style="margin: 0.3rem 0;">Nutze <code>print()</code> für Textausgabe</li>
-                        <li style="margin: 0.3rem 0;">Lasse beide LEDs grün leuchten als Erfolgszeichen</li>
-                        <li style="margin: 0.3rem 0;">Warte 2 Sekunden, dann LEDs wieder aus</li>
-
+                        <li style="margin: 0.3rem 0;">Nutze <code>print()</code> mehrmals für verschiedene Meldungen</li>
+                        <li style="margin: 0.3rem 0;">Gib eine Begrüßung aus</li>
+                        <li style="margin: 0.3rem 0;">Zeige an, dass die Verbindung erfolgreich ist</li>
                     </ul>
                 </div>
                 
@@ -691,24 +652,15 @@ Soll ich meine LED rot machen? (ja/nein) ja
                 <div class="solution" style="display: none; margin-top: 1.5rem;">
                     <h4 style="margin-bottom: 1rem; color: #10b981;">✅ Musterlösung:</h4>
                     <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; line-height: 1.6;"><code>from arduino_alvik import ArduinoAlvik
-import time
 
 alvik = ArduinoAlvik()
 alvik.begin()
 
-print("🚀 Alvik erfolgreich verbunden!")
-print("Kabel-Modus aktiv")
-
-# Grünes Licht als Bestätigung
-alvik.left_led.set_color(0, 1, 0)
-alvik.right_led.set_color(0, 1, 0)
-time.sleep(2)
-
-# LEDs ausschalten
-alvik.left_led.set_color(0, 0, 0)
-alvik.right_led.set_color(0, 0, 0)
-
-print("✅ Verbindung erfolgreich getestet!")</code></pre>
+print("🚀 Hallo Alvik!")
+print("Verbindung hergestellt")
+print("Kabel-Modus ist aktiv")
+print("✅ Alles bereit zum Programmieren!")</code></pre>
+                    <p style="margin-top: 1rem; color: #10b981;"><strong>Das war's!</strong> Einfach und klar - du siehst sofort, dass die Verbindung funktioniert.</p>
                 </div>
             </div>
         </div>
