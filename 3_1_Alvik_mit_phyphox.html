@@ -210,45 +210,147 @@
         </aside>
         
         <main class="main-content">
-            <p>Man kann alle Werte die ein Arduino Alvik ermitteln kann auch an die Phyphox App senden. Das funktioniert mit dem phyphox – Microphython Library. Sie müssen diese Bibliothek zuerst auf den Alvik übertragen.</p>
-<ol>
-<li>Erstellen Sie hierzu im Ordner lib einen Ordner phyphoxBLE.</li>
-<li>Übertrage sie nun jede einzelne Datei aus dem <a href="https://github.com/phyphox/phyphox-micropython/tree/main/phyphoxBLE">Github Repo</a><br />
-auf den Alvik. </li>
-<li>Öffne ein leeres Dokument</li>
-<li>Übertrage den Code per Copy und Paste und achte darauf, den Dateinamen korrekt abzuspeichern.</li>
-<li>Darauf achten das alle Dateien korrekt gespeichert wurden <code>__init__.py</code>2 underscore lines!!!</li>
-</ol>
-<p><img alt="Bild" src="assets/Bildschirmfoto 2025-04-16 um 12.43.42.png" /></p>
-<p>In diesem Beispiel werden Geschwindigkeitswerte an die App gesendet während er ein Viereck fährt. Das Beispiel verwendet einen Timer, der in einem speziellen Zeitintervall eine Messung ausführt.</p>
+            <h2>Alvik trifft Smartphone: Daten live auf dem Handy!</h2>
+
+            <div class="info-box">
+                📱 <strong>Was ist phyphox?</strong><br>
+                phyphox ist eine kostenlose App für dein Smartphone (Android & iOS), die von der RWTH Aachen entwickelt wurde. Mit ihr kannst du Physik-Experimente durchführen und Messdaten in coolen Diagrammen anzeigen lassen!
+            </div>
+
+            <h3>🎯 Was macht das so besonders?</h3>
+            <p>Normalerweise zeigt der Alvik seine Messwerte nur im Computer an. Mit phyphox kannst du die Daten <strong>kabellos per Bluetooth</strong> auf dein Smartphone senden und dort als Live-Diagramme betrachten – während der Alvik fährt!</p>
+
+            <p><strong>Das kannst du zum Beispiel messen:</strong></p>
+            <ul>
+                <li>📈 Geschwindigkeit des Alvik während der Fahrt</li>
+                <li>🎢 Beschleunigung in Kurven oder beim Anfahren</li>
+                <li>📏 Abstand zu Hindernissen über die Zeit</li>
+                <li>🌡️ Temperatur, wenn ein Sensor angeschlossen ist</li>
+            </ul>
+
+            <h3>📥 Schritt 1: Die phyphoxBLE-Bibliothek installieren</h3>
+            <p>Damit der Alvik mit der phyphox-App sprechen kann, brauchen wir eine spezielle Bibliothek. Die musst du einmal auf den Alvik übertragen:</p>
+
+            <div style="background: rgba(103, 116, 122, 0.1); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">
+                <h4 style="margin-top: 0; color: var(--secondary-color);">📦 Installation:</h4>
+                <ol style="line-height: 1.8;">
+                    <li>Öffne in <strong>Thonny</strong> links die Dateiansicht des Alvik</li>
+                    <li>Erstelle im Ordner <code>lib</code> einen neuen Ordner namens <code>phyphoxBLE</code></li>
+                    <li>Lade die Dateien von <a href="https://github.com/phyphox/phyphox-micropython/tree/main/phyphoxBLE" target="_blank">GitHub</a> herunter</li>
+                    <li>Kopiere <strong>alle 3 Dateien</strong> in den neuen Ordner:
+                        <ul>
+                            <li><code>__init__.py</code> (mit zwei Unterstrichen vor und nach "init"!)</li>
+                            <li><code>experiment.py</code></li>
+                            <li><code>server.py</code></li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <p><img alt="Ordnerstruktur mit phyphoxBLE-Bibliothek" src="assets/Bildschirmfoto 2025-04-16 um 12.43.42.png" /></p>
+
+            <h3>📲 Schritt 2: Die phyphox App herunterladen</h3>
+            <p>Lade dir die <strong>phyphox App</strong> kostenlos auf dein Smartphone:</p>
+            <ul>
+                <li><strong>Android:</strong> Google Play Store → "phyphox" suchen</li>
+                <li><strong>iOS:</strong> App Store → "phyphox" suchen</li>
+            </ul>
+
+            <h3>🚀 Schritt 3: Dein erstes Experiment – Geschwindigkeitsmessung</h3>
+            <p>Jetzt programmieren wir den Alvik so, dass er seine Geschwindigkeit live an dein Handy sendet, während er ein Viereck fährt!</p>
+
+            <div class="tip-box" style="margin: 1.5rem 0; padding: 1.25rem; background: rgba(227, 6, 19, 0.1); border-left: 4px solid var(--primary-color); border-radius: 8px;">
+                💡 <strong>Wie funktioniert das?</strong><br>
+                Der Code nutzt einen <strong>Timer</strong>, der automatisch alle 200 Millisekunden (= 5x pro Sekunde) die Geschwindigkeit misst und ans Handy sendet. So entsteht ein Live-Diagramm!
+            </div>
+
 <pre><code class="language-python">from machine import Timer
 from arduino_alvik import ArduinoAlvik
 from phyphoxBLE import PhyphoxBLE
 import time
 
+# Alvik initialisieren
 alvik = ArduinoAlvik()
 alvik.begin()
+
+# Bluetooth-Verbindung zu phyphox starten
 p = PhyphoxBLE()
 p.start()
+print("Bluetooth gestartet! Öffne jetzt die phyphox App.")
 
+# Diese Funktion wird automatisch vom Timer aufgerufen
 def drive_speed(timer):
-    angular_velocity, linear_velocity = alvik.get_drive_speed()  # Geschwindigkeit messen
-    print(f&quot;Die Geschwindigkeit beträgt = {linear_velocity} cm/s&quot;)
-    p.write(linear_velocity)  # Wert an die Phyphox-App senden
+    # Geschwindigkeit messen
+    angular_velocity, linear_velocity = alvik.get_drive_speed()
+    print(f"Geschwindigkeit: {linear_velocity:.1f} cm/s")
 
-# Timer initialisieren, der alle 200 ms die Geschwindigkeit sendet
+    # Wert ans Smartphone senden
+    p.write(linear_velocity)
+
+# Timer: Ruft alle 200 ms (= 0,2 Sekunden) die Funktion auf
 timer = Timer(-1)
 timer.init(period=200, mode=Timer.PERIODIC, callback=drive_speed)
 
-# Hauptschleife für Bewegungsablauf
+# Hauptprogramm: Viereck fahren
+print("Fahre Viereck und sende Daten...")
 while True:
-    for _ in range(4):
-        alvik.move(50)
-        alvik.rotate(90)
-        time.sleep(1)
-
-
+    for _ in range(4):  # 4 Seiten
+        alvik.move(50)   # Vorwärts fahren
+        alvik.rotate(90) # 90° drehen
+        time.sleep(1)    # Kurze Pause
 </code></pre>
+
+            <h3>📱 Schritt 4: Mit der App verbinden</h3>
+            <div style="background: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border: 2px solid var(--primary-color);">
+                <h4 style="margin-top: 0; color: var(--primary-color);">So verbindest du dein Smartphone:</h4>
+                <ol style="line-height: 1.8;">
+                    <li>Starte das Programm auf dem Alvik</li>
+                    <li>Öffne die <strong>phyphox App</strong> auf deinem Handy</li>
+                    <li>Tippe oben rechts auf das <strong>➕ Symbol</strong></li>
+                    <li>Wähle <strong>"Bluetooth-Gerät"</strong></li>
+                    <li>Wähle deinen Alvik aus der Liste (z.B. "Alvik" oder "ESP32")</li>
+                    <li>🎉 Fertig! Du siehst jetzt ein Live-Diagramm der Geschwindigkeit!</li>
+                </ol>
+            </div>
+
+            <h3>🔍 Was passiert im Code?</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+                <thead>
+                    <tr style="background: var(--primary-color); color: white;">
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid #ddd;">Code-Zeile</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid #ddd;">Was macht sie?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f7fafc;">
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>p = PhyphoxBLE()</code></td>
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;">Erstellt die Bluetooth-Verbindung</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>p.start()</code></td>
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;">Startet Bluetooth – jetzt kann das Handy sich verbinden</td>
+                    </tr>
+                    <tr style="background: #f7fafc;">
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>timer.init(period=200, ...)</code></td>
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;">Timer läuft alle 200 ms (5x pro Sekunde)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>p.write(linear_velocity)</code></td>
+                        <td style="padding: 0.75rem; border: 1px solid #ddd;">Sendet den Messwert ans Smartphone</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box" style="margin: 1.5rem 0; padding: 1.25rem; background: rgba(103, 116, 122, 0.1); border-left: 4px solid var(--secondary-color); border-radius: 8px;">
+                🔬 <strong>Experimentier-Ideen:</strong>
+                <ul style="margin: 0.5rem 0 0 0;">
+                    <li>Ändere die <code>period</code> auf 100 oder 500 – wie verändert sich das Diagramm?</li>
+                    <li>Lass den Alvik schneller oder langsamer fahren – siehst du den Unterschied?</li>
+                    <li>Sende statt Geschwindigkeit die Beschleunigung: <code>p.write(ax)</code> (nutze <code>alvik.get_accelerations()</code>)</li>
+                </ul>
+            </div>
+
+
 
     <!-- Challenge Sektion -->
     <div class="challenge-box" style="margin: 4rem 0 2rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color);">
