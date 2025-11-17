@@ -149,10 +149,30 @@ header p {
     border-radius: 16px;
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow-xl);
-    height: fit-content;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
     position: sticky;
     top: 6rem;
     animation: fadeInLeft 0.6s ease-out;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(227, 6, 19, 0.3) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(227, 6, 19, 0.3);
+    border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(227, 6, 19, 0.5);
 }
 
 @keyframes fadeInLeft {
