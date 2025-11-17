@@ -575,14 +575,372 @@ else:
             </div>
 
 
-    <div class="challenge-box" style="margin:4rem 0 2rem; padding:2.5rem; background:linear-gradient(135deg,rgba(227,6,19,0.08),rgba(103,116,122,0.08)); border-radius:20px; border:3px solid var(--primary-color);">
-        <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
-            <span style="font-size:3rem;">🎯</span>
-            <h2 style="margin:0; color:var(--primary-color);">Challenge: Autonome Hindernisvermeidung</h2>
+    <!-- Challenge-Bereich -->
+    <div class="challenge-box" style="margin: 4rem 0 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+        <div class="challenge-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--primary-color);">
+            <span style="font-size: 3rem;">🎯</span>
+            <div>
+                <h2 style="margin: 0; font-size: 2rem; color: var(--primary-color);">Challenge: Intelligente Kollisionsvermeidung</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Programmiere einen autonomen Navigator!</p>
+            </div>
         </div>
-        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'" style="padding:0.75rem 1.5rem; background:rgba(103,116,122,0.15); border:2px solid var(--secondary-color); border-radius:8px; cursor:pointer; font-weight:600;">💡 Lösung anzeigen</button>
-        <pre style="display:none; background:#2d3748; color:#e2e8f0; padding:1.5rem; border-radius:8px; margin-top:1rem;"><code>if dist[2] < 20: alvik.move(-15); alvik.rotate(90)</code></pre>
+
+        <div class="quiz-section" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>🧠</span>
+                <span>Wissens-Check</span>
+            </h3>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">1. Wie viele Abstandssensoren hat der Alvik?</h4>
+                <div class="quiz-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_collision" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>3 Sensoren</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_collision" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>5 Sensoren</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_collision" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>7 Sensoren</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz1_collision" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>1 Sensor</span>
+                    </label>
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz1_collision()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz1_collision-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz1_collision() {
+                const selected = document.querySelector('input[name="quiz1_collision"]:checked');
+                const feedback = document.getElementById('quiz1_collision-feedback');
+                const options = document.querySelectorAll('input[name="quiz1_collision"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Richtig! Der Alvik hat 5 Infrarot-Abstandssensoren für ein breites Sichtfeld.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Der Alvik hat 5 Sensoren: links, mitte-links, zentral, mitte-rechts, rechts!';
+                }
+            }
+            </script>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">2. Was macht der Roboter, wenn distance_c < 15 ist?</h4>
+                <div class="quiz-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz2_collision" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Er stoppt sofort</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz2_collision" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Er dreht sich um auszuweichen</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz2_collision" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Er fährt rückwärts</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz2_collision" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Er gibt einen Warnton aus</span>
+                    </label>
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz2_collision()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz2_collision-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz2_collision() {
+                const selected = document.querySelector('input[name="quiz2_collision"]:checked');
+                const feedback = document.getElementById('quiz2_collision-feedback');
+                const options = document.querySelectorAll('input[name="quiz2_collision"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Genau! Bei Hindernissen dreht der Roboter um 45° und sucht einen neuen Weg.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Der Roboter dreht sich, um dem Hindernis auszuweichen und einen neuen Weg zu finden!';
+                }
+            }
+            </script>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">3. Warum ist sleep_ms(100) am Ende der Schleife wichtig?</h4>
+                <div class="quiz-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz3_collision" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Um Energie zu sparen</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz3_collision" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Um den Prozessor nicht zu überlasten und stabile Messungen zu ermöglichen</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz3_collision" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Um die Sensoren abkühlen zu lassen</span>
+                    </label>
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer;">
+                        <input type="radio" name="quiz3_collision" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Damit die LEDs besser leuchten</span>
+                    </label>
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz3_collision()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz3_collision-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz3_collision() {
+                const selected = document.querySelector('input[name="quiz3_collision"]:checked');
+                const feedback = document.getElementById('quiz3_collision-feedback');
+                const options = document.querySelectorAll('input[name="quiz3_collision"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Perfekt! Die Pause verhindert Prozessorüberlastung und gibt den Sensoren Zeit für stabile Messungen.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Die Pause ist wichtig, damit der Prozessor nicht überlastet wird und die Sensoren stabile Werte liefern!';
+                }
+            }
+            </script>
+
+        </div>
+
+        <div class="code-challenge" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>💻</span>
+                <span>Programmier-Challenge</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.2rem; color: #222;">📝 Intelligente Richtungswahl</h4>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">Programmiere den Alvik so, dass er bei Hindernissen intelligent entscheidet: Links- oder Rechtssensor erkennt Hindernis → drehe in die Gegenrichtung!</p>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; border-radius: 4px;">
+                    <strong style="color: #1e40af;">💡 Anforderungen:</strong>
+                    <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
+                        <li style="margin: 0.3rem 0;">Linkes Hindernis → drehe rechts (positive Grad)</li>
+                        <li style="margin: 0.3rem 0;">Rechtes Hindernis → drehe links (negative Grad)</li>
+                        <li style="margin: 0.3rem 0;">Mittleres Hindernis → drehe nach rechts</li>
+                        <li style="margin: 0.3rem 0;">LEDs zeigen Richtung an (rot links, grün rechts)</li>
+                    </ul>
+                </div>
+
+                <button onclick="toggleSolution_collision(this)" style="padding: 0.75rem 1.5rem; background: rgba(103, 116, 122, 0.15); border: 2px solid var(--secondary-color); border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease; color: inherit;">
+                    💡 Lösung anzeigen
+                </button>
+
+                <div class="solution" style="display: none; margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 1rem; color: #10b981;">✅ Musterlösung:</h4>
+                    <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; line-height: 1.6;"><code>from arduino_alvik import ArduinoAlvik
+from time import sleep_ms
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+distance_threshold = 15
+
+while True:
+    distance_l, distance_cl, distance_c, distance_cr, distance_r = alvik.get_distance()
+
+    # Linkes Hindernis: drehe rechts
+    if distance_l < distance_threshold or distance_cl < distance_threshold:
+        alvik.set_wheels_speed(0, 0)
+        alvik.left_led.set_color(1, 0, 0)  # Rot
+        alvik.right_led.set_color(0, 1, 0)  # Grün
+        alvik.rotate(60)  # Rechts drehen
+
+    # Rechtes Hindernis: drehe links
+    elif distance_r < distance_threshold or distance_cr < distance_threshold:
+        alvik.set_wheels_speed(0, 0)
+        alvik.left_led.set_color(0, 1, 0)  # Grün
+        alvik.right_led.set_color(1, 0, 0)  # Rot
+        alvik.rotate(-60)  # Links drehen
+
+    # Mittleres Hindernis: drehe rechts
+    elif distance_c < distance_threshold:
+        alvik.set_wheels_speed(0, 0)
+        alvik.left_led.set_color(1, 0, 0)
+        alvik.right_led.set_color(0, 1, 0)
+        alvik.rotate(60)
+
+    # Freie Fahrt
+    else:
+        alvik.left_led.set_color(0, 1, 0)
+        alvik.right_led.set_color(0, 1, 0)
+        alvik.set_wheels_speed(50, 50)
+
+    sleep_ms(100)</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function toggleSolution_collision(button) {
+            const solution = button.nextElementSibling;
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                button.textContent = '🔼 Lösung verbergen';
+                button.style.background = 'var(--secondary-color)';
+                button.style.color = 'white';
+            } else {
+                solution.style.display = 'none';
+                button.textContent = '💡 Lösung anzeigen';
+                button.style.background = 'rgba(103, 116, 122, 0.15)';
+                button.style.color = 'inherit';
+            }
+        }
+        </script>
+
+        <div class="self-check" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>✅</span>
+                <span>Selbsttest: Das kann ich jetzt!</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="margin-bottom: 1rem;"><strong>Hake ab, was du verstanden hast:</strong></p>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_collision(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Alle 5 Abstandssensoren auslesen und nutzen</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_collision(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Reaktive Programmierung mit if-elif-else verstehen</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_collision(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Schwellenwerte für Hinderniserkennung setzen</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_collision(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Autonome Navigation programmieren</span>
+                </label>
+
+                <div class="progress-display" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);" id="progress-counter_collision">0/4</div>
+                    <p style="margin-top: 0.5rem; color: #666;">Punkte verstanden</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function updateProgress_collision(checkbox) {
+            const item = checkbox.parentElement;
+            if (checkbox.checked) {
+                item.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                item.style.borderColor = '#10b981';
+                item.style.fontWeight = '600';
+            } else {
+                item.style.background = 'white';
+                item.style.borderColor = '#e5e7eb';
+                item.style.fontWeight = 'normal';
+            }
+
+            const total = document.querySelectorAll('.self-check-item input[type="checkbox"]').length;
+            const checked = document.querySelectorAll('.self-check-item input[type="checkbox"]:checked').length;
+            document.getElementById('progress-counter_collision').textContent = `${checked}/4`;
+        }
+        </script>
+
     </div>
+    <!-- Ende Challenge-Bereich -->
         </main>
     </div>
     
