@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden - Arduino Alvik Lernplattform</title>
+    <title>Beispielaufgaben - Teste dein Wissen! - Arduino Alvik Lernplattform</title>
     <link rel="stylesheet" href="css/style.css">
     <meta name="description" content="Arduino Alvik MicroPython Tutorials und Dokumentation">
 </head>
@@ -18,11 +18,11 @@
             </div>
         </div>
     </header>
-    
+
     <div class="container">
                         <aside class="sidebar">
             <h2>Navigation</h2>
-            
+
             <!-- Fortschrittsanzeige -->
             <div style="background: linear-gradient(135deg, rgba(227, 6, 19, 0.1), rgba(103, 116, 122, 0.1)); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -36,17 +36,17 @@
                     <span id="progress-text">0 von 17 Lektionen</span>
                 </div>
             </div>
-            
+
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="Suche...">
             </div>
-            
+
             <div class="nav-section">
                 <ul>
                     <li><a href="index.html">🏠 Startseite</a></li>
                 </ul>
             </div>
-            
+
             <!-- Level 1: Grundlagen -->
             <div class="nav-section" data-level="1">
                 <h3 style="display: flex; align-items: center; gap: 0.5rem;">
@@ -87,7 +87,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Level 2: Erste Bewegungen -->
             <div class="nav-section locked" data-level="2" data-required-level="1" data-required-count="3">
                 <h3 style="display: flex; align-items: center; gap: 0.5rem;">
@@ -123,7 +123,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Level 3: Sensoren entdecken -->
             <div class="nav-section locked" data-level="3" data-required-level="2" data-required-count="3">
                 <h3 style="display: flex; align-items: center; gap: 0.5rem;">
@@ -153,7 +153,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Level 4: Erweiterte Projekte -->
             <div class="nav-section locked" data-level="4" data-required-level="3" data-required-count="2">
                 <h3 style="display: flex; align-items: center; gap: 0.5rem;">
@@ -195,7 +195,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Referenz & Hilfe -->
             <div class="nav-section">
                 <h3>📚 Referenz & Hilfe</h3>
@@ -205,7 +205,7 @@
                     <li><a href="4_0_Alvik_Kurse_online.html">🌐 Online-Kurse</a></li>
                 </ul>
             </div>
-            
+
             <!-- Praxis & Übungen -->
             <div class="nav-section">
                 <h3>✏️ Praxis & Übungen</h3>
@@ -214,140 +214,686 @@
                 </ul>
             </div>
         </aside>
-        
+
         <main class="main-content">
-            <h2>MicroPython mit Arduino Alvik – Aufgaben für vier Unterrichtsstunden</h2>
-<h2><strong>Stunde 1: Erste Bewegungen programmieren</strong></h2>
-<p><strong>1. Aufgabe:</strong><br />
-Verbinde den Arduino Alvik mit deinem Computer und öffne die Micro-Python-Programmierumgebung Thonny.</p>
-<p><strong>2. Aufgabe:</strong><br />
-Schreibe ein Programm, das den Roboter 2 Sekunden lang vorwärtsfahren lässt.<br />
-Starte das Programm und beobachte das Verhalten des Roboters. Schaue in der  <a href="1_1_Alvik_API.html">1.1 Alvik API</a> nach folgenden Befehl.</p>
-    <li><a href="command-center.html">🚀 Command Center</a></li>
-<p><strong>alvik.set.wheels_speed</strong>(x,x)</p>
-<p><em><a href="5_1_2_Lo_sung_1_Stunde_Aufgabe_2.html">5.1.2 Lösung 1.Stunde Aufgabe</a><em></p>
-<p><strong>3. Aufgabe:</strong><br />
-Erweitere dein Programm so, dass der Roboter anschließend 2 Sekunden rückwärts fährt.</p>
-<p><em><a href="5_1_3_Lo_sung_1_Stunde_Aufgabe_3.html">5.1.3 Lösung 1 Stunde Aufgabe 3</a></em></p>
-<p><strong>4. Aufgabe:</strong><br />
-Füge deinem Programm eine Drehung um 90 Grad nach links hinzu.</p>
-<p><strong>5. Zusatzaufgabe:</strong><br />
-Programmiere eine Schleife, in der der Roboter ein Quadrat fährt.<br />
-(Hinweis: Ein Quadrat besteht aus vier gleich langen Strecken und vier 90-Grad-Drehungen.)</p>
-<h2><strong>Stunde 2: Hindernisse erkennen und umfahren</strong></h2>
-<p><strong>1. Aufgabe:</strong><br />
-Lese mit Mikro-Python die Werte des Entfernungssensors aus und lasse sie dir auf dem Bildschirm anzeigen.</p>
-<p>siehe: <a href="3_0_Alvik_Sensoren_auslesen.html">3.0 Alvik Sensoren auslesen</a></p>
-<p><strong>2. Aufgabe:</strong><br />
-Schreibe ein Programm, das den Roboter vorwärtsfahren lässt, bis ein Hindernis in weniger als 20 Zentimeter Entfernung erkannt wird.<br />
-Der Roboter soll dann anhalten.</p>
-<p><strong>3. Aufgabe:</strong><br />
-Erweitere das Programm so, dass der Roboter bei einem Hindernis um 90 Grad nach rechts dreht und dann weiterfährt.</p>
-<p><strong>4. Zusatzaufgabe:</strong><br />
-Programmiere eine Schleife, sodass der Roboter immer wieder Hindernissen ausweicht, solange er eingeschaltet ist.</p>
-<h2><strong>Stunde 3: Mit Farben interagieren</strong></h2>
-<p><strong>1. Aufgabe:</strong><br />
-Lese mit Mikro-Python die Werte des Farbsensors aus und lasse dir die erkannten Farben auf dem Bildschirm anzeigen.</p>
-<p>siehe: <a href="3_0_Alvik_Sensoren_auslesen.html">3.0 Alvik Sensoren auslesen</a></p>
-<p><strong>2. Aufgabe:</strong><br />
-Schreibe ein Programm, das den Roboter unterschiedlich reagieren lässt:</p>
-<ul>
-<li>
-<p>Erkennt der Sensor <strong>Rot</strong>, soll der Roboter anhalten.</p>
-</li>
-<li>
-<p>Erkennt der Sensor <strong>Grün</strong>, soll der Roboter weiterfahren.</p>
-</li>
-<li>
-<p>Erkennt der Sensor <strong>Blau</strong>, soll der Roboter eine Drehung machen.</p>
-</li>
-</ul>
-<p><strong>3. Zusatzaufgabe:</strong><br />
-Lege verschiedenfarbige Papierstücke auf den Boden. Lasse den Roboter darüber fahren und beobachte, ob er richtig auf die Farben reagiert.</p>
-<h6>4. <strong>Masteraufgabe:</strong></h6>
-<p>Aufgabe: Erstelle ein Programm, das den Farbsensor kontinuierlich ausliest und je nach erkannter Farbe die internen LED(s) des Alvik in einer passenden Farbe leuchten lässt.</p>
-<p>Deine Aufgabenstellung im Detail:</p>
+            <h2>📝 Beispielaufgaben - Teste dein Wissen!</h2>
+
+<div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(79, 70, 229, 0.15)); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #9333ea;">
+    <h3 style="margin-top: 0;">🎯 Deine finale Herausforderung</h3>
+    <p>Du hast in den Tutorials viel über MicroPython und den Alvik gelernt. Jetzt kannst du dein Wissen testen!</p>
+    <p><strong>Wichtig:</strong> Diese Aufgaben sind keine Prüfung, sondern eine Chance zu überprüfen, ob du die <strong>Grundlagen der Microcontroller-Programmierung</strong> verstanden hast.</p>
+    <p style="margin-bottom: 0;">Die Aufgaben sind in drei Level organisiert: <strong>Python & Bewegung</strong>, <strong>Sensoren & Entscheidungen</strong> und <strong>Integration</strong>. Viel Erfolg!</p>
+</div>
+
+<!-- ============================================= -->
+<!-- LEVEL 1: PYTHON & BEWEGUNG -->
+<!-- ============================================= -->
+
+<div style="background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.15)); padding: 1.5rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid #4ade80;">
+    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+        <span style="background: #4ade80; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700;">1</span>
+        Level 1: Python & Bewegung
+    </h3>
+    <p>In diesem Level testest du dein Wissen über <strong>Python-Grundlagen</strong> und <strong>Bewegungssteuerung</strong> des Alvik.</p>
+</div>
+
+<h3>📚 Aufgabe 1: Variablen und print()</h3>
+
+<p><strong>Ziel:</strong> Verstehe, wie man Werte in Variablen speichert und sie ausgibt.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
 <ol>
-<li>
-<p>Messe fortlaufend die Farbwerte über den eingebauten Farbsensor. Verarbeite diese Werte, sodass du eine Farbbezeichnung (wie z. B. "RED", "GREEN", "BLUE") erhältst – nutze dabei übliche Konvertierungsfunktionen.</p>
-</li>
-<li>
-<p>Programmiere eine Entscheidungslogik:<br />
- • Wird beispielsweise Rot erkannt, dann soll eine bestimmte LED (oder beide, je nach deinem Konzept) in Rot aufleuchten.<br />
- • Bei Grün könnte die LED grün leuchten.<br />
- • Bei Blau sollte die LED blau leuchten oder sogar in einem Blinkmuster aktiviert werden.<br />
- • Erkennst du einen Farbwert, den du nicht eindeutig zuordnen kannst (etwa "UNDEFINED"), so kannst du entweder alle LED(s) ausschalten oder ein spezielles Blinkmuster programmieren.</p>
-</li>
-<li>
-<p>Erweitere dein Programm optional:<br />
- • Integriere eine Anzeige auf dem Bildschirm oder in einer Konsole, die den aktuell erkannten Farbstatus ausgibt.<br />
- • Experimentiere mit unterschiedlichen Blinkvarianten oder Helligkeitsanpassungen in Abhängigkeit von der Intensität bzw. Helligkeit des erkannten Lichts.</p>
-</li>
-<li>
-<p>Überlege dir am Ende, wie du das System mit realen farbigen Objekten testen kannst, zum Beispiel indem du verschiedenfarbige Papierstücke auf den Boden legst und beobachtest, ob die LED(s) korrekt auf die erkannten Farben reagieren.</p>
-</li>
+    <li>Erstelle eine Variable <code>geschwindigkeit</code> mit dem Wert <code>50</code></li>
+    <li>Erstelle eine Variable <code>roboter_name</code> mit dem Wert <code>&quot;Alvik&quot;</code></li>
+    <li>Gib beide Werte mit <code>print()</code> auf dem Bildschirm aus</li>
+    <li>Nutze einen f-string, um auszugeben: <code>Alvik fährt mit 50 cm/s</code></li>
 </ol>
-<p>Hinweise zur Umsetzung:<br />
-- Beginne mit dem Einlesen der Farbdaten und der Umwandlung in ein Farblabel.<br />
-- Implementiere die Steuerungslogik für die LED(s) so, dass sie unmittelbar auf Farbänderungen reagieren.<br />
-- Achte darauf, eventuelle Verzögerungen (etwa beim Blinken) so abzustimmen, dass der Roboter flüssig reagiert.<br />
-- Denke daran, für die sichere und verständliche Programmierung sinnvolle Kommentare und eine übersichtliche Struktur zu verwenden.</p>
-<p>Viel Erfolg bei der Implementierung und beim kreativen Experimentieren mit den LED(s) und der Farberkennung!</p>
-<h2><strong>Stunde 4: Abschlussprojekt – Deine Roboter-Challenge</strong></h2>
-<p><strong>1. Aufgabe:</strong><br />
-Überlege dir eine eigene kleine Roboter-Challenge. Beispiele:</p>
-<ul>
-<li>
-<p>Der Roboter fährt durch einen Parcours mit Hindernissen und farbigen Feldern.</p>
-</li>
-<li>
-<p>Der Roboter sucht ein bestimmtes Farbfeld und bleibt darauf stehen.</p>
-</li>
-<li>
-<p>Der Roboter zählt, wie oft er eine bestimmte Farbe erkennt, und gibt die Zahl aus.</p>
-</li>
-</ul>
-<p><strong>2. Aufgabe:</strong><br />
-Plane, wie du deine Idee mit MicroPython umsetzen kannst. Schreibe dazu einen kurzen Ablaufplan.</p>
-<p><strong>3. Aufgabe:</strong><br />
-Programmiere deinen Roboter so, dass er deine Challenge bewältigt.</p>
-<p><strong>4. Aufgabe:</strong><br />
-Teste dein Programm und verbessere es, falls nötig.</p>
-<p><strong>5. Aufgabe:</strong><br />
-Präsentiere dein Projekt und deinen Code der Klasse. Erkläre, wie du vorgegangen bist und welche Probleme du gelöst hast.</p>
-<p><strong>Viel Erfolg und Spaß beim Programmieren!</strong></p>
-<h6>6. Masteraufgabe:</h6>
-<p>Hier eine kreative Herausforderung, die verschiedene Elemente der Roboterprogrammierung miteinander verbindet:</p>
-<p><strong>Aufgabe: Entwickle ein autonomes Hindernisvermeidungssystem mit zufälliger Richtungswahl</strong></p>
-<p>Aufgabenbeschreibung:<br />
-1. Dein Roboter soll zunächst kontinuierlich vorwärtsfahren.<br />
-2. Während der Fahrt liest er ständig den Abstand des Hindernissensors aus.<br />
-3. Sobald ein Objekt in einer vordefinierten Entfernung (zum Beispiel 20 cm) erkannt wird, soll der Roboter anhalten.<br />
-4. Danach soll der Roboter zufällig entscheiden, ob er sich nach links oder rechts drehen möchte, um den Hindernissen auszuweichen.<br />
-5. Nachdem der Roboter gedreht hat, soll er wieder in den Vorwärtsmodus wechseln und die Umgebung erneut scannen.<br />
-6. Wiederhole diese Abfolge in einer Schleife, damit der Roboter fortlaufend seine Umgebung erkundet und flexibel auf Hindernisse reagiert.</p>
-<h4>Hinweise zur Umsetzung:</h4>
-<p>• Arbeite zunächst daran, den Abstandssensor korrekt auszulesen und die Rückgabewerte auf dem Bildschirm anzuzeigen.<br />
-• Überlege, wie du eine Zufallsauswahl (zum Beispiel über eine Zufallsfunktion) implementieren kannst, um die Drehrichtung zu bestimmen.<br />
-• Achte beim Drehen darauf, dass der Roboter sich um feste Winkel, etwa 90 Grad, dreht – passe dies ggf. an.<br />
-• Denke auch an ein Sicherheitskonzept: Was passiert, wenn nach einer Drehung erneut direkt ein Hindernis auftaucht?<br />
-• Optional: Integriere eine Statusanzeige (zum Beispiel über LEDs oder im Thonny-Fenster), um zu signalisieren, ob sich der Roboter im "Fahrmodus", "Anhalte- oder Hindernismodus" oder "Drehmodus" befindet.</p>
-<p><strong>Pseudo-Ablaufplan (ohne konkrete Codezeilen):</strong><br />
-• Initialisiere den Roboter und starte die Sensorüberwachung.<br />
-• Starte eine Endlosschleife:<br />
- ○ Lies den Abstandssensor aus.<br />
- ○ Wenn kein Hindernis erkannt wird, lasse den Roboter vorwärts fahren.<br />
- ○ Wird ein Hindernis (z.B. Abstand &lt; 20 cm) gemeldet:<br />
-  — Stoppe den Roboter.<br />
-  — Wähle zufällig eine Drehaktion (links oder rechts, z.B. Drehung um 90 Grad).<br />
-  — Führ die Drehung aus.<br />
-  — Fahre wieder vorwärts.<br />
-• Beende die Schleife nur auf Anforderung.</p>
-<hr />
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">geschwindigkeit = 50
+roboter_name = &quot;Alvik&quot;
+print(f&quot;{roboter_name} fährt mit {geschwindigkeit} cm/s&quot;)</code></pre>
+</div>
+
+<h3>🚗 Aufgabe 2: Alvik vorwärts fahren lassen</h3>
+
+<p><strong>Ziel:</strong> Lerne, den Alvik mit <code>set_wheels_speed()</code> zu steuern.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
+<ol>
+    <li>Schreibe ein Programm, das den Alvik 2 Sekunden vorwärts fahren lässt</li>
+    <li>Verwende <code>alvik.set_wheels_speed(50, 50)</code> für die Bewegung</li>
+    <li>Nutze <code>time.sleep(2)</code> für die Wartezeit</li>
+    <li>Stoppe den Roboter danach mit <code>alvik.stop()</code></li>
+</ol>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">from arduino_alvik import ArduinoAlvik
+import time
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+alvik.set_wheels_speed(50, 50)  # Beide Räder vorwärts
+time.sleep(2)                   # 2 Sekunden warten
+alvik.stop()                    # Stoppen</code></pre>
+</div>
+
+<h3>🔄 Aufgabe 3: Viereck fahren mit for-Schleife</h3>
+
+<p><strong>Ziel:</strong> Nutze eine <code>for</code>-Schleife, um den Alvik ein Viereck fahren zu lassen.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
+<ol>
+    <li>Nutze eine <code>for</code>-Schleife mit <code>range(4)</code>, um 4 Seiten zu fahren</li>
+    <li>In jeder Runde: Fahre vorwärts, drehe um 90 Grad</li>
+    <li>Verwende <code>alvik.move(20)</code> für 20 cm vorwärts</li>
+    <li>Verwende <code>alvik.rotate(90)</code> für die Drehung</li>
+</ol>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">for i in range(4):
+    print(f&quot;Fahre Seite {i+1}&quot;)
+    alvik.move(20)      # 20 cm vorwärts
+    alvik.rotate(90)    # 90 Grad drehen</code></pre>
+</div>
+
+<h3>🎨 Quiz: Python-Grundlagen</h3>
+
+<div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-bottom: 1rem;">Welche Aussage über <code>range(4)</code> ist korrekt?</p>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level1" value="a" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span><code>range(4)</code> erzeugt die Zahlen 1, 2, 3, 4</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level1" value="b" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span><code>range(4)</code> erzeugt die Zahlen 0, 1, 2, 3</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level1" value="c" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span><code>range(4)</code> erzeugt nur die Zahl 4</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level1" value="d" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span><code>range(4)</code> erzeugt die Zahlen 4, 3, 2, 1</span>
+        </label>
+    </div>
+
+    <button onclick="checkAnswer_quiz_level1()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">Antwort prüfen</button>
+
+    <div id="feedback_level1" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+</div>
+
+<script>
+function checkAnswer_quiz_level1() {
+    const selected = document.querySelector('input[name="quiz_level1"]:checked');
+    const feedback = document.getElementById('feedback_level1');
+
+    if (!selected) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#fef3c7';
+        feedback.style.border = '2px solid #fbbf24';
+        feedback.innerHTML = '⚠️ Bitte wähle eine Antwort aus.';
+        return;
+    }
+
+    feedback.style.display = 'block';
+
+    if (selected.value === 'b') {
+        feedback.style.background = '#d1fae5';
+        feedback.style.border = '2px solid #10b981';
+        feedback.innerHTML = '🎉 <strong>Richtig!</strong> <code>range(4)</code> erzeugt die Zahlen 0, 1, 2, 3. In Python beginnt die Zählung bei 0, nicht bei 1! Deshalb ist <code>range(4)</code> perfekt für ein Viereck mit 4 Seiten.';
+    } else {
+        feedback.style.background = '#fee2e2';
+        feedback.style.border = '2px solid #ef4444';
+        feedback.innerHTML = '❌ <strong>Nicht ganz.</strong> <code>range(4)</code> beginnt bei 0 und endet vor 4, also: 0, 1, 2, 3. Versuche es nochmal!';
+    }
+}
+</script>
+
+<h3>💻 Programmier-Challenge: Dreieck-Funktion</h3>
+
+<div style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(249, 115, 22, 0.1)); border-left: 4px solid #fb923c; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">🎯 Deine Challenge:</p>
+    <p>Schreibe eine <strong>Funktion</strong> mit dem Namen <code>fahre_dreieck()</code>, die den Alvik ein gleichseitiges Dreieck fahren lässt.</p>
+
+    <p><strong>Anforderungen:</strong></p>
+    <ul>
+        <li>Die Funktion soll <code>fahre_dreieck()</code> heißen</li>
+        <li>Nutze eine <code>for</code>-Schleife mit <code>range(3)</code> für 3 Seiten</li>
+        <li>Pro Seite: 15 cm fahren und 120 Grad drehen</li>
+        <li>Rufe die Funktion am Ende auf</li>
+    </ul>
+
+    <details style="margin-top: 1rem; background: white; padding: 1rem; border-radius: 8px;">
+        <summary style="cursor: pointer; font-weight: 600; color: #fb923c;">💡 Lösung anzeigen</summary>
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">from arduino_alvik import ArduinoAlvik
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+def fahre_dreieck():
+    for i in range(3):
+        print(f&quot;Fahre Seite {i+1} des Dreiecks&quot;)
+        alvik.move(15)      # 15 cm vorwärts
+        alvik.rotate(120)   # 120 Grad drehen (360° / 3 = 120°)
+    print(&quot;Dreieck fertig!&quot;)
+
+# Funktion aufrufen
+fahre_dreieck()</code></pre>
+    </details>
+</div>
+
+<h3>✅ Selbsttest Level 1</h3>
+
+<div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">Kannst du alle diese Fragen mit "Ja" beantworten?</p>
+    <ul style="list-style: none; padding-left: 0;">
+        <li style="padding: 0.5rem 0;">☐ Ich kann Variablen erstellen und verwenden</li>
+        <li style="padding: 0.5rem 0;">☐ Ich verstehe, wie <code>print()</code> und f-strings funktionieren</li>
+        <li style="padding: 0.5rem 0;">☐ Ich kann den Alvik mit <code>set_wheels_speed()</code> bewegen</li>
+        <li style="padding: 0.5rem 0;">☐ Ich verstehe, wie <code>for</code>-Schleifen funktionieren</li>
+        <li style="padding: 0.5rem 0;">☐ Ich kann eigene Funktionen schreiben</li>
+    </ul>
+    <p style="margin-bottom: 0;"><strong>Wenn ja: Glückwunsch!</strong> Du bist bereit für Level 2. 🎉</p>
+</div>
+
+<!-- ============================================= -->
+<!-- LEVEL 2: SENSOREN & ENTSCHEIDUNGEN -->
+<!-- ============================================= -->
+
+<div style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.15)); padding: 1.5rem; border-radius: 12px; margin-top: 3rem; border-left: 4px solid #60a5fa;">
+    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+        <span style="background: #60a5fa; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700;">2</span>
+        Level 2: Sensoren & Entscheidungen
+    </h3>
+    <p>In diesem Level testest du dein Wissen über <strong>Sensoren auslesen</strong> und <strong>if/else Entscheidungen</strong>.</p>
+</div>
+
+<h3>📡 Aufgabe 1: Abstandssensor auslesen</h3>
+
+<p><strong>Ziel:</strong> Lerne, den Entfernungssensor auszulesen und Werte anzuzeigen.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
+<ol>
+    <li>Lies die Werte des mittleren Entfernungssensors aus</li>
+    <li>Verwende <code>alvik.get_distance()</code> - das gibt 5 Werte zurück (links-außen, links-mitte, mitte, rechts-mitte, rechts-außen)</li>
+    <li>Der mittlere Sensor ist an Position <code>[2]</code></li>
+    <li>Gib den Wert mit <code>print()</code> aus</li>
+</ol>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">abstand = alvik.get_distance()  # Gibt eine Liste zurück
+mitte = abstand[2]               # Mittlerer Sensor
+print(f&quot;Abstand: {mitte} cm&quot;)</code></pre>
+</div>
+
+<h3>🛑 Aufgabe 2: Vor Hindernis stoppen (if/else)</h3>
+
+<p><strong>Ziel:</strong> Nutze <code>if/else</code>, um auf Hindernisse zu reagieren.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
+<ol>
+    <li>Schreibe ein Programm mit einer <code>while True</code>-Schleife</li>
+    <li>Lies in der Schleife den mittleren Entfernungssensor aus</li>
+    <li>Wenn der Abstand <strong>kleiner als 15 cm</strong> ist: Stoppe den Roboter</li>
+    <li>Sonst: Fahre vorwärts mit 50 cm/s</li>
+</ol>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">while True:
+    abstand = alvik.get_distance()[2]  # Mittlerer Sensor
+
+    if abstand &lt; 15:
+        print(&quot;STOP! Hindernis zu nah!&quot;)
+        alvik.stop()
+    else:
+        print(f&quot;Abstand OK: {abstand} cm&quot;)
+        alvik.set_wheels_speed(50, 50)
+
+    time.sleep(0.1)  # Kurze Pause</code></pre>
+</div>
+
+<h3>🎨 Aufgabe 3: Farbsensor auslesen</h3>
+
+<p><strong>Ziel:</strong> Lerne, den Farbsensor auszulesen.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
+<ol>
+    <li>Lies den Farbsensor mit <code>alvik.get_color_label()</code> aus</li>
+    <li>Diese Funktion gibt einen Text zurück: <code>&quot;RED&quot;</code>, <code>&quot;GREEN&quot;</code>, <code>&quot;BLUE&quot;</code>, usw.</li>
+    <li>Gib die erkannte Farbe mit <code>print()</code> aus</li>
+</ol>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">farbe = alvik.get_color_label()
+print(f&quot;Erkannte Farbe: {farbe}&quot;)</code></pre>
+</div>
+
+<h3>🚦 Aufgabe 4: Auf Farben reagieren (if/elif/else)</h3>
+
+<p><strong>Ziel:</strong> Nutze <code>if/elif/else</code>, um auf verschiedene Farben unterschiedlich zu reagieren.</p>
+
+<p><strong>Deine Aufgabe:</strong></p>
+<ol>
+    <li>Lies in einer Schleife den Farbsensor aus</li>
+    <li>Bei <strong>ROT</strong>: Stoppe den Roboter und schalte beide LEDs rot</li>
+    <li>Bei <strong>GRÜN</strong>: Fahre vorwärts und schalte beide LEDs grün</li>
+    <li>Bei <strong>BLAU</strong>: Drehe um 90 Grad und schalte beide LEDs blau</li>
+    <li>Sonst: Schalte LEDs aus</li>
+</ol>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
+    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">while True:
+    farbe = alvik.get_color_label()
+
+    if farbe == &quot;RED&quot;:
+        print(&quot;ROT erkannt - STOP!&quot;)
+        alvik.stop()
+        alvik.left_led.set_color(1, 0, 0)   # Rot
+        alvik.right_led.set_color(1, 0, 0)
+    elif farbe == &quot;GREEN&quot;:
+        print(&quot;GRÜN erkannt - Fahre!&quot;)
+        alvik.set_wheels_speed(50, 50)
+        alvik.left_led.set_color(0, 1, 0)   # Grün
+        alvik.right_led.set_color(0, 1, 0)
+    elif farbe == &quot;BLUE&quot;:
+        print(&quot;BLAU erkannt - Drehe!&quot;)
+        alvik.rotate(90)
+        alvik.left_led.set_color(0, 0, 1)   # Blau
+        alvik.right_led.set_color(0, 0, 1)
+    else:
+        alvik.left_led.set_color(0, 0, 0)   # Aus
+        alvik.right_led.set_color(0, 0, 0)
+
+    time.sleep(0.2)</code></pre>
+</div>
+
+<h3>🎨 Quiz: if/else und Sensoren</h3>
+
+<div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-bottom: 1rem;">Was bewirkt dieser Code?</p>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code style="color: #2d3748;">if abstand &lt; 10:
+    alvik.stop()
+elif abstand &lt; 30:
+    alvik.set_wheels_speed(20, 20)
+else:
+    alvik.set_wheels_speed(50, 50)</code></pre>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level2" value="a" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>Der Roboter fährt immer mit 50 cm/s</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level2" value="b" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>Bei Abstand &lt;10cm stoppt er, bei 10-30cm fährt er langsam, sonst schnell</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level2" value="c" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>Der Roboter dreht sich im Kreis</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level2" value="d" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>Der Code funktioniert nicht</span>
+        </label>
+    </div>
+
+    <button onclick="checkAnswer_quiz_level2()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">Antwort prüfen</button>
+
+    <div id="feedback_level2" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+</div>
+
+<script>
+function checkAnswer_quiz_level2() {
+    const selected = document.querySelector('input[name="quiz_level2"]:checked');
+    const feedback = document.getElementById('feedback_level2');
+
+    if (!selected) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#fef3c7';
+        feedback.style.border = '2px solid #fbbf24';
+        feedback.innerHTML = '⚠️ Bitte wähle eine Antwort aus.';
+        return;
+    }
+
+    feedback.style.display = 'block';
+
+    if (selected.value === 'b') {
+        feedback.style.background = '#d1fae5';
+        feedback.style.border = '2px solid #10b981';
+        feedback.innerHTML = '🎉 <strong>Perfekt!</strong> Das ist eine <strong>adaptive Geschwindigkeitsregelung</strong>: Der Roboter passt seine Geschwindigkeit an den Abstand an. Sehr nah (&lt;10cm) = stoppen, mittel (10-30cm) = langsam, weit (&gt;30cm) = schnell. So fährt er sicher!';
+    } else {
+        feedback.style.background = '#fee2e2';
+        feedback.style.border = '2px solid #ef4444';
+        feedback.innerHTML = '❌ <strong>Nicht ganz.</strong> Der Code passt die Geschwindigkeit basierend auf dem Abstand an. Bei sehr geringem Abstand stoppt der Roboter, bei mittlerem Abstand fährt er langsam, bei großem Abstand schnell.';
+    }
+}
+</script>
+
+<h3>💻 Programmier-Challenge: Hindernisausweichen</h3>
+
+<div style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(249, 115, 22, 0.1)); border-left: 4px solid #fb923c; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">🎯 Deine Challenge:</p>
+    <p>Schreibe ein Programm, das den Alvik <strong>automatisch Hindernissen ausweichen</strong> lässt.</p>
+
+    <p><strong>Anforderungen:</strong></p>
+    <ul>
+        <li>Der Roboter fährt kontinuierlich vorwärts in einer <code>while True</code>-Schleife</li>
+        <li>Er überwacht ständig den mittleren Entfernungssensor</li>
+        <li>Wenn ein Hindernis näher als 20 cm ist:
+            <ul>
+                <li>Stoppe den Roboter</li>
+                <li>Drehe um 90 Grad nach rechts</li>
+                <li>Fahre wieder vorwärts</li>
+            </ul>
+        </li>
+        <li>Nutze <code>time.sleep(0.1)</code> für eine kurze Pause in der Schleife</li>
+    </ul>
+
+    <details style="margin-top: 1rem; background: white; padding: 1rem; border-radius: 8px;">
+        <summary style="cursor: pointer; font-weight: 600; color: #fb923c;">💡 Lösung anzeigen</summary>
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">from arduino_alvik import ArduinoAlvik
+import time
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+print(&quot;Starte Hindernisausweichen...&quot;)
+
+while True:
+    # Mittleren Sensor auslesen
+    abstand = alvik.get_distance()[2]
+    print(f&quot;Abstand: {abstand} cm&quot;)
+
+    if abstand &lt; 20:
+        # Hindernis erkannt!
+        print(&quot;Hindernis! Weiche aus...&quot;)
+        alvik.stop()
+        time.sleep(0.5)
+        alvik.rotate(90)  # Nach rechts drehen
+        print(&quot;Weiter geht's!&quot;)
+        alvik.set_wheels_speed(50, 50)
+    else:
+        # Freie Fahrt
+        alvik.set_wheels_speed(50, 50)
+
+    time.sleep(0.1)  # Kurze Pause</code></pre>
+    </details>
+</div>
+
+<h3>✅ Selbsttest Level 2</h3>
+
+<div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">Kannst du alle diese Fragen mit "Ja" beantworten?</p>
+    <ul style="list-style: none; padding-left: 0;">
+        <li style="padding: 0.5rem 0;">☐ Ich kann den Entfernungssensor auslesen</li>
+        <li style="padding: 0.5rem 0;">☐ Ich kann den Farbsensor auslesen</li>
+        <li style="padding: 0.5rem 0;">☐ Ich verstehe <code>if/else</code> und <code>if/elif/else</code></li>
+        <li style="padding: 0.5rem 0;">☐ Ich kann Entscheidungen basierend auf Sensorwerten treffen</li>
+        <li style="padding: 0.5rem 0;">☐ Ich kann eine <code>while True</code>-Schleife nutzen</li>
+    </ul>
+    <p style="margin-bottom: 0;"><strong>Wenn ja: Super!</strong> Du bist bereit für Level 3. 🚀</p>
+</div>
+
+<!-- ============================================= -->
+<!-- LEVEL 3: INTEGRATION -->
+<!-- ============================================= -->
+
+<div style="background: linear-gradient(135deg, rgba(250, 204, 21, 0.15), rgba(251, 191, 36, 0.15)); padding: 1.5rem; border-radius: 12px; margin-top: 3rem; border-left: 4px solid #facc15;">
+    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+        <span style="background: #facc15; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700;">3</span>
+        Level 3: Alles kombinieren
+    </h3>
+    <p>In diesem Level kombinierst du <strong>alles, was du gelernt hast</strong>: Python, Bewegung, Sensoren und Entscheidungen!</p>
+</div>
+
+<h3>🎯 Abschluss-Challenge: Dein Miniprojekt</h3>
+
+<p><strong>Ziel:</strong> Erstelle ein kleines Projekt, das Bewegung, Sensoren und Entscheidungen kombiniert.</p>
+
+<div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(79, 70, 229, 0.1)); border-left: 4px solid #9333ea; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">🧭 Projekt-Ideen (wähle eine oder erfinde deine eigene):</p>
+
+    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+        <h4 style="margin-top: 0; color: #9333ea;">💡 Idee 1: Farbfeld-Sucher</h4>
+        <p>Der Alvik fährt vorwärts und sucht ein <strong>grünes</strong> Farbfeld. Wenn er es findet:</p>
+        <ul>
+            <li>Stoppt er</li>
+            <li>Schaltet beide LEDs grün</li>
+            <li>Gibt "Grünes Feld gefunden!" aus</li>
+        </ul>
+    </div>
+
+    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+        <h4 style="margin-top: 0; color: #9333ea;">💡 Idee 2: Intelligenter Parkassistent</h4>
+        <p>Der Alvik fährt vorwärts, bis er einen guten Parkplatz findet:</p>
+        <ul>
+            <li>Wenn Abstand zwischen 10 und 20 cm: "Guter Parkplatz!" → Stoppen</li>
+            <li>Wenn Abstand &lt; 10 cm: "Zu eng!" → Rückwärts fahren</li>
+            <li>Wenn Abstand &gt; 20 cm: Weiter vorwärts fahren</li>
+        </ul>
+    </div>
+
+    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+        <h4 style="margin-top: 0; color: #9333ea;">💡 Idee 3: Farbzähler</h4>
+        <p>Der Alvik fährt 30 Sekunden lang und zählt, wie oft er <strong>rote</strong> Felder sieht:</p>
+        <ul>
+            <li>Erstelle Variable <code>rot_zaehler = 0</code></li>
+            <li>Wenn Farbe == "RED": Erhöhe Zähler um 1</li>
+            <li>Am Ende: Gib Anzahl aus</li>
+        </ul>
+    </div>
+
+    <div style="background: white; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+        <h4 style="margin-top: 0; color: #9333ea;">💡 Idee 4: Deine eigene Idee!</h4>
+        <p>Sei kreativ! Kombiniere Bewegung, Sensoren und Entscheidungen auf deine Art. 🎨</p>
+    </div>
+</div>
+
+<h3>📋 Planungs-Checkliste</h3>
+
+<div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">Bevor du mit dem Programmieren beginnst, plane dein Projekt:</p>
+    <ol>
+        <li><strong>Was soll der Roboter tun?</strong> (Kurze Beschreibung)</li>
+        <li><strong>Welche Sensoren brauchst du?</strong> (Abstand, Farbe, beide?)</li>
+        <li><strong>Welche Bewegungen?</strong> (Vorwärts, Drehen, Stoppen?)</li>
+        <li><strong>Welche Entscheidungen?</strong> (Was passiert wann?)</li>
+        <li><strong>Brauchst du Variablen?</strong> (Zähler, Geschwindigkeit?)</li>
+    </ol>
+</div>
+
+<h3>💻 Dein Programmier-Bereich</h3>
+
+<div style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(249, 115, 22, 0.1)); border-left: 4px solid #fb923c; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-top: 0;">🎯 Jetzt bist du dran!</p>
+    <p>Öffne Thonny und erstelle dein Projekt. Nutze dieses Grundgerüst:</p>
+
+    <pre style="background: white; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">from arduino_alvik import ArduinoAlvik
+import time
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+print(&quot;Mein Projekt startet!&quot;)
+
+# TODO: Dein Code hier
+# - Sensoren auslesen
+# - Entscheidungen treffen
+# - Bewegungen steuern
+
+print(&quot;Projekt beendet!&quot;)</code></pre>
+</div>
+
+<h3>🎨 Abschluss-Quiz</h3>
+
+<div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 1.5rem 0;">
+    <p style="font-weight: 600; margin-bottom: 1rem;">Was ist der Hauptvorteil von MicroPython auf dem Alvik gegenüber einer festen, vorgefertigten Roboter-App?</p>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level3" value="a" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>MicroPython ist schneller als jede App</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level3" value="b" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>Du kannst eigene Programme schreiben und den Roboter genau steuern, wie du willst</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level3" value="c" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>MicroPython braucht keinen Computer</span>
+        </label>
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+        <label style="display: flex; align-items: start; cursor: pointer; padding: 0.75rem; border-radius: 8px; transition: background 0.2s;">
+            <input type="radio" name="quiz_level3" value="d" style="margin-right: 0.75rem; margin-top: 0.25rem;">
+            <span>Der Roboter kann damit fliegen</span>
+        </label>
+    </div>
+
+    <button onclick="checkAnswer_quiz_level3()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">Antwort prüfen</button>
+
+    <div id="feedback_level3" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+</div>
+
+<script>
+function checkAnswer_quiz_level3() {
+    const selected = document.querySelector('input[name="quiz_level3"]:checked');
+    const feedback = document.getElementById('feedback_level3');
+
+    if (!selected) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#fef3c7';
+        feedback.style.border = '2px solid #fbbf24';
+        feedback.innerHTML = '⚠️ Bitte wähle eine Antwort aus.';
+        return;
+    }
+
+    feedback.style.display = 'block';
+
+    if (selected.value === 'b') {
+        feedback.style.background = '#d1fae5';
+        feedback.style.border = '2px solid #10b981';
+        feedback.innerHTML = '🎉 <strong>Genau richtig!</strong> Das ist die Kraft der Programmierung: Du bist der <strong>Entwickler</strong> und bestimmst, was der Roboter tun soll. Mit MicroPython kannst du jede Idee umsetzen - von einfachen Bewegungen bis zu komplexen KI-Projekten. Du bist nicht auf vorgegebene Funktionen beschränkt!';
+    } else {
+        feedback.style.background = '#fee2e2';
+        feedback.style.border = '2px solid #ef4444';
+        feedback.innerHTML = '❌ <strong>Nicht ganz.</strong> Der größte Vorteil ist die <strong>Freiheit</strong>: Mit Code kannst du jede Idee umsetzen, statt nur vorgegebene Funktionen zu nutzen. Du bist der Entwickler!';
+    }
+}
+</script>
+
+<h3>✅ Finale Selbsteinschätzung</h3>
+
+<div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); border: 3px solid #10b981; border-radius: 12px; padding: 2rem; margin: 2rem 0;">
+    <h4 style="margin-top: 0; color: #059669;">🎓 Hast du die Grundlagen verstanden?</h4>
+    <p>Wenn du diese Fragen mit "Ja" beantworten kannst, hast du die <strong>essentiellen Grundlagen</strong> der Microcontroller-Programmierung verstanden:</p>
+
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+        <p style="font-weight: 600; margin-top: 0;">📝 Python-Grundlagen:</p>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="padding: 0.5rem 0;">☐ Ich kann Variablen erstellen und verwenden</li>
+            <li style="padding: 0.5rem 0;">☐ Ich verstehe <code>if/elif/else</code></li>
+            <li style="padding: 0.5rem 0;">☐ Ich kann <code>for</code>-Schleifen und <code>while</code>-Schleifen nutzen</li>
+            <li style="padding: 0.5rem 0;">☐ Ich kann eigene Funktionen schreiben</li>
+        </ul>
+    </div>
+
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+        <p style="font-weight: 600; margin-top: 0;">🤖 Microcontroller-Programmierung:</p>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="padding: 0.5rem 0;">☐ Ich kann den Alvik bewegen (vorwärts, rückwärts, drehen)</li>
+            <li style="padding: 0.5rem 0;">☐ Ich kann Sensoren auslesen (Entfernung, Farbe)</li>
+            <li style="padding: 0.5rem 0;">☐ Ich kann auf Sensorwerte reagieren (if/else)</li>
+            <li style="padding: 0.5rem 0;">☐ Ich kann LEDs steuern</li>
+        </ul>
+    </div>
+
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+        <p style="font-weight: 600; margin-top: 0;">🎯 Integration:</p>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="padding: 0.5rem 0;">☐ Ich kann Bewegung und Sensoren kombinieren</li>
+            <li style="padding: 0.5rem 0;">☐ Ich kann ein kleines Projekt planen und umsetzen</li>
+            <li style="padding: 0.5rem 0;">☐ Ich verstehe, wie ein Microcontroller-Programm aufgebaut ist</li>
+        </ul>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; text-align: center;">
+        <h4 style="margin: 0 0 0.5rem 0;">🎉 Glückwunsch!</h4>
+        <p style="margin: 0;">Wenn du die meisten Fragen mit "Ja" beantworten kannst, hast du die <strong>Grundlagen der Microcontroller-Programmierung mit MicroPython</strong> verstanden!</p>
+        <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Du bist jetzt bereit für eigene, kreative Projekte. Weiter so! 🚀</p>
+    </div>
+</div>
+
+<hr style="margin: 3rem 0; border: none; border-top: 2px solid #e2e8f0;">
+
+<h3>🔗 Weiterführende Ressourcen</h3>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <h4 style="margin-top: 0;">📖 Wiederhole die Basics</h4>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Schau dir nochmal den Python Werkzeugkasten an:</p>
+        <a href="1_3_2_Python_Werkzeugkasten.html" style="display: inline-block; background: linear-gradient(135deg, #4ade80, #22c55e); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">🐍 Python Werkzeugkasten</a>
+    </div>
+
+    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <h4 style="margin-top: 0;">🚀 Alvik API</h4>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Entdecke alle verfügbaren Befehle:</p>
+        <a href="1_1_Alvik_API.html" style="display: inline-block; background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">📖 API-Liste</a>
+    </div>
+
+    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <h4 style="margin-top: 0;">🎨 Erweiterte Projekte</h4>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Bereit für mehr? Probiere Level 4:</p>
+        <a href="6_0_Mustererkennung.html" style="display: inline-block; background: linear-gradient(135deg, #9333ea, #7e22ce); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">💡 KI & Machine Learning</a>
+    </div>
+</div>
+
+<div style="background: linear-gradient(135deg, rgba(227, 6, 19, 0.1), rgba(103, 116, 122, 0.1)); padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+    <h3 style="margin-top: 0;">🎓 Viel Erfolg beim Programmieren!</h3>
+    <p style="font-size: 1.1rem; margin: 0;">Du hast jetzt das Werkzeug, um deine eigenen Ideen umzusetzen. Sei kreativ, experimentiere und hab Spaß! 🚀</p>
+</div>
+
         </main>
     </div>
-    
-    <a href="#" class="back-to-top">↑</a>    
+
+    <a href="#" class="back-to-top">↑</a>
     <footer style="margin-top: 4rem; padding: 2rem; text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 16px;">
         <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem;">
             <div>
@@ -369,7 +915,7 @@ Präsentiere dein Projekt und deinen Code der Klasse. Erkläre, wie du vorgegang
             <a href="https://github.com/mzgivb/alvik-webseite" target="_blank" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">GitHub</a>
         </div>
     </footer>
-    
+
     <script src="js/main.js"></script>
 </body>
 </html>
