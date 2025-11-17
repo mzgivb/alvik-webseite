@@ -135,7 +135,7 @@ MicroPython - Python für Microcontroller
 
 Fragen, Anregungen oder Feedback?
 
-- **E-Mail**: kontakt@medienzentrum-giessen-vogelsberg.de
+- **E-Mail**: info@mzgivb.de
 - **Website**: [www.medienzentrum-giessen-vogelsberg.de](https://www.medienzentrum-giessen-vogelsberg.de)
 
 ## 🌟 Danksagung
