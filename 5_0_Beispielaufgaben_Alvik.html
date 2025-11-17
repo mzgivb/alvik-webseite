@@ -251,10 +251,19 @@
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">geschwindigkeit = 50
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li>Variablen erstellt man mit: <code>name = wert</code></li>
+        <li>Für Text (Strings) nutzt man Anführungszeichen: <code>&quot;Text&quot;</code></li>
+        <li>F-Strings sehen so aus: <code>f&quot;Text {variable}&quot;</code></li>
+    </ul>
+</div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">geschwindigkeit = 50
 roboter_name = &quot;Alvik&quot;
 print(f&quot;{roboter_name} fährt mit {geschwindigkeit} cm/s&quot;)</code></pre>
-</div>
+</details>
 
 <h3>🚗 Aufgabe 2: Alvik vorwärts fahren lassen</h3>
 
@@ -270,7 +279,18 @@ print(f&quot;{roboter_name} fährt mit {geschwindigkeit} cm/s&quot;)</code></pre
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">from arduino_alvik import ArduinoAlvik
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li>Importiere: <code>from arduino_alvik import ArduinoAlvik</code> und <code>import time</code></li>
+        <li>Initialisiere: <code>alvik = ArduinoAlvik()</code> und <code>alvik.begin()</code></li>
+        <li>Bewegung: <code>alvik.set_wheels_speed(links, rechts)</code></li>
+        <li>Warten: <code>time.sleep(sekunden)</code></li>
+        <li>Stoppen: <code>alvik.stop()</code></li>
+    </ul>
+</div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">from arduino_alvik import ArduinoAlvik
 import time
 
 alvik = ArduinoAlvik()
@@ -279,7 +299,7 @@ alvik.begin()
 alvik.set_wheels_speed(50, 50)  # Beide Räder vorwärts
 time.sleep(2)                   # 2 Sekunden warten
 alvik.stop()                    # Stoppen</code></pre>
-</div>
+</details>
 
 <h3>🔄 Aufgabe 3: Viereck fahren mit for-Schleife</h3>
 
@@ -295,11 +315,22 @@ alvik.stop()                    # Stoppen</code></pre>
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">for i in range(4):
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li>For-Schleife: <code>for i in range(anzahl):</code></li>
+        <li>Einrückung beachten! Alles in der Schleife muss eingerückt sein</li>
+        <li>Bewegung: <code>alvik.move(zentimeter)</code></li>
+        <li>Drehung: <code>alvik.rotate(grad)</code></li>
+        <li>Ein Viereck hat 4 gleiche Seiten und 4×90° Drehungen</li>
+    </ul>
+</div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">for i in range(4):
     print(f&quot;Fahre Seite {i+1}&quot;)
     alvik.move(20)      # 20 cm vorwärts
     alvik.rotate(90)    # 90 Grad drehen</code></pre>
-</div>
+</details>
 
 <h3>🎨 Quiz: Python-Grundlagen</h3>
 
@@ -439,10 +470,20 @@ fahre_dreieck()</code></pre>
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">abstand = alvik.get_distance()  # Gibt eine Liste zurück
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li><code>alvik.get_distance()</code> gibt eine Liste mit 5 Werten zurück</li>
+        <li>Listen-Zugriff: <code>liste[index]</code> (Index beginnt bei 0!)</li>
+        <li>Mittlerer Sensor = Index 2</li>
+        <li>F-String für Ausgabe: <code>print(f&quot;Text {variable}&quot;)</code></li>
+    </ul>
+</div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">abstand = alvik.get_distance()  # Gibt eine Liste zurück
 mitte = abstand[2]               # Mittlerer Sensor
 print(f&quot;Abstand: {mitte} cm&quot;)</code></pre>
-</div>
+</details>
 
 <h3>🛑 Aufgabe 2: Vor Hindernis stoppen (if/else)</h3>
 
@@ -458,7 +499,18 @@ print(f&quot;Abstand: {mitte} cm&quot;)</code></pre>
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">while True:
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li>Endlosschleife: <code>while True:</code></li>
+        <li>Sensor direkt auslesen: <code>alvik.get_distance()[2]</code></li>
+        <li>If-Else Struktur: <code>if bedingung:</code> ... <code>else:</code></li>
+        <li>Vergleichsoperator "kleiner als": <code>&lt;</code></li>
+        <li>Kurze Pause in der Schleife: <code>time.sleep(0.1)</code></li>
+    </ul>
+</div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">while True:
     abstand = alvik.get_distance()[2]  # Mittlerer Sensor
 
     if abstand &lt; 15:
@@ -469,7 +521,7 @@ print(f&quot;Abstand: {mitte} cm&quot;)</code></pre>
         alvik.set_wheels_speed(50, 50)
 
     time.sleep(0.1)  # Kurze Pause</code></pre>
-</div>
+</details>
 
 <h3>🎨 Aufgabe 3: Farbsensor auslesen</h3>
 
@@ -484,9 +536,18 @@ print(f&quot;Abstand: {mitte} cm&quot;)</code></pre>
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">farbe = alvik.get_color_label()
-print(f&quot;Erkannte Farbe: {farbe}&quot;)</code></pre>
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li><code>alvik.get_color_label()</code> gibt Farbe als Text zurück</li>
+        <li>Mögliche Werte: <code>&quot;RED&quot;</code>, <code>&quot;GREEN&quot;</code>, <code>&quot;BLUE&quot;</code>, ...</li>
+        <li>Speichere in Variable und gib mit print() aus</li>
+    </ul>
 </div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">farbe = alvik.get_color_label()
+print(f&quot;Erkannte Farbe: {farbe}&quot;)</code></pre>
+</details>
 
 <h3>🚦 Aufgabe 4: Auf Farben reagieren (if/elif/else)</h3>
 
@@ -503,7 +564,18 @@ print(f&quot;Erkannte Farbe: {farbe}&quot;)</code></pre>
 
 <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
     <p style="margin: 0; font-weight: 600;">💡 Hilfestellung:</p>
-    <pre style="background: white; padding: 0.75rem; border-radius: 4px; overflow-x: auto; margin-top: 0.5rem;"><code style="color: #2d3748;">while True:
+    <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+        <li>Struktur: <code>if ... elif ... elif ... else:</code></li>
+        <li>String-Vergleich mit <code>==</code>: <code>if farbe == &quot;RED&quot;:</code></li>
+        <li>LED steuern: <code>alvik.left_led.set_color(r, g, b)</code> mit Werten 0-1</li>
+        <li>Rot = (1, 0, 0), Grün = (0, 1, 0), Blau = (0, 0, 1)</li>
+        <li>Denke daran, beide LEDs zu setzen!</li>
+    </ul>
+</div>
+
+<details style="margin: 1rem 0; background: white; padding: 1rem; border-radius: 8px; border: 2px solid #e2e8f0;">
+    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6;">🔍 Lösung anzeigen</summary>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 4px; overflow-x: auto; margin-top: 1rem;"><code style="color: #2d3748;">while True:
     farbe = alvik.get_color_label()
 
     if farbe == &quot;RED&quot;:
@@ -526,7 +598,7 @@ print(f&quot;Erkannte Farbe: {farbe}&quot;)</code></pre>
         alvik.right_led.set_color(0, 0, 0)
 
     time.sleep(0.2)</code></pre>
-</div>
+</details>
 
 <h3>🎨 Quiz: if/else und Sensoren</h3>
 
