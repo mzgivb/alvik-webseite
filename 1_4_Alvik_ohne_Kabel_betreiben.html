@@ -479,6 +479,385 @@ alvik.stop()
             </ol>
 
             <p>Jetzt ist dein Alvik bereit, die Welt zu erkunden – ganz ohne Kabel!</p>
+    
+    <!-- Challenge-Bereich -->
+    <div class="challenge-box" style="margin: 4rem 0 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+        <div class="challenge-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--primary-color);">
+            <span style="font-size: 3rem;">🎯</span>
+            <div>
+                <h2 style="margin: 0; font-size: 2rem; color: var(--primary-color);">Challenge: Autonomer Batteriebetrieb</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Programmiere deinen ersten kabellosen Alvik!</p>
+            </div>
+        </div>
+
+        <div class="quiz-section" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>🧠</span>
+                <span>Wissens-Check</span>
+            </h3>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">1. Was macht die Datei main.py auf dem Alvik?</h4>
+                <div class="quiz-options" id="quiz1-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Sie wird beim Einschalten automatisch ausgeführt</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Sie speichert die Batteriedaten</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Sie lädt die Arduino-Demo herunter</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Sie ist nur für USB-Verbindungen wichtig</span>
+                    </label>
+
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz1()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz1-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+            
+            <script>
+            function checkAnswer_quiz1() {
+                const selected = document.querySelector('input[name="quiz1"]:checked');
+                const feedback = document.getElementById('quiz1-feedback');
+                const options = document.querySelectorAll('input[name="quiz1"]');
+                const button = event.target;
+                
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+                
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 0) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+                
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 0) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Richtig! main.py ist das Autostart-Programm beim Einschalten.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ main.py wird beim Einschalten automatisch ausgeführt - ganz ohne USB!';
+                }
+            }
+            </script>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">2. Warum sollte man sleep() am Anfang des Programms nutzen?</h4>
+                <div class="quiz-options" id="quiz2-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Um den Akku zu schonen</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Um Zeit zum Platzieren des Roboters zu haben</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Weil MicroPython das verlangt</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Damit die LEDs besser leuchten</span>
+                    </label>
+
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz2()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz2-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+            
+            <script>
+            function checkAnswer_quiz2() {
+                const selected = document.querySelector('input[name="quiz2"]:checked');
+                const feedback = document.getElementById('quiz2-feedback');
+                const options = document.querySelectorAll('input[name="quiz2"]');
+                const button = event.target;
+                
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+                
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+                
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Genau! Die Pause gibt dir Zeit, den Roboter sicher zu platzieren.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Die Startpause gibt dir Zeit, den Alvik nach dem Einschalten sicher zu platzieren, bevor er losfährt.';
+                }
+            }
+            </script>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">3. Wo muss man main.py speichern, damit sie beim Einschalten läuft?</h4>
+                <div class="quiz-options" id="quiz3-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Auf dem Computer ("Dieser Computer")</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Auf dem Alvik ("MicroPython device")</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>In der Cloud</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Das Speicherort ist egal</span>
+                    </label>
+
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz3()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz3-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+            
+            <script>
+            function checkAnswer_quiz3() {
+                const selected = document.querySelector('input[name="quiz3"]:checked');
+                const feedback = document.getElementById('quiz3-feedback');
+                const options = document.querySelectorAll('input[name="quiz3"]');
+                const button = event.target;
+                
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+                
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+                
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Perfekt! main.py muss auf dem "MicroPython device" gespeichert werden!';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ main.py muss direkt auf dem Alvik gespeichert werden - wähle beim Speichern "MicroPython device"!';
+                }
+            }
+            </script>
+
+        </div>
+
+        <div class="code-challenge" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>💻</span>
+                <span>Programmier-Challenge</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.2rem; color: #222;">📝 30-Sekunden-Routine ohne Kabel</h4>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">Erstelle ein Programm, das automatisch beim Einschalten startet und eine 30-Sekunden-Routine ausführt.</p>
+                
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; border-radius: 4px;">
+                    <strong style="color: #1e40af;">💡 Anforderungen:</strong>
+                    <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
+                        <li style="margin: 0.3rem 0;">5-Sekunden-Verzögerung am Programmstart</li>
+                        <li style="margin: 0.3rem 0;">Kombiniere Bewegungen und LED-Signale</li>
+                        <li style="margin: 0.3rem 0;">Speichere das Programm in main.py</li>
+                        <li style="margin: 0.3rem 0;">Teste ohne USB-Kabel</li>
+                    </ul>
+                </div>
+                
+                <button onclick="toggleSolution(this)" style="padding: 0.75rem 1.5rem; background: rgba(103, 116, 122, 0.15); border: 2px solid var(--secondary-color); border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease; color: inherit;">
+                    💡 Lösung anzeigen
+                </button>
+                
+                <div class="solution" style="display: none; margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 1rem; color: #10b981;">✅ Musterlösung:</h4>
+                    <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; line-height: 1.6;"><code>#import demo
+
+from arduino_alvik import ArduinoAlvik
+from time import sleep
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# 5 Sekunden warten
+sleep(5)
+
+# LEDs grün - Signal: Start
+alvik.left_led.set_color(0, 1, 0)
+alvik.right_led.set_color(0, 1, 0)
+sleep(1)
+
+# Viereck fahren
+for i in range(4):
+    # LEDs blau während der Fahrt
+    alvik.left_led.set_color(0, 0, 1)
+    alvik.right_led.set_color(0, 0, 1)
+    alvik.move(20)
+    
+    # LEDs rot während der Drehung
+    alvik.left_led.set_color(1, 0, 0)
+    alvik.right_led.set_color(1, 0, 0)
+    alvik.rotate(90)
+    sleep(0.5)
+
+# LEDs grün - Signal: Fertig
+alvik.left_led.set_color(0, 1, 0)
+alvik.right_led.set_color(0, 1, 0)
+alvik.stop()
+
+print("Programm beendet!")</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        function toggleSolution(button) {
+            const solution = button.nextElementSibling;
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                button.textContent = '🔼 Lösung verbergen';
+                button.style.background = 'var(--secondary-color)';
+                button.style.color = 'white';
+            } else {
+                solution.style.display = 'none';
+                button.textContent = '💡 Lösung anzeigen';
+                button.style.background = 'rgba(103, 116, 122, 0.15)';
+                button.style.color = 'inherit';
+            }
+        }
+        </script>
+
+        <div class="self-check" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>✅</span>
+                <span>Selbsttest: Das kann ich jetzt!</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="margin-bottom: 1rem;"><strong>Hake ab, was du verstanden hast:</strong></p>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>main.py auf dem Alvik speichern</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Programm startet automatisch nach dem Einschalten</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Warum die Startpause wichtig ist</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Batteriestatus vor dem Testen prüfen</span>
+                </label>
+
+                <div class="progress-display" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);" id="progress-counter">0/4</div>
+                    <p style="margin-top: 0.5rem; color: #666;">Punkte verstanden</p>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        function updateProgress(checkbox) {
+            const item = checkbox.parentElement;
+            if (checkbox.checked) {
+                item.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                item.style.borderColor = '#10b981';
+                item.style.fontWeight = '600';
+            } else {
+                item.style.background = 'white';
+                item.style.borderColor = '#e5e7eb';
+                item.style.fontWeight = 'normal';
+            }
+            
+            const total = document.querySelectorAll('.self-check-item input[type="checkbox"]').length;
+            const checked = document.querySelectorAll('.self-check-item input[type="checkbox"]:checked').length;
+            document.getElementById('progress-counter').textContent = `${checked}/4`;
+        }
+        </script>
+
+    </div>
+    <!-- Ende Challenge-Bereich -->
+
         </main>
     </div>
     
@@ -487,6 +866,54 @@ alvik.stop()
     <footer>
         <p>Arduino Alvik MicroPython Lernplattform © 2025</p>
         <p>Erstellt mit ❤️ für das Lernen von Robotik und Programmierung</p>
+    </footer>
+    
+    <script src="js/main.js"></script>
+
+    <footer style="margin-top: 4rem; padding: 2rem; text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 16px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem;">
+            <div>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank" rel="license" style="text-decoration: none;">
+                    <img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" alt="Creative Commons Lizenz CC BY-SA 4.0" style="border: 0; vertical-align: middle;">
+                </a>
+            </div>
+            <div style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                <strong>Arduino Alvik Lernplattform</strong><br>
+                Medienzentrum Gießen-Vogelsberg<br>
+                Lizenziert unter <a href="LICENSE" style="color: var(--accent-color); text-decoration: none;">CC BY-SA 4.0</a>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.85rem;">
+            <a href="impressum.html" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">Impressum</a>
+            <span style="color: rgba(255, 255, 255, 0.5);">|</span>
+            <a href="datenschutz.html" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">Datenschutz</a>
+            <span style="color: rgba(255, 255, 255, 0.5);">|</span>
+            <a href="https://github.com/mzgivb/alvik-webseite" target="_blank" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">GitHub</a>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+
+    <footer style="margin-top: 4rem; padding: 2rem; text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 16px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem;">
+            <div>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank" rel="license" style="text-decoration: none;">
+                    <img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" alt="Creative Commons Lizenz CC BY-SA 4.0" style="border: 0; vertical-align: middle;">
+                </a>
+            </div>
+            <div style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                <strong>Arduino Alvik Lernplattform</strong><br>
+                Medienzentrum Gießen-Vogelsberg<br>
+                Lizenziert unter <a href="LICENSE" style="color: var(--accent-color); text-decoration: none;">CC BY-SA 4.0</a>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.85rem;">
+            <a href="impressum.html" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">Impressum</a>
+            <span style="color: rgba(255, 255, 255, 0.5);">|</span>
+            <a href="datenschutz.html" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">Datenschutz</a>
+            <span style="color: rgba(255, 255, 255, 0.5);">|</span>
+            <a href="https://github.com/mzgivb/alvik-webseite" target="_blank" style="color: var(--primary-color); text-decoration: none; margin: 0 1rem;">GitHub</a>
+        </div>
     </footer>
     
     <script src="js/main.js"></script>
