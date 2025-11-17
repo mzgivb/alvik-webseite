@@ -448,18 +448,374 @@ print("2 Meter gefahren!")
                 <li><strong>Mathematik:</strong> RPM × Radumfang × Zeit = Gefahrene Strecke</li>
             </ol>
 
-    <div class="challenge-box" style="margin: 4rem 0 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color);">
-        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+    <!-- Challenge-Bereich -->
+    <div class="challenge-box" style="margin: 4rem 0 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(227, 6, 19, 0.08), rgba(103, 116, 122, 0.08)); border-radius: 20px; border: 3px solid var(--primary-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+        <div class="challenge-header" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--primary-color);">
             <span style="font-size: 3rem;">🎯</span>
-            <div><h2 style="margin: 0; color: var(--primary-color);">Challenge: Präzisions-Parcours</h2></div>
+            <div>
+                <h2 style="margin: 0; font-size: 2rem; color: var(--primary-color);">Challenge: Präzisions-Fahrt</h2>
+                <p style="margin: 0.5rem 0 0 0; opacity: 0.8;">Meistere exakte Geschwindigkeiten und Zeitsteuerung!</p>
+            </div>
         </div>
-        <p><strong>Aufgabe:</strong> Fahre durch 5 Wegpunkte mit unterschiedlichen Distanzen und Winkeln!</p>
-        <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">💡 Lösung</button>
-        <pre style="display:none; background:#2d3748; color:#fff; padding:1rem; border-radius:8px;"><code>wegpunkte = [(30,45), (25,90), (40,-60)]
-for d, w in wegpunkte:
-    alvik.move(d)
-    alvik.rotate(w)</code></pre>
+
+        <div class="quiz-section" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>🧠</span>
+                <span>Wissens-Check</span>
+            </h3>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">1. Was gibt die Radgeschwindigkeit bei set_wheels_speed() an?</h4>
+                <div class="quiz-options" id="quiz1_exakt-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1_exakt" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Umdrehungen pro Minute (RPM)</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1_exakt" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Zentimeter pro Sekunde</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1_exakt" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Meter pro Stunde</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz1_exakt" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Grad pro Sekunde</span>
+                    </label>
+
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz1_exakt()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz1_exakt-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz1_exakt() {
+                const selected = document.querySelector('input[name="quiz1_exakt"]:checked');
+                const feedback = document.getElementById('quiz1_exakt-feedback');
+                const options = document.querySelectorAll('input[name="quiz1_exakt"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 0) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 0) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Richtig! Die Geschwindigkeit wird in Umdrehungen pro Minute (RPM) angegeben.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ set_wheels_speed() erwartet die Geschwindigkeit in Umdrehungen pro Minute (RPM)!';
+                }
+            }
+            </script>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">2. Wie weit fährt der Alvik mit einer Radumdrehung (ca. 34 mm Durchmesser)?</h4>
+                <div class="quiz-options" id="quiz2_exakt-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2_exakt" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Etwa 3,4 cm</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2_exakt" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Etwa 10,7 cm</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2_exakt" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Etwa 34 cm</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz2_exakt" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Etwa 100 cm</span>
+                    </label>
+
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz2_exakt()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz2_exakt-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz2_exakt() {
+                const selected = document.querySelector('input[name="quiz2_exakt"]:checked');
+                const feedback = document.getElementById('quiz2_exakt-feedback');
+                const options = document.querySelectorAll('input[name="quiz2_exakt"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Genau! Umfang = π × d = 3,14 × 34 mm ≈ 10,7 cm pro Radumdrehung.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Der Radumfang beträgt π × 34 mm ≈ 106,8 mm = ca. 10,7 cm pro Umdrehung!';
+                }
+            }
+            </script>
+
+            <div class="quiz-question" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #222;">3. Was ist der Vorteil von ticks_ms() gegenüber sleep()?</h4>
+                <div class="quiz-options" id="quiz3_exakt-options" style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3_exakt" value="0" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>ticks_ms() ist schneller</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3_exakt" value="1" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>Der Roboter kann während der Zeitmessung andere Aufgaben ausführen</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3_exakt" value="2" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>ticks_ms() verbraucht weniger Strom</span>
+                    </label>
+
+                    <label class="quiz-option" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 1); border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+                        <input type="radio" name="quiz3_exakt" value="3" style="margin-right: 0.75rem; width: 18px; height: 18px; cursor: pointer;">
+                        <span>ticks_ms() ist genauer</span>
+                    </label>
+
+                </div>
+                <button class="check-answer-btn" onclick="checkAnswer_quiz3_exakt()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    Antwort prüfen
+                </button>
+                <div id="quiz3_exakt-feedback" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; font-weight: 600;"></div>
+            </div>
+
+            <script>
+            function checkAnswer_quiz3_exakt() {
+                const selected = document.querySelector('input[name="quiz3_exakt"]:checked');
+                const feedback = document.getElementById('quiz3_exakt-feedback');
+                const options = document.querySelectorAll('input[name="quiz3_exakt"]');
+                const button = event.target;
+
+                if (!selected) {
+                    feedback.style.display = 'block';
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ Bitte wähle eine Antwort aus!';
+                    return;
+                }
+
+                button.disabled = true;
+                button.style.opacity = '0.5';
+
+                options.forEach((opt, idx) => {
+                    opt.parentElement.style.pointerEvents = 'none';
+                    if (idx === 1) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                        opt.parentElement.style.borderColor = '#10b981';
+                        opt.parentElement.style.fontWeight = '600';
+                    } else if (opt.checked) {
+                        opt.parentElement.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                        opt.parentElement.style.borderColor = '#ef4444';
+                    }
+                });
+
+                feedback.style.display = 'block';
+                if (parseInt(selected.value) === 1) {
+                    feedback.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                    feedback.style.color = '#065f46';
+                    feedback.textContent = '✅ Perfekt! Mit ticks_ms() kann der Roboter die Zeit überwachen UND gleichzeitig Sensoren auslesen, fahren etc.';
+                } else {
+                    feedback.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
+                    feedback.style.color = '#991b1b';
+                    feedback.textContent = '❌ ticks_ms() ermöglicht Multitasking - der Roboter pausiert nicht, sondern kann die Zeit überwachen während er andere Aufgaben ausführt!';
+                }
+            }
+            </script>
+
+        </div>
+
+        <div class="code-challenge" style="margin-bottom: 2.5rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>💻</span>
+                <span>Programmier-Challenge</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h4 style="margin: 0 0 1rem 0; font-size: 1.2rem; color: #222;">📝 Präzisions-Parcours: Exakt 1 Meter in 10 Sekunden</h4>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">Programmiere den Alvik so, dass er in genau 10 Sekunden genau 1 Meter fährt.</p>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; border-radius: 4px;">
+                    <strong style="color: #1e40af;">💡 Anforderungen:</strong>
+                    <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
+                        <li style="margin: 0.3rem 0;">Berechne die richtige RPM-Geschwindigkeit</li>
+                        <li style="margin: 0.3rem 0;">Verwende ticks_ms() zur Zeitsteuerung</li>
+                        <li style="margin: 0.3rem 0;">Nach 10 Sekunden exakt stoppen</li>
+                        <li style="margin: 0.3rem 0;">Gib die Startzeit in der Konsole aus</li>
+                    </ul>
+                </div>
+
+                <button onclick="toggleSolution_exakt(this)" style="padding: 0.75rem 1.5rem; background: rgba(103, 116, 122, 0.15); border: 2px solid var(--secondary-color); border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease; color: inherit;">
+                    💡 Lösung anzeigen
+                </button>
+
+                <div class="solution" style="display: none; margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 1rem; color: #10b981;">✅ Musterlösung:</h4>
+                    <pre style="background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; line-height: 1.6;"><code>from arduino_alvik import ArduikoAlvik
+from time import ticks_ms, ticks_diff
+
+alvik = ArduinoAlvik()
+alvik.begin()
+
+# Berechnung:
+# 1 Meter = 1000 mm
+# Radumfang = 106,8 mm
+# Benötigte Umdrehungen: 1000 / 106,8 ≈ 9,36 Umdrehungen
+# In 10 Sekunden: 9,36 Umdrehungen / (10/60) min ≈ 56,2 RPM
+
+print("Start!")
+start_zeit = ticks_ms()
+
+# Fahre mit berechneter Geschwindigkeit
+alvik.set_wheels_speed(56, 56)
+
+while True:
+    # Prüfe, ob 10 Sekunden vergangen sind
+    if ticks_diff(ticks_ms(), start_zeit) >= 10000:
+        alvik.stop()
+        print("Ziel erreicht!")
+        break
+
+# Gefahrene Strecke: ca. 1 Meter in 10 Sekunden</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function toggleSolution_exakt(button) {
+            const solution = button.nextElementSibling;
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                button.textContent = '🔼 Lösung verbergen';
+                button.style.background = 'var(--secondary-color)';
+                button.style.color = 'white';
+            } else {
+                solution.style.display = 'none';
+                button.textContent = '💡 Lösung anzeigen';
+                button.style.background = 'rgba(103, 116, 122, 0.15)';
+                button.style.color = 'inherit';
+            }
+        }
+        </script>
+
+        <div class="self-check" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span>✅</span>
+                <span>Selbsttest: Das kann ich jetzt!</span>
+            </h3>
+            <div style="padding: 1.5rem; background: rgba(255, 255, 255, 0.95); color: #333; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="margin-bottom: 1rem;"><strong>Hake ab, was du verstanden hast:</strong></p>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_exakt(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Radgeschwindigkeit mit set_wheels_speed() steuern</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_exakt(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Radumfang berechnen und Fahrstrecke bestimmen</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_exakt(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>ticks_ms() für Zeitmessung verwenden</span>
+                </label>
+
+                <label class="self-check-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 8px; margin: 0.75rem 0; cursor: pointer; transition: all 0.2s ease;">
+                    <input type="checkbox" onchange="updateProgress_exakt(this)" style="margin-top: 0.25rem; width: 20px; height: 20px; cursor: pointer;">
+                    <span>Unterschied zwischen sleep() und ticks_ms() erklären</span>
+                </label>
+
+                <div class="progress-display" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);" id="progress-counter_exakt">0/4</div>
+                    <p style="margin-top: 0.5rem; color: #666;">Punkte verstanden</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function updateProgress_exakt(checkbox) {
+            const item = checkbox.parentElement;
+            if (checkbox.checked) {
+                item.style.background = 'linear-gradient(135deg, #d1fae5, #a7f3d0)';
+                item.style.borderColor = '#10b981';
+                item.style.fontWeight = '600';
+            } else {
+                item.style.background = 'white';
+                item.style.borderColor = '#e5e7eb';
+                item.style.fontWeight = 'normal';
+            }
+
+            const total = document.querySelectorAll('.self-check-item input[type="checkbox"]').length;
+            const checked = document.querySelectorAll('.self-check-item input[type="checkbox"]:checked').length;
+            document.getElementById('progress-counter_exakt').textContent = `${checked}/4`;
+        }
+        </script>
+
     </div>
+    <!-- Ende Challenge-Bereich -->
         </main>
     </div>
     
